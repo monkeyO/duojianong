@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>购物车</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<script type="text/javascript">
+			var TP_PUBLIC = '/Public';
+			var ROOT = '/';
+			var APP = '';
+		</script>
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/order-cart.css" />
+		<script>
+			var buy_cart_url = "/sale/mallorder/buy_cart_detail";
+			var save_cart_num_url = "/sale/mallorder/save_cart_num";
+			var del_cart_url = "/sale/mallorder/del_cart";
+			var is_null_sku_id = "/sale/mallorder/is_null_sku_id";
+		</script>
+	</head>
+	<body>
+		<div class="page">
+			<div class="content content-order">
+				<section class="order-alist">
+					<ul>
+						<div class="cart_list">
+							<div class="car_empty_box">
+								<div class="cart_empty">
+								</div>
+								<div class="cart_empty_text">
+									购物车空空如也，快去购物吧
+								</div>
+								<div class="cart_btn_box">
+									<a style="color:#fff;" href="/sale/mall/index" class="cart_btn cart_btn_buy external">去逛逛</a>
+								</div>
+							</div>
+						</div>
+					</ul>
+				</section>
+			</div>
+		</div>
+		<!--script strat-->
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/order-list.js" type="text/javascript" charset="utf-8"></script>
+		<!--script end-->
+	</body>
+</html>

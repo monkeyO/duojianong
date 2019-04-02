@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>添加支付方式</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		<script type="text/javascript">
+			var TP_PUBLIC = '/Public';
+		</script>
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<script>
+			$.config = { router: false, autoInit: true }
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "https://hm.baidu.com/hm.js?6c445663e719abf0b505d6cf82bbb15d";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+
+		<link rel="stylesheet" type="text/css" href="../css/pay_way.css" />
+
+	</head>
+
+	<body>
+		<div class="page">
+			<div class="content">
+				<div class="pay-way">
+					<span>支付方式：</span>
+					<span id="card">银行卡</span>
+					<span class="icon icon-down open-popover"></span>
+				</div>
+				<div class="username">
+					<span>姓名：</span>
+					<input type="text" id="card_name" placeholder="请输入姓名"></input>
+				</div>
+				<div class="bank">
+					<span>银行：</span>
+					<input type="text" id="bank" placeholder="请输入银行，如招商银行"></input>
+				</div>
+				<div class="card-number">
+					<span>卡号：</span>
+					<input type="text" id="card_number" class="" placeholder="请输入卡号"></input>
+				</div>
+				<div class="account-number hidden">
+					<span>账号：</span>
+					<input type="text" id="card_account" class="" placeholder="请输入账号"></input>
+				</div>
+				<div class="btn">
+					<button onclick="add()">保存</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="popover popover-links">
+			<!-- Popover's angle arrow -->
+			<div class="popover-angle"></div>
+			<!-- Popover content -->
+			<div class="popover-inner">
+				<!-- Any HTML content here -->
+				<ul class="close-popover select-list">
+					<li>银行卡</li>
+					<li>支付宝</li>
+					<li>微信支付</li>
+				</ul>
+			</div>
+		</div>
+
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/pay_way.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			function add() {
+
+				tusi("添加成功！");
+
+				var odata = {
+					type: $("#card").text(),
+					cardname: $("#card_name").val(),
+					bank: $("#bank").val(),
+					cardnumber: $("#card_number").val(),
+					cardaccount: $("#card_account").val()
+				}
+				$.post('get_pay_way', odata, function(data) {
+					console.log(odata);
+					if(data.code == '1') {
+						tusi(data.msg);
+						setTimeout(function() {
+							window.history.go(-1)
+						}, 1000);
+					} else if(data.code == '2') {
+						tusi(data.msg);
+					} else {
+						tusi(data.msg);
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

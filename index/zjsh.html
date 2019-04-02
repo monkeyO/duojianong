@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>审核申请</title>
+	<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/light7.min.css">
+<link rel="stylesheet" href="../css/header_v1.css">
+
+<link rel="stylesheet" href="../css/color_scheme-default.css">
+<!-- 默认配色方案 -->
+<!--<link rel="stylesheet" href="../css/color_scheme-default.css">-->
+
+<!-- 绿色配色方案 -->
+<!-- <link rel="stylesheet" href="../css/color_scheme-green.css"> -->
+
+<!-- 粉色配色方案 -->
+<!-- <link rel="stylesheet" href="../css/color_scheme-pink.css"> -->
+
+<!--<link rel="stylesheet" href="../css/footer.css">-->
+<script type="text/javascript">
+    var TP_PUBLIC = '/Public';
+</script>
+<script src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+    $.config = {router: false,autoInit: true}
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6c445663e719abf0b505d6cf82bbb15d";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+	<link rel="stylesheet" type="text/css" href="../css/check_apply.css" />
+
+</head>
+
+<body>
+<div class="page">
+	<div class="content infinite-scroll">
+		<div class="search-wrapper">
+			<div class="left">
+				<div class="search-input">
+					<label class="icon icon-search" for="search"></label>
+					<input type="search" class="search" placeholder='搜索名称' />
+				</div>
+			</div>
+			<div class="right">
+				<div class="select open-popover" >
+					<em id="picker">
+                    充值申请                    </em>
+					<span class="icon icon-down"></span>
+				</div>
+			</div>
+        </div>
+        <nav class="nav-wrapper">
+            <ul>
+                <li class="active color-check-apply-nav"><a href="caiwu/daish.html">待审核</a></li>
+                <li class="color-check-apply-nav"><a href="caiwu/gssh.html">待公司审核</a></li>
+                <li class="color-check-apply-nav" ><a href="caiwu/yjj.html">已拒绝</a></li>
+            </ul>
+        </nav>
+		<ul id="apply-list">
+
+		</ul>
+
+		<!-- <div class="apply">
+        <dl class="apply-left">
+        <dt>充值申请</dt>
+        <dd>申请人：测试中</dd>
+        <dd>申请人等级：一级经销商</dd>
+        <dd>
+        充值金额：
+        <span>￥2500.00</span>
+        </dd>
+        </dl>
+        <div class="apply-right">
+        <button>待审核</button>
+        </div>
+        </div> -->
+		<!-- preloader -->
+		<div class="infinite-scroll-preloader">
+			<div class="preloader"></div>
+		</div>
+	</div>
+</div>
+
+<div class="popover">
+	<div class="popover-angle on-top"></div>
+
+	<div class="popover-inner">
+            <ul class="close-popover select-list">
+			<!-- <li class="btn_all" data-type="all">全部</li> -->
+            			<li class="btn_apply" data-type="apply">充值申请</li>
+            <li class="btn_refund" data-type="refund">提现申请</li>
+            
+                        <li class="btn_rebate" data-type="rebate">推荐奖励申请</li>
+                        
+                        <li class="btn_rebate" data-type="team">业绩奖励申请</li>
+                        
+                        <li class="btn_rebate" data-type="upgrade_apply">升级申请</li>
+                        </ul>
+	</div>
+</div>
+<script>
+    var type = "apply";
+    var module = 1;
+    if (!module) {
+        type = "rebate";
+    }
+</script>
+
+<script>
+    var applyurl = '/admin/funds/get_apply_ajax';
+    var imgSrc = '../images/empty.png';
+    var upgradeUrl = '/admin/funds/upgrade_apply_check';
+    $(function() {
+        $(document).on('click', '.check_money_apply', function() {
+            var apply_id = $(this).data('id');
+            console.log(apply_id);
+            window.location.href = 'recharge_check?id=' + apply_id;                                                                                                                                                                                                                                         
+        });
+    });
+
+    $(function() {
+        $(document).on('click', '.check_money_refund_apply', function() {
+            var refund_id = $(this).data('id');
+            console.log(refund_id);
+            window.location.href = 'money_refund_check?id=' + refund_id;
+        });
+    });
+
+    $(function() {
+        $(document).on('click', '.check_money_rebate_apply ,.team_apply', function() {
+            var rebate_id = $(this).data('id');
+            var type = $(this).data('type');
+            window.location.href = 'rebate_check?id=' + rebate_id + '&type=' + type;
+        });
+    });
+
+    $(function() {
+        $(document).on('click', '.upgrade_apply', function() {
+            var upgrade_id = $(this).data('id');
+            console.log(upgrade_id);
+            window.location.href = 'upgrade_apply_check?id=' + upgrade_id;
+        });
+    });
+    
+    // $(function() {
+    //     $(document).on('click', '.check_money_back_apply', function() {
+    //         var back_id = $(this).data('id');
+    //         console.log(back_id);
+    //         window.location.href = 'money_refund_check?id=' + back_id;
+    //     });
+    // });
+
+    $(function(){
+        $(document).on('click', '.pass', function(){
+            var id = $(this).find('button').data('id');
+            if($(this).find('dt').text() == '充值申请'){
+                window.location.href = 'recharge_check?id=' + id + '&type=1';
+            }else if($(this).find('dt').text() == '提现申请'){
+                window.location.href = 'money_refund_check?id=' + id + '&type=1';
+            }else if($(this).find('dt').text() == '升级申请'){
+                window.location.href = 'upgrade_apply_check?id=' + id + '&type=1';
+            }
+        });
+        $(document).on('click', '.refuse', function(){
+            var id = $(this).find('button').data('id');
+            if($(this).find('dt').text() == '充值申请'){
+                window.location.href = 'recharge_check?id=' + id + '&type=2';
+            }else if($(this).find('dt').text() == '提现申请'){
+                window.location.href = 'money_refund_check?id=' + id + '&type=2';
+            }else if($(this).find('dt').text() == '升级申请'){
+                window.location.href = 'upgrade_apply_check?id=' + id + '&type=2';
+            }
+        });
+    });
+</script>
+<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="s/js/check_apply.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

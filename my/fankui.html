@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>系统反馈</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<style>
+			#content{
+			  width: 90%;
+			  margin: 0 auto;
+			}
+			#content textarea{
+				padding: 10px;
+				display: block;
+                width: 100%;
+				margin-bottom: 20px; 
+				border-radius: 10px;
+			}
+			h3{
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<div id="content">
+				<h3>请输入对我们的意见</h3>
+				<textarea rows="10" cols="40"></textarea>
+				<a href="#" class="button button-big button-fill" id="makeSubmit">提交</a>
+			</div>
+		</div>
+	</body>
+	<script src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript" src="../js/light7.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#makeSubmit").click(function() {
+				if ($("textarea").val() == "") {
+					tusi("请填写信息！");
+				} else {
+					var myToken = getLocal("token");
+					var getparam_ajax = {
+						Token: myToken,
+						conent: $("textarea").val()
+					};
+					var getorder_option = {
+						url: '/User/feedback',
+						params: getparam_ajax,
+						callback: function(res) {
+							if (res.code == 200){
+								tusi(res.message);
+							} else {
+								tusi(res.message);
+							}
+						}
+					}
+					callajax(getorder_option);
+				}
+			})
+		})
+	</script>
+</html>

@@ -1,0 +1,169 @@
+#main {
+    width: 100%;
+    min-height: 100%;
+    padding-top: 2.8125rem;
+    padding-bottom: 3.125rem;
+    background-color: #f5f4f9;
+}
+
+#main .search-wrapper {
+    top: 0;
+    height: 3.4375rem;
+    border-bottom: none;
+}
+
+#main .bar {
+    background-color: #fff;
+}
+
+#main .search-wrapper .searchbar {
+    padding: 0 1.5625rem;
+    background: #fff;
+}
+
+#main .search-wrapper .searchbar .icon-search {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -5.3125rem;
+}
+
+#main .search-wrapper .searchbar .search {
+    text-align: center;
+    margin-top: 0.625rem;
+    height: 2.125rem;
+    font-size: .875rem;
+    background-color: #eee;
+}
+
+#main .nav-wrapper {
+    position: relative;
+    width: 100%;
+    border-bottom: 0.0625rem solid #c9c9c9;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#main .nav {
+	box-sizing: border-box;
+    width: 100%;
+    margin: 0 5%;
+    margin-top: .625rem;
+    position: relative;
+    height: 2.5rem;
+    overflow-x: scroll;
+    box-sizing: content-box;
+}
+
+#main .nav .nav-list {
+    position: absolute;
+    height: 2.5rem;
+    width: 100%!important;
+}
+
+#main .nav .nav-list li {
+    float: left;
+    padding: 0 .5rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    font-weight: 400;
+}
+
+#main .nav .nav-list li a {
+    display: inline-block;
+    height: 100%;
+    color: #000;
+}
+
+#main .nav-list-hidden {
+    display: none;
+    background-color: #fff;
+    width: 100%;
+}
+
+#main .nav-list-hidden li {
+    display: block;
+    text-align: center;
+    line-height: 2.5rem;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+#main .nav-list-hidden li a {
+    color: #000;
+}
+
+
+
+/* #main .detail {
+    margin-bottom: 100px;
+} */
+
+#main .detail-wrapper {
+    display: block;
+    padding: 0 1.375rem;
+    color: #000;
+    background-color: #fff;
+}
+
+#main .detail-wrapper .title-wrapper {
+    position: relative;
+    display: flex;
+    height: 2.875rem;
+    line-height: 2.875rem;
+}
+
+#main .detail-wrapper .title-wrapper .toggle {
+    background-image: url("../images/marketing/star_golden@2x.png");
+}
+
+#main .detail-wrapper .title-wrapper button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.25rem;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+#main .detail-wrapper .title-wrapper h3 {
+    flex: 1;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-image: url("../images/marketing/star_gray@2x.png");
+    background-size: auto 1rem;
+    background-repeat: no-repeat;
+    background-position: 0 13px;
+    padding-left: 1.75rem;
+    padding-right: 1rem;
+}
+
+#main .detail-wrapper .title-wrapper .detail {
+    flex: 0 0 5.625rem;
+    text-align: right;
+}
+
+#main .detail-wrapper .title-wrapper span {
+    font-size: .875rem;
+    font-weight: 700;
+    color: #111;
+}
+
+#main .detail-wrapper .title-wrapper span:nth-of-type(2) {
+    font-size: .75rem;
+}
+
+#main .detail-wrapper .img-wrapper {
+    width: 100%;
+    padding-bottom: .9375rem;
+    margin-bottom: .9375rem;
+}
+
+#main .detail-wrapper .img-wrapper .img {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+}

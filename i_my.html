@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>个人信息</title>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/light7.min.css">
+		<link rel="stylesheet" href="css/header_v1.css">
+		<link rel="stylesheet" href="css/color_scheme-default.css">
+		<script src="js/jquery.js"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<link rel="stylesheet" href="css/information.css" />
+		<link rel="stylesheet" href="css/footer.css" />
+		<style>
+			#amount .line::after {
+				border-bottom: none;
+			}
+			#main .information .avatar a {
+				position: relative;
+				display: block;
+				text-align: center;
+				font-size: 12px;
+				height: 20px;
+				line-height: 20px;
+				background: #FFFFFF;
+				color: #0894ec;
+				border-radius: 5px;
+			}
+			#main .information .avatar>a input {
+				display: block;
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				z-index: 9999;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<div class="content">
+				<section id="main">
+					<div class="information color-user-bg">
+						<div class="avatar" id="avatar">
+							<img src="" alt="头像" width="56" height="56" style="border-radius: 50%;">
+							<a>
+								修改头像
+								<input type="file" id="file" value="" accept="image/*" onchange="makeUpImg()" />
+							</a>
+						</div>
+						<a href="/admin/user/info" class="external user-infos">
+							<div class="text">
+								<p id="name"></p>
+								<p id="phone">手机号：<span></span></p>
+								<p id="jibie">级别：<span></span></p>
+							</div>
+						</a>
+						<div class="QR">
+							<!--签到-->
+							<section class="signin">
+								<img src="images/information/icon-score.png" alt="" />
+								<span>签到</span>
+							</section>
+						</div>
+					</div>
+					<div class="property item">
+						<a id="protocol" class="external">
+							<div class="wrapper line">
+								<div class="protocol">朵嘉浓经营规则</div>
+								<div class="text icon icon-right"></div>
+							</div>
+						</a>
+						<a href="index/sqzs.html" class="external">
+							<div class="integral wrapper line">
+								<div class="titel">授权证书</div>
+								<div class="text icon icon-right"></div>
+							</div>
+						</a>
+					</div>
+					<div class="property item">
+						<a href="my/zhangdan.html" class="external">
+							<div class="wrapper line">
+								<div class="bill">账单</div>
+								<div class="text icon icon-right"></div>
+							</div>
+						</a>
+						<a href="my/qianbao.html" class="external">
+							<div class="wrapper line">
+								<div class="total-assets">钱包</div>
+								<div class="text icon icon-right"></div>
+							</div>
+						</a>
+						<!-- <a class="external" id="amount">
+							<div class="wrapper line">
+								<div class="bank-card">申请月度达量奖<i style="color: red; font-size: 12px;">
+										(每月申请一次)
+									</i></div>
+								<div class="text icon icon-right"></div>
+							</div>
+						</a> -->
+					</div>
+					<div class="order item">
+						<a href="my/dizhi.html" class="external">
+							<div class="wrapper line">
+								<div class="address">地址管理</div>
+								<div class="text icon icon-right"></div>
+							</div>
+						</a>
+						<a href="my/shengji.html" class="external">
+							<div class="wrapper line">
+								<div class="upgrade">升级代理级别</div>
+								<div class="text icon icon-right"></div>
+							</div>
+						</a>
+					</div>
+					<div class="order item">
+						<a href="my/fankui.html" class="external">
+							<div class="wrapper line">
+								<div class="suggest">建议反馈</div>
+								<div class="text icon icon-right"></div>
+							</div>
+						</a>
+						<a class="external" id="tuichu">
+							<div class="wrapper line">
+								<div class="tuichu">退出登录</div>
+								<div class="text icon icon-right"></div>
+							</div>
+						</a>
+					</div>
+					<a class="technical_support" href="javascript:;">—— 初美生物 ——</a>
+				</section>
+				<link rel="stylesheet" href="css/footer.css">
+				<footer id="footer" class="row">
+					<a href="index.html" class="col-25 wrapper external team color-footer-nav-icon">
+						<p class="text color-footer-nav-text">主页</p>
+					</a>
+					<a href="i_yingxiao.html" class="col-25 wrapper external market color-footer-nav-icon">
+						<p class="text color-footer-nav-text ">营销</p>
+					</a>
+					<a href="i_xiadan.html" class="col-25 wrapper external order color-footer-nav-icon">
+						<p class="text color-footer-nav-text">下单</p>
+					</a>
+					<a href="i_my.html" class="col-25 wrapper external personal color-footer-nav-icon">
+						<p class="text color-footer-nav-text">个人信息</p>
+					</a>
+				</footer>
+			</div>
+		</div>
+			<!--弹出协议-->
+		<div id="mask-box">
+			<div>
+				<div class="error">
+					x
+				</div>
+				<iframe src="protocol.html" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+			</div>
+		   <style type="text/css">
+		   	  #mask-box{
+				  display: none;
+				  width: 100%;
+				  height: 100%;
+				  position: fixed;
+				  top: 0;
+				  left: 0;
+				  background-color: rgba(0,0,0,0.5);
+				  z-index: 99999;
+			  }
+			  #mask-box>div{
+				  position: absolute;
+				  left: 5%;
+				  width: 90%;
+				  top: 5%;
+				  height: 90%;
+			  }
+			   #mask-box>div .error{
+				   width: 30px;
+				   height: 30px;
+				   position: absolute;
+				   right:-10px;
+				   top: -10px;
+				   background: red;
+				   color: #FFFFFF;
+				   font-size: 20px;
+				   text-align: center;
+				   line-height: 30px;
+		           border-radius: 50%;
+				   z-index: 9999;
+			   }
+		   </style>
+		</div>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script src="js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--获取用户-->
+		<script src="js/information.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+		<script type="text/javascript">
+			//上传头像
+			function makeUpImg() {
+				$.showPreloader();
+				var myToken = getLocal("token");
+				var file = document.getElementById("file");
+				var fileObj = file.files[0];
+				var formData = new FormData();
+				formData.append('Token', myToken);
+                if(fileObj.size / 1024 > 1025){ //大于1M
+					photoCompress(fileObj, {
+						quality: 0.2
+					}, function(base64Codes) {
+						var bl = convertBase64UrlToBlob(base64Codes);
+						formData.append("Image", bl, "file_" + Date.parse(new Date()) + ".jpg"); // 文件对象
+						makeSubmit(formData);
+					});
+				}else{
+					formData.append('Image', fileObj);
+					makeSubmit(formData);
+				}
+			}
+			//开始上传
+			function makeSubmit(formData) {
+				$.ajax({
+					url: apiUrl + '/User/HeadUpdate',
+					type: 'POST',
+					data: formData,
+					cache: false,
+					processData: false,
+					contentType: false,
+					success: function(res) {
+						if (res.code == 200) {
+							$.hidePreloader();
+							tusi(res.message);
+							location.reload();
+						} else {
+							tusi(res.message);
+						}
+					},
+					error: function() {
+
+					}
+				})
+			}
+			//退出登录
+			$("#tuichu").click(function() {
+				if (window.localStorage) {
+					var wStorages = window.localStorage;
+					wStorages.clear();
+					window.location.href = "login.html";
+				}
+			})
+			$(function() {
+				$("#protocol").click(function(){
+					$("#mask-box").show();
+				})	
+				$("#mask-box .error").click(function(){
+					$("#mask-box").hide();
+				})
+				$("#amount").click(function() {
+					var date = new Date();
+					var day = date.getDate();
+					// if(day == 2) {
+					var myToken = getLocal("token");
+					var getparam_ajax = {
+						Token: myToken
+					};
+					var getorder_option = {
+						url: '/Trade/YdJl', // 地址
+						params: getparam_ajax,
+						callback: function(res) {
+							if (res.code == 200) {
+								tusi(res.message);
+							} else {
+								tusi(res.message);
+							}
+						}
+					}
+					callajax(getorder_option);
+				})
+				var active = window.location.href;
+				active = active.toLowerCase();
+				if (active.indexOf("i_yingxiao") != -1) {
+					$(".market").addClass("active").children("p").addClass("active");
+				} else if (active.indexOf("i_xiadan") != -1) {
+					$(".order").addClass("active").children("p").addClass("active");
+				} else if (active.indexOf("i_my") != -1) {
+					$(".personal").addClass("active").children("p").addClass("active");
+				} else {
+					$(".team").addClass("active").children("p").addClass("active");
+				}
+			});
+		</script>
+	</body>
+</html>

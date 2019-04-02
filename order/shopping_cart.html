@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>购物车</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<link rel="stylesheet" type="text/css" href="../css/order-cart.css" />
+	</head>
+	<body>
+		<div class="page" id="main">
+			<div class="content content-order" v-if="shoppingCart.length>0">
+				<section class="order-alist">
+					<ul>
+						<li v-for="(item,index) in shoppingCart">
+							<button :class="item.select? 'active' :''" @click="makeSelectItem(index)" class="btn-select"></button>
+							<p class="seller-inf">
+								产品信息
+							</p>
+							<div class="goods-infs">
+								<img :src="imgUrl+item.image" />
+								<p class="goods-title">{{item.productname}}</p>
+								<p class="goods-format">描述：{{item.miaoshu}} </p>
+								<p class="goods-price">￥<span class="priceval">{{item.jiage}}</span>
+									<input type="text" readonly="readonly" name="shownum" class="shownum pull-right" v-model="item.number" />
+									<span style="color: #000000;" class="pull-right">数量：</span>
+								</p>
+							</div>
+						</li>
+					</ul>
+				</section>
+			</div>
+			<div v-else>
+				<div class="no-cart">
+			        <img src="../images/no.png"/> 
+			        <span>暂无数据</span>
+			        <a onclick="goBuy()">去逛逛</a>
+				</div>	
+			</div>
+			<footer class="submit-order">
+				<p>
+					<button :class="selectAll? 'active' :''" class="btn-sel" @click="makeSelectAll"></button>全选
+				</p>
+				<input type="button" name="settlement" v-show="isShow" id="del-cart" @click="makeDelet"  class="settlement" value="删除" style="background-color: #0099ff" />
+				<input type="button" name="settlement"  id="settlement" @click="makePay" class="settlement" value="结算" />
+			</footer>
+		</div>
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+		<script type="application/javascript" src="../js/order-list1.js"></script> 
+		<!--<script src="../js/order-list.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="application/javascript">
+			 function goBuy(){
+			    window.location.href = "../i_xiadan.html"
+			 }
+		</script>
+		<style>
+			.submit-order>p{
+				text-align: left;
+			}
+			
+			.no-cart{
+                padding-top: 100px;
+			    text-align: center;	
+			}
+			.no-cart>img{
+				display: block;
+				margin: 0 auto;
+			}
+			.no-cart>span{
+				display:block;
+				text-align: center;
+			}
+			.no-cart>a{
+               display: inline-block;
+               margin-top: 10px;
+               padding: 3px 8px;
+               background: #FFFFFF;
+               border-radius: 5px;
+			}
+		</style>
+	</body>
+</html>

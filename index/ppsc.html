@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>品牌商城</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<!--<link rel="stylesheet" href="../css/footer.css">-->
+		<script type="text/javascript">
+			var TP_PUBLIC = '/Public';
+			var ROOT = '/';
+			var APP = '';
+		</script>
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+
+		<link rel="stylesheet" href="../css/light7-swiper.min.css" />
+		<link rel="stylesheet" href="../css/mall_index1.css" />
+
+	</head>
+
+	<body>
+		<div class="page">
+			<div class="content mall-index">
+				<!--搜索及轮播图-->
+				<header class="header-wrapper">
+					<div class="top-header">
+						<!--<img src="../images/manager-order/icons1.png" alt="" class="icon-logo" />-->
+						<input type="text" name="mall-search" id="mall-search" value="" />
+						<label for="mall-search" class="search-placeholder"><i class="icon icon-search"></i>搜索商品</label>
+						<!-- <img src="../images/mallorder/bell.png" alt="" class="icon-bell" /> -->
+					</div>
+					<div class="middle-header">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide"><img src="../images/5a67fabfd8f42.jpg" alt="图片一" /></div>
+							</div>
+							<!-- Add Pagination -->
+							<div class="swiper-pagination"></div>
+						</div>
+					</div>
+					
+				</header>
+				<!--分类菜单-->
+				<!--<nav class="menus" style="margin-bottom: -60px;">-->
+				<nav class="menus">
+					<div class="menus-wrapper">
+						<ul class="menu-list">
+							<li>
+								<a class="external" href='javaScript:;'>新品上市</a>
+							</li>
+							<li>
+								<a class="external" href='javaScript:;'>秒杀专区</a>
+							</li>
+							<li>
+								<a class="external" href='javaScript:;'>店主推荐</a>
+							</li>
+							<li>
+								<a class="external" href='javaScript:;'>热卖精选</a>
+							</li>
+							<li>
+								<a class="external more" href='/sale/mall/commodity'>更多</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+				<!--中间banner图-->
+				<section class="middle-banner">
+					<img src="../images/5a67fcc1840b0.jpg" alt="" style="width: 100%" />
+				</section>
+				<!--商品列表-->
+
+				<div class="goods-list">
+					<dl class="goods-area">
+						<dt class="area-title">
+                            <p>热卖精选</p>
+                        </dt>
+
+						<section class="area-list">
+							<dd class="area-goods" data-id="23">
+								<img src="/Public/Radmin_v3/images/logo/system_logo.jpg" alt="" />
+								<p class="goods-title">雪莲伴侣清清裤</p>
+								<p class="goods-price">￥18.00</p>
+								<i class="icon icon-car" id="cart" data-property="" data-id="23"></i>
+							</dd>
+							<dd class="area-goods" data-id="24">
+								<img src="/Public/Radmin_v3/images/logo/system_logo.jpg" alt="" />
+								<p class="goods-title">酷保小分子玻尿酸保湿面膜</p>
+								<p class="goods-price">￥208.00</p>
+								<i class="icon icon-car" id="cart" data-property="" data-id="24"></i>
+							</dd>
+							<dd class="area-goods" data-id="25">
+								<img src="/Public/Radmin_v3/images/logo/system_logo.jpg" alt="" />
+								<p class="goods-title">酷保惊奇洗卸凝露</p>
+								<p class="goods-price">￥138.00</p>
+								<i class="icon icon-car" id="cart" data-property="" data-id="25"></i>
+							</dd>
+							<dd class="area-goods" data-id="26">
+								<img src="/Public/Radmin_v3/images/logo/system_logo.jpg" alt="" />
+								<p class="goods-title">酷保经络贴 10片装</p>
+								<p class="goods-price">￥199.00</p>
+								<i class="icon icon-car" id="cart" data-property="" data-id="26"></i>
+							</dd>
+						</section><dt class="area-title">
+                            <p>店主推荐</p>
+                        </dt>
+
+						<section class="area-list">
+							<dd class="area-goods" data-id="27">
+								<img src="/Public/Radmin_v3/images/logo/system_logo.jpg" alt="" />
+								<p class="goods-title">领格玻尿酸避孕套</p>
+								<p class="goods-price">￥18.00</p>
+								<i class="icon icon-car" id="cart" data-property="" data-id="27"></i>
+							</dd>
+							<dd class="area-goods" data-id="29">
+								<img src="/Public/Radmin_v3/images/logo/system_logo.jpg" alt="" />
+								<p class="goods-title">柴博士中医灸疗炷</p>
+								<p class="goods-price">￥168.00</p>
+								<i class="icon icon-car" id="cart" data-property="" data-id="29"></i>
+							</dd>
+						</section><dt class="area-title">
+                            <p>秒杀专区</p>
+                        </dt>
+
+						<section class="area-list">
+						</section><dt class="area-title">
+                            <p>新品上市</p>
+                        </dt>
+
+						<section class="area-list">
+						</section>
+					</dl>
+
+				</div>
+			</div>
+			<link rel="stylesheet" href="../css/footer_v4.css">
+			<footer class="bar bar-tab">
+				<a class="tab-item active external shopping" href="ppsc.html">
+					<span class="icon-shop"></span>
+					<span class="tab-label">商城</span>
+				</a>
+
+				<a class="tab-item external shopping_cart" href="gwc.html">
+					<span class="icon-shoppingcart"></span>
+					<span class="tab-label">购物车</span>
+
+				</a>
+				<a class="tab-item external personal" href="grzx.html">
+					<span class="icon-center"></span>
+					<span class="tab-label">个人中心</span>
+				</a>
+				
+			</footer>
+		</div>
+		<!--script strat-->
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/light7-swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$().ready(function() {
+				var swiper = new Swiper('.swiper-container', {
+					pagination: '.swiper-pagination',
+					paginationClickable: true,
+					centeredSlides: true,
+					autoplay: 2500,
+					autoplayDisableOnInteraction: false
+				});
+				//搜索框的判定
+				$("#mall-search").click(function() {
+					$(this).focus().siblings(".search-placeholder").hide();
+					$("#mall-search").blur(function() {
+						if($(this).val() == '') {
+							$(this).siblings("label").show();
+						}
+					});
+				});
+
+				$('.menu-list li').click(function() {
+					$('.menu-list li').removeClass('active');
+					$(this).addClass('active');
+				})
+			})
+		</script>
+		<script>
+			var signurl = '/admin/integral/get_sign_up_state_ajax';
+			var signedurl = '/admin/integral/sign_up';
+
+			$(function() {
+				$(".more").click(function(){
+					tusi('暂无更多');
+				})
+				//点击购物车提示
+				$(document).on('click', "#cart", function(event) {
+					var num = 1;
+					var id = $(this).data("id");
+					//属性
+					//              var property = $(this).data("property");
+					//              if (property == 1) {
+					//                  //属性
+					//                  _id = id;
+					//                  getProperties($('#skus-menu').find('.select-middle'));
+					//                  $('.mask').show();
+					//              } else {
+					$.post('/sale/mallorder/add_shopping_cart', {
+						id: id,
+						num: num
+					}, function(data) {
+						tusi(data.msg);
+					});
+					//              }
+					return false;
+				});
+
+				$(document).on('click', '.area-goods', function() {
+					var id = $(this).data('id');
+					//              console.log(id);
+					window.location.href = 'goods_detail?id=' + id;
+				})
+
+				var flag = false;
+				$.get(signurl, function(data) {
+					if(data.is_sign_up == 1 && flag == false) {
+						$(".signin").find("span").text("已签到");
+						flag = true;
+					} else if(data.is_sign_up == 2 && flag == false) {
+						$(".signin").bind("click", function() {
+							$.get(signedurl, function(data, res) {
+								if(!(data == null || data == undefined || data == "")) {
+									if(data.code != 1) {
+										alert(data.msg);
+									} else {
+										$(".signin").find("span").text("已签到");
+										flag = true;
+									}
+								} else {
+									alert("数据传输错误，签到失败！");
+								}
+							});
+							if(flag) {
+								$(".signin").unbind("click");
+							}
+						});
+					} else {
+						return false;
+					}
+				});
+
+				//          setUlWidth();
+				function setUlWidth() {
+					var liWidth = 0;
+					$('.menus-wrapper .menu-list li').each(function(k, v) {
+						liWidth += $(v).width() + 20;
+						console.log(liWidth)
+					})
+					if(liWidth > $(window).width()) {
+						$('.menus-wrapper .menu-list').width(liWidth + 20);
+					} else {
+						$('.menus-wrapper .menu-list').width($(document).width() * 0.88);
+					}
+				}
+
+			});
+		</script>
+
+	</body>
+
+</html>

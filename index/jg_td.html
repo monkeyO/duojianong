@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的团队</title>
+
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		<!-- 默认配色方案 -->
+		<!--<link rel="stylesheet" href="../css/color_scheme-default.css">-->
+
+		<!-- 绿色配色方案 -->
+		<!-- <link rel="stylesheet" href="../css/color_scheme-green.css"> -->
+
+		<!-- 粉色配色方案 -->
+		<!-- <link rel="stylesheet" href="../css/color_scheme-pink.css"> -->
+
+		<!--<link rel="stylesheet" href="../css/footer.css">-->
+		<script type="text/javascript">
+			var TP_PUBLIC = '/Public';
+		</script>
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+
+		<link rel="stylesheet" href="../css/myteam_v3.1.css" type="text/css" />
+
+		<script type="text/javascript">
+			var agenturl = '/admin/team/index_ajax'
+			var getMenurl = '/admin/team/get_levname'
+			var getDetail = '/admin/team/get_distributor_all_info'
+		</script>
+	</head>
+
+	<body>
+		<div class="page">
+			<header class="bar bar-nav">
+				<div class="title">
+					<div class="search-wrap">
+						<i class="icon icon-search">搜索名字、授权号、手机号</i>
+						<form action="" method="post">
+							<input type="search" id="keyword" name="agent-search" class="agent-search" style="height: 2.1rem;margin: 0;" />
+						</form>
+					</div>
+					<div class="buttons-tab">
+						<a href="#tab1" id="btn1" class="tab-link active button color-team-index-nav" data-type="recommend" data-flag="false">我直属的代理</a>
+						<a href="#tab2" id="btn2" class="tab-link button color-team-index-nav" data-type="under" data-flag="false">我推荐的代理</a>
+					</div>
+				</div>
+			</header>
+			<div id="toTop">
+				<img src="../images/toTop.png" />
+			</div>
+			<div class="content infinite-scroll" id="content-hook">
+				<div class="content-block content-wrapper">
+					<div class="tabs">
+						<div id="tab1" class="tab active">
+							<div class="content-block myteam-items">
+								<!--<ul id="items1">
+									
+								</ul>-->
+								<!--<dl class="agent-wrapper">
+									<dt class="agent-level">
+										<i class="icon-triangledowm"></i>
+										总经销商
+										<span>6</span>
+									</dt>
+									<section class="items-hook">
+										<dd class="agent-content">
+											<div class="agent-all">
+												<div class="content-left">
+													<img src="" alt="" />
+													<span>测试</span>
+												</div>
+												<div class="content-right">
+													<div class="agent-count">
+														<p>推荐代理：<span>0</span></p>
+														<p>直属代理：<span>0</span></p>
+													</div>
+													<i class="icon icon-right"></i>
+												</div>
+											</div>
+										</dd>
+										<dd class="agent-content">
+											<div class="agent-all">
+												<div class="content-left">
+													<img src="" alt="" />
+													<span>测试</span>
+												</div>
+												<div class="content-right">
+													<div class="agent-count">
+														<p>推荐代理：<span>0</span></p>
+														<p>直属代理：<span>0</span></p>
+													</div>
+													<i class="icon icon-right"></i>
+												</div>
+											</div>
+										</dd>
+										<dd class="agent-content">
+											<div class="agent-all">
+												<div class="content-left">
+													<img src="" alt="" />
+													<span>测试</span>
+												</div>
+												<div class="content-right">
+													<div class="agent-count">
+														<p>推荐代理：<span>0</span></p>
+														<p>直属代理：<span>0</span></p>
+													</div>
+													<i class="icon icon-right"></i>
+												</div>
+											</div>
+										</dd>
+										<p class="loadmore">点击加载更多</p>
+									</section>
+								</dl>-->
+							</div>
+						</div>
+						<div id="tab2" class="tab">
+							<div class="content-block myteam-items">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--script start-->
+		<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../js/myteam.js" type="text/javascript" charset="utf-8"></script>-->
+		<script>
+			var empty = 'Public/empty';
+			$(function() {
+				$(document).on('click', '.myteam-detail', function() {
+					var myteam_id = $(this).data('id');
+					console.log(myteam_id);
+					window.location.href = 'agency_detail?myteam_id=' + myteam_id;
+				})
+
+				$('#content-hook').scroll(function() {
+					if($(this).scrollTop() > 80) {
+						$('#toTop').fadeIn()
+					} else {
+						$('#toTop').fadeOut()
+					}
+				});
+				$('#toTop').bind('click', function() {
+					$('#content-hook').animate({
+						scrollTop: 0
+					}, 500);
+					return false;
+				})
+			});
+
+			// $(function() {
+			//     var keyword=$('#keyword').val();
+			//     $.post('/Admin/Team/index_ajax',{keyword:keyword},function(data){
+
+			//     })
+			// });
+		</script>
+		<script type="text/javascript">
+			var i_page = 1;
+			var u_page = 1;
+			var first = true;
+			var s_page = 1;
+			var loading = false;
+
+			$(function() {
+				//				推荐代理
+				var introduct = 'pid';
+				i_aim = $('#tab1 .myteam-items');
+				getMenu(introduct, i_aim)
+				//				直属代理
+				var under = 'recommendID';
+				u_aim = $('#tab2 .myteam-items');
+				getMenu(under, u_aim);
+
+				//				点击获取相应列表
+				$(document).on('click', '.agent-level', function() {
+					var _level = $(this).data("level");
+					var _type = $(this).data("type");
+					var _aim = $(this).siblings('.items-hook');
+					i_page = 1;
+					first = true;
+					u_page = 1;
+					$(this).parent().siblings('.agent-wrapper').find('.items-hook').slideUp().empty().siblings('.agent-level').removeClass('active')
+					$(this).toggleClass('active').siblings('.items-hook').stop(true, true).slideToggle().empty()
+					if(!$(this).hasClass('active')) {
+						return
+					} else {
+						getAgentDeatil(_type, _aim, _level)
+					}
+				})
+
+				//				点击加载更多
+				$(document).on('click', '.loadmore', function() {
+					var l_aim = $(this).parent();
+					var l_level = l_aim.siblings('.agent-level').data("level");
+					var l_type = l_aim.siblings('.agent-level').data("type");
+					console.log(l_aim + ':' + l_level + ":" + l_type)
+					getAgentDeatil(l_type, l_aim, l_level);
+				})
+
+				//				搜索框的判定
+				$(".search-wrap").click(function() {
+					$(this).find("i").hide().siblings("form").children("input").focus();
+					$(".agent-search").blur(function() {
+						if($(this).val() == '') {
+							$(this).parent().siblings("i").show();
+						}
+					});
+				});
+
+				//				搜索框的值改变时进行筛选
+				$('.search-wrap').on('input propertychange', '#keyword', function() {
+					var oKeyword = $(this).val().toString().trim();
+					$(this).val(oKeyword)
+					console.log($(this).val())
+					var tab = $('.tabs dl');
+					var s_type = $('.buttons-tab').find('.active').data('type')
+					s_page = 1;
+					i_num = 1;
+					u_num = 1;
+					first = true;
+					tab.parent().parent().siblings('dd').remove()
+					$('.infinite-scroll-preloader').remove();
+					if(oKeyword == "" || oKeyword == null || oKeyword == undefined) {
+						tab.show(1)
+						$.detachInfiniteScroll($('.infinite-scroll'));
+					} else {
+						tab.hide(1)
+						addItems(oKeyword, s_type);
+					}
+				})
+
+				//		    点击进入查看代理详情
+				$(document).on('click', '.agent-content', function() {
+					$('#keyword').val("");
+					window.location.href = 'agency_detail?myteam_id=' + $(this).data("id")
+				})
+
+				//		    输入搜索时,切换tab
+				$('.tab-link').click(function() {
+					var oKeyword = $('#keyword').val().toString().trim();
+					var s_type = $('.buttons-tab').find('.active').data('type')
+					s_page = 1;
+					i_num = 1;
+					u_num = 1;
+					first = true;
+					$('.tabs .search-dd').remove()
+					if(oKeyword != "") {
+						addItems(oKeyword, s_type)
+					}
+				});
+			});
+
+			//			获取代理目录
+			function getMenu(type, aim) {
+				$.post(getMenurl, {
+					type: type
+				}, function(data) {
+					if(data.code == 1) {
+						console.log(data)
+						if(data.info.list != null) {
+							var temp = []
+							$.each(data.info.list, function(key, value) {
+								$.each(value, function(k, val) {
+									var html = '<dl class="agent-wrapper"><dt class="agent-level" data-level="' + k + '" data-type="' + type + '"><i class="icon-triangledowm"></i>' + key +
+										'<span>' + val + '</span></dt><section class="items-hook"></section></dl>';
+									temp.push(html)
+								});
+							});
+							aim.append(temp)
+						}
+					} else {
+						alert(data.msg)
+					}
+				})
+			}
+
+			//			获取代理详情信息
+			function getAgentDeatil(type, aim, level) {
+				var page;
+				if(type == 'pid') {
+					page = i_page;
+					i_page++;
+				} else if(type == 'recommendID') {
+					page = u_page;
+					u_page++;
+				}
+				$.post(getDetail, {
+					page_num: page,
+					type: type,
+					level: level
+				}, function(data) {
+					if(data.code == 1) {
+						if(data.info.list == null || data.info.list.length < 9) {
+							i_page = 1;
+							u_page = 1;
+							aim.find('.loadmore').remove()
+						}
+						var temp = [];
+						$.each(data.info.list, function(key, value) {
+							var html = '<dd class="agent-content" data-id="' + value.id + '"><div class="agent-all"><div class="content-left"><img src="' + value.headimgurl + '" alt="" />' +
+								'<span>' + value.name + '</span></div><div class="content-right"><div class="agent-count"><p>直属代理：<span>' + value.dis_pid_count + '</span></p>' +
+								'<p>推荐代理：<span>' + value.dis_recommendID_count + '</span></p></div><i class="icon icon-right"></i></div></div></dd>';
+							temp.push(html);
+						});
+						if(first && temp.length >= 9) {
+							temp.push('<p class="loadmore">点击加载更多</p>');
+							first = !first
+						}
+						aim.append(temp)
+					} else {
+						alert(data.msg)
+					}
+				})
+			}
+			//			滚动加载
+			function addItems(str, type) {
+				$.post(agenturl, {
+					type: type,
+					keyword: str,
+					page_num: s_page
+				}, function(data) {
+					var temp = [];
+					if(data.code == 1) {
+						var count = 0;
+						s_page++;
+						console.log(data)
+						$.each(data.info.list, function(key, value) {
+							count++;
+							var html = '<dd class="agent-content search-dd" data-id="' + value.id + '"><div class="agent-all"><div class="content-left"><img src="' + value.headimgurl + '" alt="" />' +
+								'<span>' + value.name + '</span></div><div class="content-right"><div class="agent-count"><p>直属代理：<span>' + value.dis_pid_count + '</span></p>' +
+								'<p>推荐代理：<span>' + value.dis_recommendID_count + '</span></p></div><i class="icon icon-right"></i></div></div></dd>';
+							temp.push(html);
+						});
+						if(count == 9) {
+							if(first == true) {
+								first = !first;
+								if(!$(".infinite-scroll").find(".preloader").length > 0) {
+									var str = '<div class="infinite-scroll-preloader"><div class="preloader"></div></div>';
+									$(".infinite-scroll .infinite-scroll-preloader").remove()
+									$(".infinite-scroll").append(str);
+								}
+							}
+							$.attachInfiniteScroll($('.infinite-scroll'));
+							$(document).on('infinite', '.infinite-scroll', function() {
+								var oKeyword = $('#keyword').val().toString();
+								var s_type = $('.buttons-tab').find('.active').data('type')
+								// 如果正在加载，则退出
+								if(loading) return;
+								// 设置flag
+								loading = true;
+								setTimeout(function() {
+									loading = false;
+									addItems(oKeyword, s_type);
+								}, 1000);
+							});
+						} else {
+							$.detachInfiniteScroll($('.infinite-scroll'));
+							$('.infinite-scroll-preloader').html('暂无更多数据！')
+						}
+						$('.tabs').append(temp);
+					} else {
+						alert(data.msg);
+					}
+				})
+			}
+		</script>
+		<!--script end-->
+	</body>
+
+</html>

@@ -1,0 +1,197 @@
+
+.award-menu {
+	position: fixed;
+	width: 100%;
+	background-color: white;
+}
+.award-menu ul {
+	width: 100%;
+	padding: 0 .3rem;
+	white-space: nowrap;
+	overflow-x: scroll;
+	overflow-y:hidden;
+    float:left;	
+}
+
+.award-menu ul li {
+    display:inline-block;
+	text-align: center;
+	color: #303030;
+	font-weight: 400;
+	padding: 0 20px;
+}
+
+.award-menu ul li a {
+	color: #303030;
+	line-height: 3.125rem;
+	display: inline-block;
+}
+.award-menu ul li a:hover{
+	cursor: pointer;
+} 
+.award-menu ul li .active {
+	color: #fe684a;
+}
+
+section {
+	margin-top: 3.125rem;
+}
+
+.award-manager1,.award-manager2,.award-manager5,.award-manager6,.award-manager7{
+	display: none;
+}
+.award-manager1{
+	display: block;
+}
+
+.award-show {
+	height: 2rem;
+	background: url(../images/team-manager/team-award/award-bg.jpg) no-repeat;
+	background-size: cover;
+	text-align: center;
+}
+
+.award-show .select-date {
+	position: relative;
+	display: flex;
+}
+
+.award-show .select-date span {
+	display: block;
+	padding-left: 15px;
+	line-height: 2rem;
+	width: 80px;
+}
+
+.award-show .select-date input {
+	display: block;
+	flex: 1;
+	text-align: left!important;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	text-align: center;
+	color: white;
+	margin-top: 0;
+	position: relative;
+	z-index: 50;
+}
+
+.award-show .select-date i {
+	margin-left: -3rem;
+	font-size: .75rem;
+	color: white;
+	vertical-align: text-bottom;
+	position: absolute;
+	z-index: 5;
+	line-height: 2rem;
+	top: 50%;
+	transform: translateY(-40%);
+}
+
+.award-show .select-date ::-webkit-input-placeholder {
+	/* WebKit browsers */
+	color: white;
+}
+
+.award-show .select-date :-moz-placeholder {
+	/* Mozilla Firefox 4 to 18 */
+	color: white;
+}
+
+.award-show .select-date ::-moz-placeholder {
+	/* Mozilla Firefox 19+ */
+	color: white;
+}
+
+.award-show .select-date :-ms-input-placeholder {
+	/* Internet Explorer 10+ */
+	color: white;
+}
+
+.award-show .award-num {
+	display: flex;
+	font-weight: 400;
+	color: white;
+}
+
+.award-show .award-num .day-award {
+	flex: 1;
+}
+
+.award-show .award-num .day-award p:last-child {
+	margin: 0;
+	font-size: 1.8125rem;
+}
+
+.award-show .award-num .month-award {
+	flex: 1;
+}
+
+.award-show .award-num .month-award p:last-child {
+	margin: 0;
+	font-size: 1.8125rem;
+}
+
+.award-list {
+	margin-top: .5rem;
+	background-color: white;
+}
+
+.award-list .alist-title {
+	overflow: hidden;
+	padding: 0 1rem;
+	border-bottom: solid #C9C9C9 1px;
+}
+
+.award-list .alist-title p {
+	font-weight: 400;
+	margin: 0;
+	line-height: 2.6875rem;
+}
+
+.award-list .alist-title p:first-child {
+	float: left;
+}
+
+.award-list .alist-title p:last-child {
+	float: right;
+	color: #fe684a;
+}
+
+.award-list .alist-detail {
+	padding: .3rem 1rem;
+}
+
+.award-list .alist-detail p {
+	margin: 0;
+	line-height: 1.5625rem;
+	font-size: 0.875rem;
+	font-weight: 400;
+	color: #a0a0a0;
+}
+
+.bar+.picker-items {
+	display: flex;
+	height: 10.8rem;
+}
+
+.picker-items-col {
+	margin: 0 .5rem!important;
+	margin: 0 .5rem!important;
+	flex: 1;
+	text-align: center;
+}
+
+.list-wrapper {
+	text-align: left
+}
+
+.award-manager2,
+.award-manager3,
+.award-manager4 {
+	display: none;
+}
+
+
+/*# sourceMappingURL=award_manager.css.map */

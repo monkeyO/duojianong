@@ -1,0 +1,114 @@
+  #list1 img {
+            height: 110px;
+            margin-right: 10px;
+            width: 110px;
+            margin-top: 10px;
+        }
+
+        #list2 img {
+            height: 110px;
+            margin-right: 10px;
+            width: 110px;
+            margin-top: 10px;
+        }
+
+        #list3 img {
+            height: 110px;
+            margin-right: 10px;
+            width: 110px;
+            margin-top: 10px;
+        }
+
+        input[type=checkbox]:active,
+        input[type=radio]:active {
+            border-color: #c6c6c6;
+            background: #ebebeb;
+        }
+
+        input[type=checkbox]:hover {
+            border-color: #c6c6c6;
+            -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type=checkbox]:checked,
+        input[type=radio]:checked {
+            background: #fff;
+        }
+
+        input[type=checkbox]:checked::after {
+            content: url(../../images/yes.png);
+            display: block;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            left: 0px;
+            width: 30px;
+            height: 30px;
+        }
+
+        input[type=checkbox]:focus {
+            outline: none;
+        }
+
+        .imgUpload {
+            position: relative;
+            float: left;
+            width: 110px;
+            height: 110px;
+            box-sizing: border-box;
+            margin: 10px;
+        }
+
+        .imgUpload img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 110px;
+            height: 110px;
+            border: none;
+            z-index: 5;
+        }
+
+        .imgUpload #myfile1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+            outline: none;
+            opacity: 0;
+            width: 110px;
+            height: 110px;
+            z-index: 10;
+        }
+
+        .imgUpload #myfile2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+            outline: none;
+            opacity: 0;
+            width: 110px;
+            height: 110px;
+            z-index: 10;
+        }
+		
+.list-block .item-title.label{
+	width: 39%;
+}		
+.item-inner{
+	position: relative;
+}
+.list-block .order-inner .item-inner:not(:last-child){
+	border-bottom: none;
+}
+
+.item-input>span{
+	display: inline-block;
+	margin-right: 10px;
+}
+.item-input>span font,.item-input font{
+	color: red;
+}

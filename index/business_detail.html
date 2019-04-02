@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>课程详情</title>
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+<!--{{content}}-->
+	</head>
+	<body>
+		<div id="main">
+			<h2>{{title}}</h2>
+			<p>{{content}}</p>
+		</div>
+	</body>
+	<script>
+		var app = new Vue({
+			el: '#main',
+			data() {
+				return {
+					title: "",
+					content: ""
+				}
+			},
+			mounted() {
+				var that = this;
+				that.init();
+			},
+			methods: {
+				//初始加载
+				init() {
+					var that = this;
+					var getparam_ajax = {
+						id: GetQueryString("id")
+					};
+					var getorder_option = {
+						url: '/CmSchool/CmSchoolXX',
+						type: 'post',
+						params: getparam_ajax,
+						callback: function(res) {
+							if(res.code == 200) {
+								that.title = res.data[0].schoolname;
+								that.content = res.data[0].conent;
+							}
+						}
+					}
+					callajax(getorder_option);
+				}
+			}
+		})
+	</script>
+	<style>
+		#main{
+			box-sizing: border-box;
+			padding: 0 15px;
+		}
+		h2 {
+			font-size: 20px;
+			text-align: center;
+			line-height: 30px;
+		}
+		#main>p{
+			text-align: justify;
+			text-indent: 2em;
+			line-height: 28px;
+			font-size: 16px;
+		}
+	</style>
+
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>产品</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="../css/light7.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/manager-order_v3.1.css" />
+		<style>
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<header class="bar bar-nav">
+				<a class="icon icon-left pull-left"></a>
+				<!-- <a class="icon icon-refresh pull-right"></a> -->
+				<h1 class="title">详情</h1>
+			</header>
+			<div id="detail" v-cloak>
+				<!--购物车弹框-->
+				<div class="popup popup-about">
+					<div class="content-block">
+						<div class="popup-content">
+							<span>
+								商品名称：{{shoppingCart.name}}
+							</span>
+							<span>
+								商品价格：{{shoppingCart.price}}
+							</span>
+						</div>
+					</div>
+					<div class="num_operate" style="bottom: 80px;">
+						<span @click="makeLess">-</span>
+						<input type="text" readonly="readonly" v-model="buyNum" />
+						<span @click="makeAdd">+</span>
+						盒
+					</div>
+					<a href="#" @click="makeAddCart" class="button button-big button-fill">加入购物车</a>
+				</div>
+				<h2>{{title}}</h2>
+				<img class="banner" :src="imgUrl+banner" />
+				<div v-html="content">
+				</div>
+				<div class="shopping-cart" @click="makeShowCart">
+					添加购物车
+				</div>
+	    </div>
+		</div>
+	</body>
+	<script src="../js/jquery.js"></script>
+	<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="application/javascript" src="../js/vue.min.js"></script>
+	<script type="application/javascript">
+		var app = new Vue({
+			el: '#detail',
+			data() {
+				return {
+					title: "",
+					content: "",
+					banner: "",
+					shoppingCart: {},
+					imgUrl: imgUrl,
+					buyNum: "",
+					minNum: ""
+				}
+			},
+			created() {
+				this.init();
+			},
+			methods: {
+				//初始加载
+				init() {
+					var that = this;
+					var getparam_ajax = {
+						pid: GetQueryString("id")
+					};
+					var getorder_option = {
+						url: '/Single/ProductXq',
+						params: getparam_ajax,
+						type: 'post',
+						callback: function(res) {
+							if (res.code == 200) {
+								var myObject = {};
+								myObject["id"] = res.data.pid;
+								myObject["name"] = res.data.productname;
+								myObject["price"] = GetQueryString("jiage");
+								that.shoppingCart = myObject;
+								that.title = res.data.productname;
+								that.banner = res.data.image;
+								that.content = res.data.details;
+							}
+						}
+					}
+					callajax(getorder_option);
+				},
+				//减
+				makeLess() {
+          if(this.buyNum <= this.minNum) {
+          	return false;
+          } else {
+          	this.buyNum-=this.minNum;
+          }
+				},
+				//加
+				makeAdd() {
+            this.buyNum+=this.minNum;
+				},
+				//显示购物车
+				makeShowCart() {
+					this.getMinNum(this.shoppingCart.id);
+				},
+				//获取最小数量
+				getMinNum(id) {
+					var that = this;
+					var myToken = getLocal("token");
+					var getparam_ajax = {
+						Token: myToken,
+						pid: id
+					};
+					var getorder_option = {
+						url: '/Single/GwNumber',
+						params: getparam_ajax,
+						callback: function(res) {
+							if (res.code = 200) {
+								$.popup('.popup-about');
+								that.buyNum = that.minNum = res.data;
+							}
+						}
+					}
+					callajax(getorder_option);
+				},
+				//添加购物车
+				makeAddCart() {
+					var myToken = getLocal("token");
+					if(myToken) {
+						var getparam_ajax = {
+							Token: myToken,
+							number: this.buyNum,
+							pid: this.shoppingCart.id
+						};
+						var getorder_option = {
+							url: '/Single/JrGouWC', // 地址
+							params: getparam_ajax,
+							callback: function(res) {
+								if(res.code == 200) {
+									tusi(res.message);
+								} else {
+									tusi(res.message);
+								}
+							}
+						}
+						callajax(getorder_option);
+					} else {
+						
+					}
+				}
+			}
+		})
+	</script>
+	<style>
+		.page {
+			position: static !important;
+		}
+
+		#detail {
+			box-sizing: border-box;
+			padding: 2rem 10px 60px;
+			background: #FFFFFF;
+			height: 100%;
+			overflow-y: scroll;
+		}
+
+		#detail img {
+			width: 100%;
+		}
+
+		.shopping-cart {
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			height: 40px;
+			line-height: 40px;
+			width: 100%;
+			text-align: center;
+			color: #ffffff;
+			background: #32A5E4;
+		}
+
+		h2 {
+			font-size: 20px;
+			text-align: center;
+			line-height: 30px;
+		}
+	</style>
+</html>

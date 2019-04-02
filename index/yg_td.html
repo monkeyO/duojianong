@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的团队</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		
+		<link rel="stylesheet" href="../css/myteam_v3.1.css" type="text/css" />
+		<style>
+			.no-number{
+				padding-top: 100px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page" id="main">
+			<div class="content infinite-scroll" id="content-hook">
+					<div class="tabs">
+						<div class="tab active">
+							<div class="myteam-items" v-if="dataList.length>0">
+								<section class="items-hook" v-for="item in dataList" @click="makeDetail(item.uid)">
+									<dd class="agent-content">
+										<div class="agent-all">
+											<div class="content-left">
+												<img :src="item.head" alt="" />
+												<span>{{item.username}}</span>
+											</div>
+											<div class="content-right">
+												<div class="agent-count">
+													<!--	<p>推荐代理：<span>0</span></p>-->
+													<p>我的代理：<span>{{item.sid.length}}</span></p>
+												</div>
+												<i class="icon icon-right"></i>
+											</div>
+										</div>
+									</dd>
+								</section>
+							</div>
+							<!--暂无数据-->
+							<div v-else class="no-number">
+								<img src="../images/no.png" />
+								<p>暂无数据</p>
+							</div>
+						</div>
+					</div>
+			
+			</div>
+		</div>
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+		<script type="application/javascript">
+			var app = new Vue({
+				el: '#main',
+				data() {
+					return {
+						dataList: []
+					}
+				},
+				mounted() {
+					var that = this;
+					that.init();
+				},
+				methods: {
+					//查看详情
+					makeDetail(e) {
+						window.location.href = "yg_td_detail.html?uid=" + e;
+					},
+					//初始化
+					init() {
+						var that = this;
+						var myToken = getLocal("token");
+						var getparam_ajax = {
+							Token: myToken
+						};
+						var getorder_option = {
+							url: '/Team/Structure',
+							params: getparam_ajax,
+							callback: function(res) {
+								if(res.code = 200) {
+									that.dataList = res.data;
+								} else {
+									tusi(res.message);
+								}
+							}
+						}
+						callajax(getorder_option);
+					}
+				}
+			})
+// 			$(document).on('click', '.agent-level', function() {
+// 				$(this).toggleClass('active').siblings('.items-hook').slideToggle()
+// 			})
+		</script>
+	</body>
+
+</html>

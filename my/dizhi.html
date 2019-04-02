@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<link rel="stylesheet" href="../css/address_detail.css">
+		<title>收货地址</title>
+	</head>
+	<body>
+		<div class="page">
+			<header class="bar bar-nav">
+				<a class="icon icon-left pull-left"></a>
+				<!-- <a class="icon icon-refresh pull-right"></a> -->
+				<h1 class="title">地址</h1>
+			</header>
+			<div class="content" id="main">
+				<section v-for="item in dizhiList">
+					<div class="information">
+						<div class="wrapperbox clearfix">
+							<div class="name">{{item.yhm}}, {{item.phone}}</div>
+						</div>
+						<div class="address">{{item.areaname}}</div>
+					</div>
+					<div class="wrapper">
+						<span :class="item.status==1? 'active' :''" class="default-address" @click="makeDefault(item.id)">默认地址</span>
+						<!--<span class="edit"><a class="external" href="address_add.html">编辑</a></span>-->
+						<!--<span class="delete"><a class="external" href='' data-vid="461">删除</a></span>-->
+					</div>
+					<div class="mask">
+						<p class="text">是否删除该地址？</p>
+						<button class="btn-yes">是</button>
+						<button class="btn-no">否</button>
+					</div>
+				</section>
+				<!--footer start-->
+				<footer id="footer">
+					<a href="address_add.html" class="external"> <button class="add">新增收货地址</button></a>
+				</footer>
+				<!--footer end-->
+			</div>
+		</div>
+		<script src="../js/address_detail.js"></script>
+		<!--script end-->
+	</body>
+	<script>
+		var app = new Vue({
+			el: '#main',
+			data() {
+				return {
+					dizhiList: [],
+					type: ""
+				}
+			},
+			mounted() {
+				var that = this;
+				that.init();
+			},
+			methods: {
+				//修改默认
+				makeDefault(e) {
+					let that = this;
+					var myToken = getLocal("token");
+					var getparam_ajax = {
+						Token: myToken,
+						id: e
+					};
+					var getorder_option = {
+						url: '/User/DzXg',
+						params: getparam_ajax,
+						callback: function(res) {
+							if(res.code = 200) {
+							    if(that.type&&that.type==1){
+                                    setTimeout(function(){
+                                    	 window.history.back(); 
+                                    },2000)
+							    }
+								tusi(res.message);
+							} else {
+								tusi(res.message);
+							}
+						}
+					}
+					callajax(getorder_option);
+				},
+				//初始加载
+				init() {
+					var that = this;
+					if(GetQueryString("type")) {
+						that.type = GetQueryString("type");
+					}
+					var myToken = getLocal("token");
+					var getparam_ajax = {
+						Token: myToken
+					};
+					var getorder_option = {
+						url: '/User/AddressZs',
+						params: getparam_ajax,
+						callback: function(res) {
+							console.log(res);
+							if(res.code = 200) {
+								that.dizhiList = res.data;
+							} else {
+								tusi("暂无数据");
+							}
+						}
+					}
+					callajax(getorder_option);
+				}
+			}
+		})
+		var imgurl = "..";
+		var addressflag = false;
+		function del_addre(id) {
+			tusi("删除成功！");
+			$.post('/Admin/address/address_del', {
+				id: id
+			}, function(data) {
+				tusi(data.message);
+				setTimeout(function() {
+					window.location.href = changeURLArg(window.location.href, "reloadtime", new Date().valueOf());
+				}, 2000);
+			});
+		}
+	</script>
+
+</html>

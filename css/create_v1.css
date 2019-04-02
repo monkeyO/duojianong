@@ -1,0 +1,30 @@
+.content { background-color: #fff; }
+.content .top-wrapper { position: relative; height: 210px; text-align: center; background-position: center; background-size: cover; padding-top: 20px; margin-bottom: 40px; }
+.content .top-wrapper .avatar { margin: 0 auto; display: block; width: 70px; height: 70px; border: 2px solid #fff; border-radius: 160px; box-sizing: border-box; }
+.content .top-wrapper .name, .content .top-wrapper .level, .content .top-wrapper .agent-id { color: white; margin: 0; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); }
+.content .top-wrapper .titles { position: absolute; bottom: 0; left: 50%; transform: translate3d(-50%, 40%, 0); line-height: 45px; width: 80%; margin: 0 auto; border: none; border-radius: 90px; background-color: #fff; color: #030303; box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1); }
+.content .bottom-wrapper .agent-list { list-style: none; padding: 0 2%; text-align: center; margin-bottom: 50px; overflow: hidden; }
+.content .bottom-wrapper .agent-list li { display: inline-block; width: 32%; text-align: center; margin: 0 auto; }
+.content .bottom-wrapper .agent-list li a { display: block; text-decoration: none; }
+.content .bottom-wrapper .agent-list li img { width: 60px; border: none; border-radius: 50%; }
+.content .bottom-wrapper .agent-list li p { margin-top: 0; margin-bottom: 1.5em; font-size: 14px; }
+
+.mask { overflow: hidden; position: fixed; left: 0; top: 0; bottom: 0; right: 0; background-color: transparent; z-index: 999999; }
+.mask .guide-wrapper .guide-aim { width: 80px; height: 80px; border: dashed 2px #fff; border-radius: 50%; position: absolute; left: 50%; top: 240px; transform: translateX(-50%); animation: scaleOut 2s linear infinite; }
+.mask .guide-wrapper .guide-aim2 { animation-delay: 1s; }
+.mask .guide-wrapper .guide-img { position: absolute; width: 60px; height: 80px; left: 50%; top: 340px; transform: translateX(-100%); background: url(../images/team-manager/team-agent/guide-point.png) no-repeat; background-size: contain; animation: scaleY 1s linear infinite; transform-origin: bottom; }
+.mask .guide-wrapper .desc { position: absolute; top: 420px; left: 50%; transform: translateX(-125px); color: white; }
+.mask .guide-wrapper .btn-close { position: absolute; transform: translateX(-50%); top: 460px; left: 50%; padding: 5px 20px; border: solid 2px #fff; border-radius: 5px; color: #fff; font-size: 18px; background-color: transparent; }
+.mask .qrcode-wrapper { display: none; position: absolute; top: 50%; left: 50%; width: 240px; height: 240px; transform: translate3d(-50%, -50%, 0); }
+.mask .qrcode-wrapper #qrcode { width: 100%; }
+
+.overlay_hole { height: 70px; width: 70px; padding: 20px; position: fixed; top: 245px; left: 50%; bottom: 0; right: 0; transform: translateX(-50%); border: none; border-radius: 50%; z-index: 999998; box-shadow: 0px 0px 10000px 10000px rgba(0, 0, 0, 0.6); }
+
+@keyframes scaleY { 0% { transform: translateX(-100%) scaleY(1); }
+  50% { transform: translateX(-100%) scaleY(0.8); }
+  100% { transform: translateX(-100%) scaleY(1); } }
+@keyframes scaleOut { 0% { transform: translateX(-50%) scale(0.9); opacity: 1; }
+  50% { transform: translateX(-50%) scale(1.2); opacity: .5; }
+  100% { transform: translateX(-50%) scale(1.5); opacity: 0; } }
+
+/*# sourceMappingURL=create_v1.css.map */

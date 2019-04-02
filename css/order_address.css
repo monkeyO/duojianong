@@ -1,0 +1,11 @@
+*{padding:0;margin: 0;}
+html,body{overflow: hidden;}
+.order-address .add-address { background-color: white; text-align: center;}
+.order-address .add-address li { display: flex; padding: .8rem 1rem; border-bottom: solid 1px #c9c9c9; }
+.order-address .add-address li span { flex: 1; color: #303030; text-align: left;}
+.order-address .add-address li input { flex: 3; border: none; outline: none; }
+.order-address .add-address li textarea { border: none; outline: none; resize: none; }
+.order-address .add-address li .icon-right{right:20px;position: absolute;}
+.choose_wrapper{position: fixed;left: 0;top: 0;right: 0;bottom: 0;}
+.save{border:none;border-radius:.2rem;padding:.5rem 0;background-color: #009CDA; color: white;width: 80%;margin: .5rem 0;}
+/*# sourceMappingURL=order_address.css.map */

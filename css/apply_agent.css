@@ -1,0 +1,447 @@
+.content {
+    background-color: #f5f4f9;
+}
+
+.inviter-wrapper {
+    width: 100%;
+    /* height: 11.875rem; */
+    color: #fff;
+    /*background-color: #0e3e6e;*/
+    background: url(../images/color-scheme/default/banner.png) no-repeat;
+}
+
+.inviter-wrapper .inviter-title {
+    line-height: 3.125rem;
+    padding: 0 5%;
+}
+
+.inviter-wrapper .inviter-detail {
+    display: flex;
+    height: 5.625rem;
+    padding: 3% 5% 0 5%;
+    border-bottom: 0.0625rem solid #fff;
+}
+
+.inviter-wrapper .inviter-detail .inviter-avatar {
+    flex: 1;
+    position: relative;
+}
+
+.inviter-wrapper .inviter-detail .inviter-avatar img {
+    height: 3.5rem;
+    border:none;
+    border-radius:50%;
+    overflow:hidden;
+}
+
+.inviter-wrapper .inviter-detail .inviter-avatar .text {
+    position: absolute;
+    bottom: 23px;
+    left: 67px;
+}
+
+.inviter-wrapper .inviter-detail .inviter-avatar .text .inviter-name {
+    font-size: 0.875rem;
+}
+
+.inviter-wrapper .inviter-detail .inviter-avatar .text .inviter-grade {
+    font-size: 0.875rem;
+}
+
+.inviter-wrapper .inviter-detail .warrant {
+    flex: 1;
+    position: relative;
+}
+
+.inviter-wrapper .inviter-detail .warrant img {
+    margin-left: .625rem;
+    height: 3.6875rem;
+}
+
+.inviter-wrapper .inviter-detail .warrant .check-warrant {
+    position: absolute;
+    bottom: 23px;
+    left: 77px;
+    font-size: .875rem;
+}
+
+.inviter-wrapper .apply-grade {
+    display: flex;
+    position: relative;
+    padding: 0 5%;
+}
+
+.inviter-wrapper .apply-grade p {
+    flex: 0 0 11.25rem;
+    margin: 0;
+    line-height: 3.125rem;
+}
+
+.inviter-wrapper .apply-grade input {
+    flex: 1;
+    width: 100%;
+    line-height: 3.125rem;
+    background-color: transparent;
+    border: none;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+}
+
+.inviter-wrapper .apply-grade span {
+    position: absolute;
+    top: 18px;
+    right: 5%;
+    font-size: 0.625rem;
+}
+
+.informatin {
+    width: 90%;
+    margin: 5%;
+    background-color: #fff;
+    color: #303030;
+}
+
+.informatin .informatin-title {
+    width: 100%;
+    line-height: 3rem;
+    margin: 0;
+    padding-left: 5%;
+    color: #0e3e6e;
+    border-bottom: 0.0625rem solid #c9c9c9;
+}
+
+.informatin .username,
+.informatin .Wechat,
+.informatin .tel,
+.informatin .email,
+.informatin .identity-card,
+.informatin .detail-address {
+    display: flex;
+    line-height: 3rem;
+    margin: 0 5%;
+    border-bottom: 0.0625rem solid #c9c9c9;
+}
+
+.informatin .username div,
+.informatin .Wechat div,
+.informatin .tel div,
+.informatin .email div,
+.informatin .identity-card div,
+.informatin .detail-address div {
+    flex: 0 0 5.9375rem;
+}
+
+.informatin .username input,
+.informatin .Wechat input,
+.informatin .tel input,
+.informatin .email input,
+.informatin .identity-card input,
+.informatin .detail-address input {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+.informatin .email {
+    text-indent: 0.625rem;
+}
+
+.informatin .probably-address {
+    display: flex;
+    position: relative;
+    line-height: 3rem;
+    margin: 0 5%;
+    border-bottom: 0.0625rem solid #c9c9c9;
+}
+
+.informatin .probably-address em {
+    flex: 0 0 5.625rem;
+    font-style: normal;
+    /*text-indent: 0.625rem;*/
+}
+
+.informatin .probably-address input {
+    flex: 2;
+    border: none;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.informatin .probably-address .select_wrapper{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 68px;
+}
+
+.informatin .probably-address .select_wrapper p{
+    flex: 1;
+    text-align: right;
+    font-size: 16px;
+    line-height: 16px;
+    color: #007AFF;
+}
+.informatin .probably-address .select_wrapper .three-select{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.informatin .probably-address .select_wrapper .three-select select{
+    flex: 1;
+}
+
+.informatin .probably-address span {
+    position: absolute;
+    right: 0;
+    font-size: 0.75rem;
+}
+
+.informatin .detail-address {
+    text-indent: 0.625rem;
+}
+
+.informatin .detail-address input {
+    line-height: 3rem;
+}
+
+.informatin .identity-img {
+    margin: 0 5%;
+}
+
+.informatin .identity-img span {
+    color: #787878;
+}
+
+.informatin .uploading-img {
+		overflow: hidden;
+    padding: 0 5%;
+    margin-top: 1.25rem;
+    position: relative;
+}
+
+.informatin .uploading-img .image-container {
+    width: 4.6875rem;
+    height: 4.6875rem;
+    margin-top: 0.625rem;
+    display: inline-block;
+}
+
+.informatin .uploading-img .image-container img {
+    width: 4.6875rem;
+    height: 4.6875rem;
+}
+
+.informatin .uploading-img .picture {
+    position: absolute;
+    top: 31px;
+    left: 0.9375rem;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.informatin .uploading-img .select-img {
+    position: absolute;
+    top: 5.375rem;
+    display: inline-block;
+    margin-left: 0.9375rem;
+    background: #dcdcdc;
+    border: 1px solid #787878;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #303030;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 0.875rem;
+    font-size: 0.875rem;
+}
+
+.informatin .uploading-img .select-img input {
+    position: absolute;
+    /* width: 5.125rem;
+    height: 1.5rem; */
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.informatin .uploading-img .check-template {
+    position: absolute;
+    left: 12rem;
+    top: 5.625rem;
+    margin: 0 0 0 0.3125rem;
+    display: inline-block;
+    color: #0e3e6e;
+    font-size: 0.875rem;
+}
+
+.informatin .agreement {
+    line-height: 3.125rem;
+    text-align: center;
+    font-size: 0.75rem;
+    padding-left: 0.9375rem;
+}
+
+.informatin .agreement span {
+    display: inline-block;
+    padding-left: 1.25rem;
+    font-size: 0.875rem;
+    background-image: url("../images/icon2.png");
+    background-repeat: no-repeat;
+    background-size: 0.9375rem auto;
+    background-position: 0 1.0625rem;
+}
+
+.informatin .agreement span.active {
+    background-image: url("../images/icon1.png");
+}
+
+.informatin .agreement a {
+    font-size: 0.875rem;
+    color: #0e3e6e;
+}
+
+.informatin .btn-wrapper {
+    padding: 0 5%;
+}
+
+.informatin .btn-wrapper button {
+    width: 100%;
+    line-height: 2.8125rem;
+    border: none;
+    color: #fff;
+    background-color: #0E3E6E;
+    border-radius: 0.3125rem;
+}
+
+.informatin .tip {
+    margin-bottom: 1.875rem;
+    padding: 0.9375rem 5% 1.25rem 5%;
+    font-size: 0.875rem;
+}
+
+
+/*鍥剧墖閬僵灞�*/
+
+.mask-img {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mask-img .qrcode-wrapper{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%,-50%,0);
+}
+
+.mask-img .qrcode-wrapper #qrcode{
+  width: 100%;
+}
+
+.mask-img .img-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}
+
+.mask-img .img-wrapper img {
+    width: 100%;
+}
+
+.mask-text {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+.mask-text .text {
+    height: 90%;
+    margin: 10% 5%;
+    padding: 5%;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: scroll;
+}
+.mask-text img {
+    width: 30px;
+    position: absolute;
+    top: 3px;
+    right: 5px;
+}
+
+
+/*popover閬僵灞�*/
+
+.popover {
+    top: 12.3125rem !important;
+}
+
+.popover-angle.on-top {
+    left: 56px !important;
+}
+
+.popover .popover-inner {
+    text-align: center;
+    line-height: 2.5rem;
+}
+
+.select-list li {
+    color: #303030;
+}
+
+.popover .popover-inner li+li {
+    margin: 0 40px;
+    border-top: 0.0625rem solid #c9c9c9;
+}
+
+
+/* 閭棬姝亾 */
+
+.font2 {
+    letter-spacing: 1.95rem;
+}
+
+.font3 {
+    letter-spacing: 0.5rem;
+}
+#mask-input{
+  display: none;
+  position: absolute;
+  left: 0;
+  z-index: 50;
+}
+
+.Choice-mode{
+    width: 90%;
+    height: 49px;
+    margin-left:15px;   
+    padding:10px 0 12px 0; 
+    border-bottom: 1px solid #c9c9c9;
+}
+.Choice-mode div{
+    width: 32%;
+    height: 30px;
+    float: left;
+    /*margin-left:1rem;*/
+}
+.Choice-mode select{
+    height: 28px;       
+    width: 65%;
+    float: left;
+}

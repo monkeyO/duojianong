@@ -1,0 +1,236 @@
+body{
+  	
+}
+/**导航**/
+.buttons-tab{
+	background: #0894ec;
+	border-bottom: none;
+}
+.buttons-tab .button{
+	color: #ffffff;
+}
+.buttons-tab .button.active{
+	color: #E3B775;
+	border-color: #E3B775;
+}
+
+.tab1-content {
+	margin-top: 2rem;
+}
+.tab1-content .tab1-title {
+	font-size: 1rem;
+	margin: 1rem 0 .5rem 0;
+}
+.item-inner>input {
+	display: block;
+	width: 100%;
+	height: 3rem;
+	border: none;
+	outline: none;
+	box-sizing: border-box;
+	padding-left: .5rem;
+	background: #FFFFFF;
+}
+
+:-moz-placeholder {
+	color: #BBBBBB;
+}
+
+::-moz-placeholder {
+	color: #BBBBBB;
+}
+
+input:-ms-input-placeholder {
+	color: #BBBBBB;
+}
+
+input::-webkit-input-placeholder {
+	color: #BBBBBB;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clearfix {
+	display: block;
+	zoom: 1;
+}
+
+.z_file {
+	width: 5rem;
+	height: 5rem;
+	background: url(../images/z_add.png) no-repeat;
+	background-size: 100% 100%;
+	float: left;
+	margin-right: 0.2rem;
+}
+
+.z_addImg {
+	float: left;
+	margin-right: 0.5rem;
+}
+.content-block{
+	padding: 0;
+}
+.tab3 p {
+	display: inline-block;
+	margin-right: 1rem;
+}
+
+#tab1{
+   box-sizing: border-box;
+   padding:0 1rem;	
+}
+#tab2{
+   padding-bottom: 3rem;
+}
+
+#tab2 .item-content,#tab3 .item-content{
+	background: #FFFFFF;
+	margin-bottom: 1rem;
+}
+#tab3 .item-content{
+	padding: .5rem;
+	display: flex;
+	box-sizing: border-box;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#tab2 .item-content{
+	display: flex;
+	box-sizing: border-box;
+	align-items: center;
+	padding: 1rem;
+	justify-content: space-between;
+}
+
+#tab2 .item-content .red{
+	color: red;
+}
+#tab3 .item-content .red{
+	color: red;
+}
+
+#tab3 .item-content .green{
+	color: #19be6b;
+}
+
+#tab2 .item-content .time{
+	color: #888888;
+}
+#tab2 .item-content .item-media,#tab2 .item-content .item-media .item-after{
+   flex: 1;
+}
+
+#tab2 .item-content>div.button{
+	width: 50%;
+}
+
+#tab2 .item-content .item-box{
+	width: 2rem;
+}
+
+#tab2 .item-media>span,#tab3 .item-media>span{
+	display: block;
+	height: 1.5rem;
+	line-height: 1.5rem;
+}
+
+.z_mask {
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	display: none;
+}
+
+.z_alert {
+	width: 12rem;
+	height: 6rem;
+	border-radius: .2rem;
+	background: #fff;
+	font-size: .24rem;
+	text-align: center;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -6rem;
+	margin-top: -3rem;
+	overflow: hidden;
+}
+
+.z_alert p:nth-child(1) {
+	line-height: 1.5rem;
+}
+
+.z_alert p:nth-child(2) span {
+	display: inline-block;
+	width: 49%;
+	height:3rem;
+	line-height: 3rem;
+	float: left;
+	border-top: 1px solid #ddd;
+}
+.z_cancel {
+	border-right: 1px solid #ddd;
+}
+.z_photo img {
+	width: 5rem;
+	height: 5rem;
+}
+
+.z_file input::-webkit-file-upload-button {
+	width: 5rem;
+	height: 5rem;
+	border: none;
+	position: absolute;
+	outline: 0;
+	opacity: 0;
+}
+
+.z_file input#file {
+	display: block;
+	width: auto;
+	border: 0;
+	vertical-align: middle;
+}
+/**底部导航**/
+.bt-nav{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 3rem;
+}
+.bt-nav>div{
+	height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+	background:#B8B8B8;
+	color: #FFFFFF;
+	flex: 1;
+}
+.bt-nav>div.yes{
+	background: #05A3E7;
+}
+/**弹框**/
+.mask { overflow: hidden; position: fixed; left: 0; top: 0; bottom: 0; right: 0; background-color: transparent; z-index: 999999; }
+.mask .guide-wrapper .guide-aim { width: 80px; height: 80px; border: dashed 2px #fff; border-radius: 50%; position: absolute; left: 50%; top: 240px; transform: translateX(-50%); animation: scaleOut 2s linear infinite; }
+.mask .guide-wrapper .guide-aim2 { animation-delay: 1s; }
+.mask .guide-wrapper .guide-img { position: absolute; width: 60px; height: 80px; left: 50%; top: 340px; transform: translateX(-100%); background: url(../images/team-manager/team-agent/guide-point.png) no-repeat; background-size: contain; animation: scaleY 1s linear infinite; transform-origin: bottom; }
+.mask .guide-wrapper .desc { position: absolute; top: 420px; left: 50%; transform: translateX(-125px); color: white; }
+.mask .guide-wrapper .btn-close { position: absolute; transform: translateX(-50%); top: 460px; left: 50%; padding: 5px 20px; border: solid 2px #fff; border-radius: 5px; color: #fff; font-size: 18px; background-color: transparent; }
+.mask .qrcode-wrapper { display: none; position: absolute; top: 50%; left: 50%; width: 240px; height: 240px; transform: translate3d(-50%, -50%, 0); }
+.mask .qrcode-wrapper #qrcode { width: 100%; }

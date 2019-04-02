@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>订单详情</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		<script type="text/javascript">
+			var TP_PUBLIC = '/Public';
+		</script>
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+
+		<link rel="stylesheet" type="text/css" href="../css/shipping_order_detail.css" />
+		<style>
+			.pay-way {
+				margin-top: .9375rem;
+				padding: .625rem 5%;
+				background-color: #fff;
+				line-height: 1.5rem;
+			}
+			
+			.pay-way .img-wrapper {
+				margin-top: 1.25rem;
+				/*width: 6.25rem;
+            height: 6.25rem;*/
+				overflow: hidden;
+			}
+			
+			.pay-way .img-wrapper img {
+				width: 100%;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="page">
+			<div class="content">
+				<div class="part1">
+					<div class="order-title">
+						<div class="order-num">
+							订单号：191533624942824 </div>
+						<div class="is-pay">
+							交易成功 </div>
+					</div>
+					<div class="receiving-wrapper">
+						<div class="icon-wrapper">
+							<img src="../images/information/13.png" alt="" width="14">
+						</div>
+						<div class="receiving-detail">
+							<div class="consignee">
+								收货人：菲菲 </div>
+							<div class="tel">13800138000</div>
+							<br />
+							<div class="address clearfix">收货地址：上海上海黄浦区122</div>
+						</div>
+					</div>
+				</div>
+				<!--<div class="part2">
+            <div class="account">
+                <p>订单号：</p>
+            </div>
+        </div>-->
+				<div class="part3">
+					<div class="goods">
+						<div class="goods-img">
+							<img src="../images/5a2a3c8a1b6fd.png" alt="" height="94">
+						</div>
+						<div class="goods-detail">
+							<div class="goods-top">
+								<div class="goods-name">测试属性产品</div>
+								<div class="goods-price">￥60.00</div>
+							</div>
+							<div class="goods-bottom">
+								<div class="goods-specification"></div>
+								<div class="goods-count">×4</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="part4">
+					<div class="all-price clearfix">
+						<div class="price">实付:
+							<strong>￥240.00(含运费:￥0.00)</strong>
+						</div>
+						<div class="all-count">共4件商品</div>
+					</div>
+					<div class="date">
+						订单日期：2018-08-07 14:55:42 </div>
+				</div>
+				<div class="part5">
+					<div class="logistics">
+						<h3>物流信息</h3>
+						<div class="company">物流公司：</div>
+						<div class="detail">
+							<div class="order">物流单号：</div>
+							<ul class="order-list">
+								<li>
+									<div class="number"></div>
+									<button class="btn-check">
+                                        <a class="external" style="vertical-align: text-bottom;" href="http://api.weisika.net/kd100/index/jump?ShipperCode=&LogisticCode=&callbackurl=http://viska.weisika.net/admin/order/all?part=1">查看物流</a>
+                                    </button>
+								</li>
+							</ul>
+						</div>
+						<div class="part6">
+							<div class="remark">备注信息： <br />
+								<!--<span>123</span>-->
+							</div>
+						</div>
+						<div class="pay-way">
+							<div>
+								支付截图:
+								<div class="img-wrapper">
+									<img src="../images/4d81249254bfb1ae4eae9c684e6cb216.jpg" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+			<script src="../js/shipping_order_detail.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

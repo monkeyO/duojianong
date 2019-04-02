@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>代理审核</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/czzx.css" />
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<style>
+			.buttons-tab .button {
+				height: 3rem;
+				line-height: 3rem;
+				font-size: 1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page" style="background:#F0EFEF;">
+			<div class="buttons-tab">
+				<a href="#tab2" class="tab-link active button btns color-examine-nav">待上级审核</a>
+				<a href="#tab3" class="tab-link button btns color-examine-nav">待公司审核</a>
+			</div>
+			<div>
+				<div class="tabs">
+					<div id="tab2" class="tab active">
+						<div class="content-block">
+							<ul>
+								<li class="item-content" v-for="item in dataList">
+									<div class="item-box">
+										<input type="radio" :value="item.uid" name="select" v-model="selectValue" />
+									</div>
+									<div class="item-media">
+										<span>姓名：{{item.username}}</span>
+										<span>申请类别：{{item.agent_name}}</span>
+
+										<span class="red">状态：待审核</span>
+									</div>
+									<div class="item-after">
+										<a class="button button-fill" @click="makeCheck(item.uid)">
+											点击查看凭证
+										</a>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<!--底部导航-->
+						<div class="bt-nav">
+							<div class="yes" @click="makeYes">
+								通过
+							</div>
+							<div class="no" @click="makeNo">
+								拒绝
+							</div>
+						</div>
+					</div>
+
+					<div id="tab3" class="tab">
+						<div class="content-block">
+							<ul>
+								<li class="item-content" v-for="item in dataList">
+									<div class="item-media">
+										<span>姓名：{{item.username}}</span>
+										<span>申请类别：{{item.agent_name}}</span>
+										<span class="red">状态：待审核</span>
+									</div>
+									<div class="item-after">
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--弹框-->
+		<div class="mask">
+			<div class="qrcode-wrapper">
+				<img src="" alt="" id="qrcode" />
+			</div>
+		</div>
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+		<script type="application/javascript">
+			var app = new Vue({
+				el: '#tab2',
+				data() {
+					return {
+						dataList: [],
+						zhi: false,
+						selectValue: ""
+					}
+				},
+				mounted() {
+					var that = this;
+					that.init();
+				},
+				methods: {
+					//点击查看凭证
+					makeCheck(e){
+						var getparam_ajax = {
+								Uid: e
+							};
+							var getorder_option = {
+								url: '/User/PingZ',
+								params: getparam_ajax,
+								callback: function(res) {
+									if(res.code = 200) {
+									    $('.mask').slideDown().find('.qrcode-wrapper').fadeIn();
+						                $('#qrcode').attr('src', reUrl + res.data.pricrimage);
+									} else {
+										
+									}
+								}
+							}
+							callajax(getorder_option);
+					},
+					//确定
+					makeYes() {
+						var that = this;
+						if(this.selectValue == "") {
+							tusi("请选择代理");
+						} else {
+							var getparam_ajax = {
+								Uid: this.selectValue
+							};
+							var getorder_option = {
+								url: '/User/UserSh',
+								params: getparam_ajax,
+								callback: function(res) {
+									if(res.code = 200) {
+										tusi(res.message);
+										that.init();
+									} else {
+										tusi(res.message);
+									}
+								}
+							}
+							callajax(getorder_option);
+						}
+					},
+					//取消
+					makeNo() {
+						if(this.selectValue == "") {
+							tusi("请选择代理");
+						} else {
+							var getparam_ajax = {
+								Uid: this.selectValue
+							};
+							var getorder_option = {
+								url: '/User/UserShjj',
+								params: getparam_ajax,
+								callback: function(res) {
+									if(res.code = 200) {
+										tusi(res.message);
+									} else {
+										tusi(res.message);
+									}
+								}
+							}
+							callajax(getorder_option);
+						}
+					},
+					//审核类型
+					getCategory(status) {
+						var result;
+						if(status === 0) {
+							result = "待上级审核";
+						} else if(status === 1) {
+							result = "待公司审核";
+						}
+						return result;
+					},
+					//获取类别
+					getType(e) { //1货款  2运费
+						var result;
+						if(e == 1) {
+							result = "货款";
+						} else if(e == 2) {
+							result = "运费";
+						}
+						return result;
+					},
+					//时间转换
+					getTime(timestamp) {
+						var date = new Date(timestamp * 1000);
+						var Y = date.getFullYear() + '-';
+						var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+						var D = date.getDate() + ' ';
+						var h = date.getHours() + ':';
+						var m = date.getMinutes() + ':';
+						var s = date.getSeconds();
+						return Y + M + D + h + m + s;
+					},
+					init() {
+						var that = this;
+						var myToken = getLocal("token");
+						var getparam_ajax = {
+							Token: myToken,
+							Status: 0
+						};
+						var getorder_option = {
+							url: '/User/UserShlb',
+							params: getparam_ajax,
+							callback: function(res) {
+								if(res.code = 200) {
+									that.dataList = res.data;
+								} else {
+									tusi(res.message);
+								}
+							}
+						}
+						callajax(getorder_option);
+					}
+				}
+			})
+			//列表2
+			var app = new Vue({
+				el: '#tab3',
+				data() {
+					return {
+						dataList: [],
+						zhi: false,
+						selectValue: ""
+					}
+				},
+				mounted() {
+					var that = this;
+					that.init();
+				},
+				methods: {
+					//获取类别
+					getType(e) { //1货款  2运费
+						var result;
+						if(e == 1) {
+							result = "货款";
+						} else if(e == 2) {
+							result = "运费";
+						}
+						return result;
+					},
+					//时间转换
+					getTime(timestamp) {
+						var date = new Date(timestamp * 1000);
+						var Y = date.getFullYear() + '-';
+						var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+						var D = date.getDate() + ' ';
+						var h = date.getHours() + ':';
+						var m = date.getMinutes() + ':';
+						var s = date.getSeconds();
+						return Y + M + D + h + m + s;
+					},
+					init() {
+						var that = this;
+						var myToken = getLocal("token");
+						var getparam_ajax = {
+							Token: myToken,
+							Status: 1
+						};
+						var getorder_option = {
+							url: '/User/UserShlb',
+							params: getparam_ajax,
+							callback: function(res) {
+								if(res.code = 200) {
+									that.dataList = res.data;
+								} else {
+									tusi(res.message);
+								}
+							}
+						}
+						callajax(getorder_option);
+					}
+				}
+			})
+			//关闭
+			$('.mask').hide(1).css('backgroundColor', 'rgba(0, 0, 0, .7)');
+			//关闭凭证
+			$('.mask').bind('click', function() {
+				if($('.guide-wrapper').is(":visible")) {
+					return false;
+				} else {
+					$(this).slideToggle();
+				}
+			})
+		</script>
+	</body>
+
+</html>

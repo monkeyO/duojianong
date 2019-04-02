@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<title>发货</title>
+		<meta charset="UTF-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="HandheldFriendly" content="true">
+		<meta name="MobileOptimized" content="640">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-orientation" content="portrait">
+		<meta name="full-screen" content="yes">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="browsermode" content="application">
+		<meta name="x5-page-mode" content="app">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="width=640,target-densitydpi=device-dpi,maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="../css/send-good.css">
+		<link rel="stylesheet" href="../css/weui.min.css">
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="application/javascript" src="../js/light7.min.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<link rel="stylesheet" href="../css/reset.css">
+		<script>
+			var flag = "yes";
+		</script>
+		<script>
+			var count = 1;
+		</script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script>
+			wx.config({
+				appId: 'wx2bd078345537e70c',
+				timestamp: 1538018062,
+				nonceStr: 'rJbXbtkMGJAedWne',
+				signature: '41ac37f82e7a7efa3008ddc6565b86972c589aab',
+				jsApiList: [
+					"onMenuShareTimeline",
+					"scanQRCode"
+				]
+			});
+			wx.ready(function() {
+				// 在这里调用 API
+			});
+			function ScanQRCode() {
+				var obj = document.getElementById('ls');
+				wx.scanQRCode({
+					desc: 'scanQRCode desc',
+					needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+					scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+					success: function(res) {
+						var result = res.resultStr; // 当needResult为 1 时，扫码返回的结果
+						var p = new Array();
+						var st = new Array();
+						p = result.split("p=");
+						st = result.split("st=");
+						if(p.length > 1) {
+							var ptag = p[1].substring(0);
+						}
+						if(st.length > 1) {
+							var status = st[1].substring(0, 1);
+						}
+						//查找小标
+						$.post('/Admin/G/searchxb', {
+							ptag: ptag
+						}, function(data) {
+							if(data != 'none') {
+								ptagBeg = data['ptag_beg'];
+								ptagEnd = data['ptag_end'];
+							} else {
+								ptagBeg = '';
+								ptagEnd = '';
+							}
+							var ptagObj = document.getElementsByName("ptag");
+							for(var i = 0; i < ptagObj.length; i++) {
+								if(ptag == ptagObj[i].value) {
+									if(flag == 'yes') {
+										obj.checked = true;
+										setTimeout(function() {
+											ScanQRCode();
+										}, 1000);
+									} else {
+										obj.checked = false;
+									}
+									return;
+								}
+							}
+							var text = "";
+							//text+= '<section class="section7" id="myul'+count+'"><ul class="ul1" ><li>'+count+'</li>';
+							text += '<section class="section7" id="myul' + count + '"><ul class="ul1" ><li>' + count + '</li>';
+							text += '<li>' + ptag + '</li>';
+							text += '<li class="xb">' + ptagBeg + '<br>' + ptagEnd + '</li>';
+							text += '</li><li><img src="../images/s-delete.png" onclick="delPtag(' + count + ')"/>';
+							text += '</li></ul><input type="hidden" name="ptag" value="' + ptag + '"/>';
+							text += '<input type="hidden" name="status" value="' + status + '"/></section>';
+							$(".content1").append(text);
+							$(".content1").show();
+							count++;
+							setTimeout(function() {
+								if(flag == 'yes') {
+									obj.checked = true;
+									ScanQRCode();
+								} else {
+									obj.checked = false;
+								}
+							}, 500);
+						});
+					}
+				});
+			}
+		</script>
+
+	</head>
+	<script type="text/javascript">
+		$(function() {
+			$(".serial").click(function() {
+				$(this).find("input").toggleClass("serial-check");
+			})
+			$(".typing").click(function() {
+				$(".fh_mask").show();
+			})
+			$("#ss").click(function() {
+				$("#ss").hide();
+				$(".search").show();
+			})
+			//点击搜索
+			$("#subsearch").click(function() {
+				var s = $("input[name=search]").val();
+				if(s == "") {
+					tusi('请输入经销商姓名');
+					return;
+				}
+				$.post('/Admin/G/searchAgent', {
+					search: s
+				}, function(data) {
+					var html = "";
+					if(data == null) {
+						tusi('对不起,未找到相关经销商');
+						return false;
+					}
+					$.each(data, function(index, array) {
+						html += '<ul class="ul1" onclick="selectAgent(' + array["id"] + ');">';
+						html += '<li>' + array["id"] + '</li><li>' + array["name"] + '</li><li>' + array["levname"] + '</li></ul>';
+					})
+					$("#fh_mask .section5 .mysel").html(html);
+					$("#fh_mask").show();
+					$("#ss").show();
+					$(".search").hide();
+				})
+			})
+
+			$(".btm1").click(function() {
+				var agentId = $("input[name=receive_id]").val();
+				if(agentId == "") {
+					tusi('收货经销商不能为空!');
+					return;
+				}
+				//大标
+				var ptag = document.getElementsByName("ptag");
+				var managers = '';
+				for(var i = 0; i < ptag.length; i++) {
+					managers = managers + '|' + ptag[i].value;
+				}
+				//小标
+				var status = document.getElementsByName("status");
+				var m = '';
+				for(var j = 0; j < status.length; j++) {
+					m = m + '|' + status[j].value;
+				}
+				if(ptag.length == 0) {
+					tusi('请扫描标签!');
+					return;
+				}
+				var receive_id = $("input[name=receive_id]").val();
+				var send_id = $("input[name=send_id]").val();
+				//发货
+				$.post('/Admin/G/stock', {
+					ptag: managers,
+					status: m,
+					receive_id: receive_id,
+					send_id: send_id
+				}, function(data) {
+					if(data['state'] == 'ptag') {
+						tusi('对不起,标签号为:' + data["ptag"] + '的产品您无权发货');
+					} else if(data['state'] == 'repeat') {
+						tusi('对不起,标签号为:' + data["repeat"] + '的产品不能重复发货');
+					} else if(data == 'success') {
+						tusi('发货成功');
+						$.post('/Admin/G/clearAgent', {}, function(list) {
+							if(list == 'success') {
+								setTimeout(function() {
+									location.href = "/Admin/G/s"
+								}, 3000);
+							}
+						});
+					} else {
+						tusi('发货失败');
+					}
+				})
+
+			})
+
+			$("#ls").click(function() {
+				var ls = "";
+				if(this.checked) {
+					ls = 1;
+				} else {
+					ls = 0;
+				}
+				$.post('/Admin/G/setLs', {
+					ls: ls
+				}, function(data) {
+					flag = data;
+				})
+			});
+		})
+	</script>
+	<script>
+		function selectAgent(id) {
+			$.post('/Admin/G/saveAgent', {
+				id: id
+			}, function(data, status) {
+				if(data == 1) {
+					tusi('选择的经销商被公司禁用了！');
+					$(".fh_mask").hide();
+				} else {
+					if(status == 'success') {
+						$("#person").html(data['name']);
+						$("input[name=receive_id]").val(data['id']);
+						$(".fh_mask").hide();
+					}
+				}
+			})
+		}
+		//删除标签
+		function delPtag(count) {
+			$("#myul" + count).remove();
+		}
+	</script>
+
+	<body>
+		<div class="page" id="main">
+			<header class="header color-s-bg">
+				<a href="javascript:history.go(-1);" class="a"></a>
+				<p class="typing" id="person">录入新单</p>
+				<div class="serial"><span class="span2">连扫</span><input type="checkbox" id="ls" value="" class="input" /><br></div>
+			</header>
+			<div class="s-panel bg-red color-s-bg">
+				<div class="panel-content" style="padding-top:4%;">
+					<div class="clearfix">
+						<p class="left agent-search"><input type="text" name="search" class="G-ordernum" placeholder="输入经销商姓名查询"><input id="subsearch" type="button" class="G-search" value="搜索"></p>
+						<p class="right agent-select"><input type="button" value="选择" class="typing"></p>
+					</div>
+					<p class="scan-tip">扫描发货时请不要超过15个标哦！</p>
+				</div>
+			</div>
+			<div class="content1" style="clear:both;display:none">
+				<section class="section7_7">
+					<ul class="ul">
+						<li>编号</li>
+						<li>条码</li>
+						<li>标号</li>
+						<li>删除</li>
+					</ul>
+				</section>
+			</div>
+			<div class="footer footer-fixed bg-red" id="footer">
+				<ul>
+					<li class="left center color-s-bg"><img class="btm1" src="../images/footer-left.png" alt=""></li>
+					<li class="right center color-s-bg"><img class="btm2" onclick="ScanQRCode()" src="../images/footer-right.png" alt=""></li>
+				</ul>
+			</div>
+			<div class="fh_mask" id="fh_mask" style="display:none">
+				<div class="box">
+					<p>请选择经销商</p>
+					<section class="section5">
+						<ul class="ul">
+							<li>授权号</li>
+							<li>经销商名称</li>
+							<li>经销商级别</li>
+						</ul>
+						<div class="mysel">
+							<ul class="ul1">
+								<li></li>
+								<li style="font-size:25px;color:red;margin-left:33%;">您没有下级经销商</li>
+								<li></li>
+							</ul>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#main',
+				data() {
+					return {
+						title: "",
+						contentList: ""
+					}
+				},
+				mounted() {
+					var that = this;
+					that.init();
+				},
+				methods: {
+					//初始加载
+					init() {
+						var that = this;
+						var myToken = getLocal("token");
+						var getparam_ajax = {
+							Token: myToken
+						};
+						var getorder_option = {
+							url: '/Scanning/SelectSubordinate',
+							type: 'post',
+							params: getparam_ajax,
+							callback: function(res) {
+								if(res.code == 200) {
+
+								}else{
+									tusi(res.message);
+								}
+							}
+						}
+						callajax(getorder_option);
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

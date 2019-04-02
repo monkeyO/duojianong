@@ -1,0 +1,398 @@
+.box {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	overflow: auto;
+}
+
+#header {
+	width: 100%;
+	height: 2.8125rem;
+	background-color: #1b1b1b;
+}
+
+#header .back {
+	display: inline-block;
+	line-height: 2.8125rem;
+	color: #fff;
+}
+
+#header .more {
+	position: relative;
+	color: #fff;
+	margin-right: 0.3125rem;
+	line-height: 2.8125rem;
+}
+#header .more .img {
+	position: absolute;
+	top: 0.1875rem;
+	left: -2.75rem;
+	margin-top: 0.3125rem;
+}
+
+#header .more .text {
+	position: absolute;
+	top: -0.3125rem;
+	left: -1.625rem;
+	margin-top: 0.3125rem;
+	width: 1.4375rem;
+	height: 1.5625rem;
+	line-height: 1.5625rem;
+	text-align: center;
+	background-color: #f00;
+	border-radius: 50%;
+}
+
+#header .more .circle {
+	letter-spacing: 0.375rem;
+	font-style: normal;
+	font-size: 0.625rem;
+}
+
+#header .title {
+	color: #fff;
+	font-size: 1.1875rem;
+	line-height: 2.8125rem;
+}
+
+#main {
+	width: 100%;
+	min-height: 100%;
+	padding-bottom: 3.125rem;
+}
+
+#main .information {
+	display: flex;
+	width: 100%;
+	height: 8.6875rem;
+	background-size:cover;
+}
+
+#main .information .avatar {
+	flex: 1;
+	padding-top: 2.8125rem;
+	padding-left: 1.6875rem;
+}
+
+#main .information .text {
+	flex: 4;
+	padding-top: 2.8125rem;
+	padding-left: 0.625rem;
+	color: #2b8ec7;
+	font-size: 1rem;
+}
+
+#main .information .text p {
+	margin: 0;
+	line-height: 1.25rem;
+}
+.msg {
+    background: url(../images/information/25.png) no-repeat 1.25rem 0.6875rem;
+    background-size: auto 1.25rem;
+}
+
+#main .information .QR {
+	flex: 0 0 4.5625rem;
+	margin-top: 3.75rem;
+}
+
+#main .integral {
+	display: flex;
+}
+
+#main .integral .titel {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon1.png") no-repeat 1.35rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+#main .integral .text {
+	flex: 100%;
+	text-align: right;
+	font-size: 0.875rem;
+	padding-right: 16px;
+	color: #959595;
+}
+
+#main .property {}
+
+#main .property .wrapper {
+	position: relative;
+	display: flex;
+	width: 100%;
+}
+
+#main .integral .text i {
+	font-size: 12px;
+	padding-left: 1.2rem;
+	padding-right: 0;
+}
+
+.order-scan {
+	background: url("../images/information/icon9.png") no-repeat 1.25rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+.live {
+	background: url("../images/information/icon10.png") no-repeat 1.25rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+.course {
+	background: url("../images/information/icon7.png") no-repeat 1.25rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+#main .property .wrapper .money {
+	position: absolute;
+	top: 0;
+	right: 3.125rem;
+	display: inline-block;
+	text-align: right;
+	color: #959595;
+	font-size: 0.875rem;
+}
+
+#main a {
+	color: #000;
+}
+
+.warp {
+	position: relative;
+	display: flex;
+	width: 100%;
+}
+
+.titles {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+}
+
+.icon {
+	color: #959595;
+	flex: 100%;
+	text-align: right;
+	font-size: 12px;
+	padding-right: 1rem;
+}
+
+.friends {
+	background: url("../images/information/icon8.png") no-repeat 1.25rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+#main .property .wrapper .bill {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon2.png") no-repeat 1.25rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+#main .property .wrapper .protocol{
+	flex: 0 0 11rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/jingying.png") no-repeat 1.25rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+#main .property .wrapper .total-assets {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon11.png") no-repeat 1.25rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+#main .property .wrapper .check-apply {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon12.png") no-repeat 1.25rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+#main .property .wrapper .upgrade-apply {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon23.png") no-repeat 1.25rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+#main .property .wrapper .bank-card {
+	flex: 3.5;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon4.png") no-repeat 1.25rem 0.875rem;
+	background-size: 1.25rem auto;
+}
+
+#main .property .wrapper .text {
+	flex: 1;
+	text-align: right;
+	font-size: 12px;
+	padding-right: 1rem;
+}
+
+#main .item {
+	margin-bottom: 0.9375rem;
+	border-top: 0.0625rem solid #c9c9c9;
+	border-bottom: 0.0625rem solid #c9c9c9;
+	line-height: 2.6875rem;
+	background-color: #f5f4f9;
+}
+
+#main .order {}
+
+#main .order .wrapper {
+	display: flex;
+	width: 100%;
+}
+
+#main .order .wrapper .order-detail {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon5.png") no-repeat 1.35rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+#main .order .wrapper .order-detail1 {
+    flex: 0 0 10.375rem;
+    padding-left: 3.125rem;
+    background: url(../images/information/icon5_1.png) no-repeat 1.35rem 0.6875rem;
+    background-size: auto 1.25rem;
+}
+
+#main .order .wrapper .address {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon6.png") no-repeat 1.35rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+
+#main .order .wrapper .tuichu {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon7.png") no-repeat 1.35rem 0.6875rem;
+	background-size: auto 1.25rem;
+}
+#main .order .wrapper .discounts {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/21.png") no-repeat 1.35rem 0.6875rem;
+	background-size: auto 1rem;
+}
+
+#main .order .wrapper .upgrade {
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon23.png") no-repeat 1.35rem 0.6875rem;
+	background-size: auto 1rem;
+}
+#main .order .wrapper .suggest{
+	flex: 0 0 9.375rem;
+	padding-left: 3.125rem;
+	background: url("../images/information/icon24.png") no-repeat 1.35rem 0.6875rem;
+	background-size: auto 1rem;
+}
+
+#main .order .wrapper .text {
+	flex: 100%;
+	font-size: 12px;
+	text-align: right;
+	padding-right: 1rem;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 3.125rem;
+	background: #f3f3f3;
+	margin: -3.125rem auto 0 auto;
+	clear: both;
+	text-align: center;
+	border-top: 0.0625rem solid #cacaca;
+	background-color: #fff;
+}
+
+#footer .wrapper {
+	text-align: center;
+	margin-left: 0;
+}
+
+#footer .wrapper:first-child {
+	margin-left: 8%;
+}
+
+#footer .wrapper .img {
+	margin-top: 0.3125rem;
+}
+
+#footer .wrapper .text {
+	margin-top: -0.3125rem;
+	font-size: 0.625rem;
+	color: #b3b3b3;
+}
+
+#footer .wrapper .text:focus {
+	color: #0e3e6e;
+}
+
+
+/*ä¸‹åˆ’çº¿*/
+
+.line {
+	position: relative;
+}
+
+.line::after {
+	position: absolute;
+	top: 2.6875rem;
+	left: 5%;
+	content: '';
+	width: 90%;
+	display: block;
+	border-bottom: 0.0625rem solid #c9c9c9;
+}
+
+.user-infos {
+	display: flex;
+	flex: 5;
+}
+
+.signin {
+	display: none;
+	position: relative;
+	margin-left: -1rem;
+	/* right: 0; */
+	/* top: 16%; */
+	word-break: keep-all;
+	width: 4.4rem;
+	height: 1.5rem;
+	border: none;
+	border-radius: 50rem;
+	background-color: #faab15;
+	color: white;
+	cursor: pointer;
+	z-index: 9999;
+}
+
+.signin span {
+	font-size: .75rem;
+}
+
+.signin img {
+	height: 1rem;
+	margin: .25rem 0rem .25rem .4rem;
+	vertical-align: middle;
+}
+.page .technical_support{
+  display: block;
+  height: 30px;
+  color: #C1C1C1!important;
+  text-align: center;
+  margin: 0;
+  line-height: 30px;
+  font-size: 14px;
+  text-decoration: none;
+}

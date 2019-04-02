@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>代理升级</title>
+		<link rel="stylesheet" href="../css/reset.css" />
+		<link rel="stylesheet" href="../css/apply.css" />
+		<link rel="stylesheet" href="../css/light7.min.css" />
+		<link rel="stylesheet" href="../css/caiji.css" />
+		<link rel="stylesheet" href="../css/city-picker.css" />
+		<style>
+			.city_picker .select-wrapper .three-select{
+				margin: 10px 0 0 0;
+			}
+			select{
+				display: block;
+				background: #FFFFFF;
+				border: none;
+				width: 100%;
+				height: 2.5rem!important;
+				margin: 0!important;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page" id="main" v-cloak>
+			<header>
+				代理升级
+			</header>
+			<div class="content-block">
+				<div class="tab1-content">
+					<div class="tab1-title">
+						升级成为<span>*</span>
+					</div>
+					<div class="city_picker">
+						<div class="select-wrapper">
+							<div class="three-select">
+								<select class="type">
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab1-content">
+					<div class="tab1-title">
+						充值金额<span>*</span>
+					</div>
+					<div class="item-inner">
+						<input type="number" id="jine" placeholder="请输入已充值金额" />
+					</div>
+				</div>
+				<div class="tab1-content">
+					<div class="tab1-title">
+						上传截图
+					</div>
+					<div class="z_photo clearfix">
+						<div class="z_file">
+							<input type="file" id="file" value="" accept="image/*" onchange="imgChange('z_photo','z_file');" />
+						</div>
+					</div>
+				</div>
+				<a id="makeSubmit" class="button button-big button-fill login-btn">提交</a>
+			</div>
+		</div>
+	</body>
+	<script src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		//图片上传
+		function imgChange(obj1, obj2) {
+			//获取点击的文本框
+			var file = document.getElementById("file");
+			//存放图片的父级元素
+			var imgContainer = document.getElementsByClassName(obj1)[0];
+			//获取的图片文件
+			var fileList = file.files;
+			//文本框的父级元素
+			var input = document.getElementsByClassName(obj2)[0];
+			var imgArr = [];
+			//遍历获取到得图片文件
+			for (var i = 0; i < fileList.length; i++) {
+				var imgUrl = window.URL.createObjectURL(file.files[i]);
+				imgArr.push(imgUrl);
+				var img = document.createElement("img");
+				img.setAttribute("src", imgArr[i]);
+				var imgAdd = document.createElement("div");
+				imgAdd.setAttribute("class", "z_addImg");
+				imgAdd.appendChild(img);
+				imgContainer.appendChild(imgAdd);
+			};
+			$(".z_file").hide();
+		};
+		$(function() {
+			//列表信息
+			var getorder_option = {
+				url: '/index/IndexYQ',
+				type: "get",
+				callback: function(res) {
+					var Datas = res.data;
+					for (var item of Datas) {
+						$(".type").append('<option value="' + item.aid + '" selected>' + item.agent_name + '</option>');
+					}
+				}
+			}
+			callajax(getorder_option);
+			$("#makeSubmit").click(function() {
+				var myToken = getLocal("token");
+				var formData = new FormData();
+				var fileObj = $('#file')[0].files[0];
+				var getAid = $(".type option:selected").val();
+				if ($('#jine').val() == "") {
+					tusi("充值金额不能为空！");
+				} else if (fileObj == undefined) {
+					tusi("请上传凭证");
+				} else {
+					formData.append("Token", myToken);
+					formData.append("aid", getAid);
+					formData.append("money", $('#jine').val());
+					if (fileObj.size / 1024 > 1025) {
+						photoCompress(fileObj, {
+							quality: 0.2
+						}, function(base64Codes) {
+							var bl = convertBase64UrlToBlob(base64Codes);
+							formData.append("Image", bl, "file_" + Date.parse(new Date()) + ".jpg");
+							makeUpload(formData);
+						});
+					} else {
+						formData.append("Image", fileObj);
+						makeUpload(formData);
+					}
+				}
+			})
+			//图片上传
+			function makeUpload(formData) {
+				$.ajax({
+					url: apiUrl + '/User/Shengji',
+					type: 'POST',
+					data: formData,
+					cache: false,
+					processData: false,
+					contentType: false,
+					success: function(res) {
+						if (res.code == 200) {
+							tusi(res.message);
+							setTimeout(function(){
+								window.history.go(-1);
+							},1000)
+						} else {
+							tusi(res.message);
+						}
+					},
+					error: function() {
+
+					}
+				})
+
+			}
+
+		})
+	</script>
+</html>

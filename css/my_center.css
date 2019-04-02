@@ -1,0 +1,239 @@
+.content {
+    background-color: #f5f4f9;
+}
+
+.information {
+    width: 100%;
+    height: 10.9375rem;
+    color: #fff;
+    background-color: #0e3e6e;
+}
+
+.information .detaile {
+    display: flex;
+    width: 90%;
+    height: 6.875rem;
+    margin: 0 5%;
+    color: #fff;
+}
+
+.information .detaile .avatar {
+    flex: 0 0 6.875rem;
+}
+
+.information .detaile .avatar img {
+    height: 4.6875rem;
+    margin-left: 0.5625rem;
+    margin-top: 1.25rem;
+    border: none;
+    border-radius: 3rem;
+}
+
+.information .detaile .text {
+    flex: 1;
+    padding-top: 2.1875rem;
+}
+
+.information .detaile .text p {
+    margin: 0;
+}
+
+.information .detaile .arrow {
+    flex: 0 0 0.75rem;
+}
+
+.information .detaile .arrow span {
+    display: block;
+    font-size: 0.75rem;
+    margin-top: 2.9375rem;
+}
+
+.information .property {
+    display: flex;
+    border-top: 1px solid #fff;
+}
+
+.information .property .turnover {
+    flex: 1;
+    padding: 0.75rem;
+}
+
+.information .property .turnover p {
+    margin: 0;
+    text-align: center;
+}
+
+.information .property .empty {
+    flex: 0 0 1;
+    background-color: #fff;
+    width: 0.0625rem;
+    height: 2.0625rem;
+    margin-top: 1.0625rem;
+}
+
+.information .property .commission {
+    flex: 1;
+    padding: 0.75rem;
+}
+
+.information .property .commission p {
+    margin: 0;
+    text-align: center;
+}
+
+.order-wrapper {
+    display: flex;
+    width: 100%;
+    height: 3.3125rem;
+    padding: 0 5%;
+    line-height: 3.3125rem;
+    border-bottom: 1px solid #c9c9c9;
+    background-color: #fff;
+}
+
+.order-wrapper .my-order {
+    flex: 0 0 4.6875rem;
+    margin: 0;
+}
+
+.order-wrapper .all-order {
+    flex: 1;
+    margin: 0;
+    padding-right: 0.75rem;
+    text-align: right;
+    color: #959595;
+}
+
+.order-wrapper .all-order a {
+    color: #303030
+}
+
+.order-wrapper span {
+    flex: 0 0 0.75rem;
+    font-size: 0.75rem;
+    color: #959595;
+}
+
+.img-wrapper {
+    display: flex;
+    width: 100%;
+    height: 5rem;
+    padding: 0 5%;
+    background-color: #fff;
+}
+
+.img-wrapper .wrapper {
+    flex: 1;
+    text-align: center;
+    padding-top: 1.125rem;
+}
+
+.img-wrapper .wrapper img {
+    height: 1.4rem;
+}
+
+.img-wrapper .wrapper p {
+    margin: 0;
+    color: #787878;
+    font-size: 0.875rem;
+}
+
+.detail-list {
+    padding-bottom: 4.375rem;
+}
+
+.detail-list .my-team,
+.detail-list .integral,
+.detail-list .QR,
+.detail-list .commission,
+.detail-list .bandcard,
+.detail-list .agent-store,
+.detail-list .upgrade-apply,
+.detail-list .my-address {
+    padding: 0 5%;
+    display: flex;
+    line-height: 3.125rem;
+    background-color: #fff;
+    color: #303030;
+}
+
+.detail-list .my-team p,
+.detail-list .integral p,
+.detail-list .QR p,
+.detail-list .commission p,
+.detail-list .bandcard p,
+.detail-list .agent-store p,
+.detail-list .upgrade-apply p,
+.detail-list .my-address p {
+    flex: 1;
+    margin: 0;
+    border-bottom: 1px solid #c9c9c9;
+    text-indent: 1.875rem;
+    background-repeat: no-repeat;
+    background-size: 1.0625rem auto;
+}
+
+.detail-list .my-team span,
+.detail-list .integral span,
+.detail-list .QR span,
+.detail-list .commission span,
+.detail-list .bandcard span,
+.detail-list .agent-store span,
+.detail-list .upgrade-apply span,
+.detail-list .my-address span {
+    flex: 0 0 0.75rem;
+    font-size: 0.75rem;
+    color: #959595;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+.detail-list .my-team {
+    margin-top: 0.625rem;
+}
+
+.detail-list .my-team p {
+    background-image: url("../images/mallorder/icon1@2x.png");
+    background-position: 0 17px;
+}
+
+.detail-list .integral p {
+    background-image: url("../images/mallorder/kind5.png");
+    background-position: 0 14px;
+    background-size: 20px auto;
+}
+
+.detail-list .QR p {
+    background-image: url("../images/mallorder/icon3@2x.png");
+    background-position: 0 17px;
+}
+
+.detail-list .commission p {
+    background-image: url("../images/mallorder/icon2@2x.png");
+    background-position: 0 18px;
+}
+
+.detail-list .bandcard p {
+    background-image: url("../images/mallorder/icon4@2x.png");
+    background-position: 0 18px;
+}
+
+.detail-list .agent-store p {
+    background-image: url("../images/mallorder/icon5@2x.png");
+    background-position: 0 19px;
+}
+
+.detail-list .my-address p {
+    background-image: url("../images/mallorder/icon6@2x.png");
+    background-position: 1px 16px;
+    background-size: 0.875rem auto;
+    border: none;
+}
+
+.detail-list .my-address span {
+    border: none;
+}
+
+.detail-list .upgrade-apply p {
+    background-image: url("../images/mallorder/icon7@2x.png");
+    background-position: 0 19px;
+}

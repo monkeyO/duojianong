@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>个人中心</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<script type="text/javascript">
+			var TP_PUBLIC = '/Public';
+			var ROOT = '/';
+			var APP = '';
+		</script>
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<link rel="stylesheet" href="../css/my_center.css">
+		<link rel="stylesheet" href="../css/footer.css">
+	</head>
+
+	<body>
+		<div class="page">
+			<div class="content">
+				<!-- header start-->
+				<!--class="bar bar-nav"-->
+				<header id="header" class="" style="display:none;">
+					<button class="back button button-link button-nav pull-left">
+        <span class="icon icon-left">返回</span>  
+    </button>
+					<button class="more button button-link button-nav pull-right">
+        <img class="img" src="../images/clock.jpg" height="26">
+        <span class="text">10</span>
+        <i class="circle">●●●</i>
+    </button>
+			<h1 class="title">微商管理系统</h1>
+				</header>
+				<!-- header end-->
+
+				<div class="information">
+					<a class="detaile external" href="/sale/mall/info">
+						<div class="avatar">
+							<img src="http://thirdwx.qlogo.cn/mmopen/vi_32/OMiaZFZFibibEndtFnnDcCkq9e5ic9M0jSib8mQexyubE05ExrYsAClakibthJu8od9fKtjCnx2lh6zZQqyq3Hl7c58Q/132" alt="">
+						</div>
+						<div class="text">
+							<p>菲小姐</p>
+							<p>运营中心</p>
+							<p>品牌商城</p>
+						</div>
+						<div class="arrow">
+							<span class="icon icon-right"></span>
+						</div>
+					</a>
+					<div class="property">
+						<div class="turnover">
+							<p>消费金额</p>
+							<p>￥0.00</p>
+						</div>
+						<div class="empty"></div>
+						<div class="commission">
+							<p>总佣金</p>
+							<p>￥0.00</p>
+						</div>
+					</div>
+				</div>
+				<div class="order-wrapper">
+					<p class="my-order">我的订单</p>
+					<p class="all-order">
+						<a class="external" href="/sale/mallorder/all">查看全部订单</a>
+					</p>
+					<span class="icon icon-right"></span>
+				</div>
+				<div class="img-wrapper">
+					<a class="wrapper external" href="/sale/mallorder/all">
+						<img src="../images/mallorder/icon1.png" alt="">
+						<p>待付款</p>
+					</a>
+					<a class="wrapper external" href="/sale/mallorder/all">
+						<img src="../images/mallorder/icon2.png" alt="">
+						<p>待发货</p>
+					</a>
+					<a class="wrapper external" href="/sale/mallorder/all">
+						<img src="../images/mallorder/icon3.png" alt="">
+						<p>已发货</p>
+					</a>
+					<a class="wrapper external" href="/sale/mallorder/all">
+						<img src="../images/mallorder/icon4.png" alt="">
+						<p>已收货</p>
+					</a>
+				</div>
+				<div class="detail-list">
+					<a class="my-team external" href="/admin/team/index">
+						<p>我的团队</p>
+						<span class="icon icon-right"></span>
+					</a>
+					<a class="QR external" href="/sale/mallorder/qrcode?type=mall">
+						<p>分享二维码</p>
+						<span class="icon icon-right"></span>
+					</a>
+					<a class="upgrade-apply external" href="/sale/mall/info?type=up">
+						<p>申请升级</p>
+						<span class="icon icon-right"></span>
+					</a>
+					<a class="agent-store external" href="/admin/order/index">
+						<p>代理商城</p>
+						<span class="icon icon-right"></span>
+					</a>
+					<a class="my-address external" href="/sale/malladdress/address_detail">
+						<p>我的地址</p>
+						<span class="icon icon-right"></span>
+					</a>
+				</div>
+				<script type="text/javascript">
+					var signurl = '/sale/integral/get_sign_up_state_ajax';
+					var signedurl = '/sale/integral/sign_up';
+					$().ready(function() {
+						$("a.personal").children("img").attr('src', '../images/footer4.jpg').siblings(
+							".text").css({
+							color: "#1d4a78"
+						});
+						$(".bar-tab").children().removeClass("active");
+						$(".bar-tab").children(":last-child").addClass("active");
+					});
+				</script>
+			</div>
+			<link rel="stylesheet" href="../css/footer_v4.css">
+			<footer class="bar bar-tab">
+				<a class="tab-item  external shopping" href="ppsc.html">
+					<span class="icon-shop"></span>
+					<span class="tab-label">商城</span>
+				</a>
+
+				<a class="tab-item external shopping_cart" href="gwc.html">
+					<span class="icon-shoppingcart"></span>
+					<span class="tab-label">购物车</span>
+
+				</a>
+				<a class="tab-item external active personal" href="grzx.html">
+					<span class="icon-center"></span>
+					<span class="tab-label">个人中心</span>
+				</a>
+			</footer>
+		</div>
+		<!--script start-->
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

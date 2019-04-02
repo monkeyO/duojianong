@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>奖励详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/manager-order_v3.1.css" />
+		<style>
+			[v-cloak]{
+				display:none;
+			}
+            .page{
+				overflow-y: auto;
+			}			
+			.list-block .item-inner{
+				padding-left: .75rem;
+			}
+			.list-block{
+				margin-top: 3rem;
+			}
+            .list-block ul ul{
+				display: none;
+				padding-left: 0;
+				opacity: 0;
+				transition: all .2s;
+			}
+			.list-block ul ul.active {
+				opacity: 1;
+				display: block;
+			}
+			.list-block .list-block-article>div{
+				display: flex;
+				align-items: center;
+			}
+			.list-block .list-block-article .list-block-text{
+				flex: 1;
+			}
+			.list-block .list-block-article  i{
+				width: 40px;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<header class="bar bar-nav">
+				<a class="icon icon-left pull-left"></a>
+				<h1 class="title">详情</h1>
+			</header>
+			<div id="detail" v-cloak>
+				<div class="list-block">
+					<ul>
+						<li class="list-block-article" v-for="(item,index) in cartsList">
+							<div @click="makeToggle(index)">
+								<div class="list-block-text">
+									<div class="item-inner">
+										<div class="item-title">您的下级：{{item.ly}}</div>
+									</div>
+									<div class="item-inner">
+										<div class="item-title">订单金额：{{item.Moneyreceived}}</div>
+									</div>
+									<div class="item-inner">
+										<div class="item-title">获得订货积分奖励：{{item.flmoney}}</div>
+									</div>
+									<div class="item-inner">
+										<div class="item-title">订单编号：{{item.ordernumber}}</div>
+									</div>
+									<div class="item-inner">
+										<div class="item-title">时间：{{timestampToTime(item.create_time)}}</div>
+									</div>
+								</div>
+								<i class="icon icon-down"></i>
+							</div>
+                            <ul :class="index==toggle?'active':''">
+                            	<li v-for="itemss in item.product">
+									<div class="item-inner" style="font-weight: bold;">
+										名称：{{itemss.productname}}
+									</div>
+									<!--
+									<div class="item-inner">
+										单品返利：{{itemss.bili}}
+									</div>
+									-->
+									<div class="item-inner">
+										价格：{{itemss.price}}
+									</div>
+									<div class="item-inner">
+										数量：{{itemss.num}}
+									</div>
+                            	</li>
+                            </ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/jquery.js"></script>
+	<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="application/javascript" src="../js/vue.min.js"></script>
+	<script type="application/javascript">
+		var app = new Vue({
+			el: '#detail',
+			data() {
+				return {
+					cartsList: [],
+					toggle: -1
+				}
+			},
+			created() {
+				this.init();
+			},
+			methods: {
+				//初始化
+				init() {
+					var that = this;
+					var getparam_ajax = {
+						id: GetQueryString("id")
+					};
+					var getorder_option = {
+						url: '/Trade/TradeLy',
+						params: getparam_ajax,
+						type: 'post',
+						callback: function(res) {
+							console.log(res);
+							if (res.code == 200) {
+								that.cartsList = res.data;
+							} else {
+								tusi(res.message);
+							}
+						}
+					}
+					callajax(getorder_option);
+				},
+				//点击下拉
+				makeToggle(index){
+					this.toggle = this.toggle == index ? -1 : index;
+				}
+			}
+		})
+	</script>
+</html>

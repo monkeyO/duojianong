@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>朵嘉浓代理管理系统</title>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/light7.min.css">
+		<link rel="stylesheet" href="css/header_v1.css">
+		<link rel="stylesheet" href="css/color_scheme-default.css">
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script src="js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<link rel="stylesheet" type="text/css" href="css/index_v3_1.css" />
+	</head>
+	<body>
+		<div class="page">
+			<div class="banner color-index-bg">
+				<div class="avatar-wrapper">
+					<a class="external">
+						<img class="avatar" src="" alt="">
+					</a>
+				</div>
+				<p class="manager_name"></p>
+				<p class="manager_levname"></p>
+				<div class="inform">
+					<div class="inform-icon">
+						<img src="images/index/icon1.png" alt="">
+					</div>
+					<div class="inform-text">
+						<p>通知：朵嘉浓代理管理系统上线了</p>
+					</div>
+				</div>
+			</div>
+			<div class="menu">
+				<ul>
+					<li>
+						<a class="external" href="index/yqdl.html"><img src="images/index/icon3.png" alt="">邀请代理</a>
+					</li>
+					<li>
+						<a class="external" href="index/shdl.html"><img src="images/index/icon4.png" alt="">审核代理</a>
+					</li>
+					<li>
+						<a class="external" onclick="saoMa()"><img src="images/index/icon5.png" alt="">扫码发货</a>
+					</li>
+					<li>
+						<a class="external shouquan" href="index/sqzs.html"><img src="images/index/icon6.png" alt="">授权证书</a>
+					</li>
+					<li>
+						<a class="external" href="index/sxy.html"><img src="images/index/icon9.png" alt="">商学院</a>
+					</li>
+					<li>
+						<a class="external" href="order/index.html?id=0"><img src="images/index/icon7.png" alt="">订单管理</a>
+					</li>
+					<li>
+						<a class="external" href="index/czzx.html"><img src="images/index/icon10.png" alt="">充值中心</a>
+					</li>
+					<li>
+						<a class="external saoma" href="index/yj_gr.html"><img src="images/index/icon8.png" alt="">业绩查询</a>
+					</li>
+				</ul>
+			</div>
+			<div class="module-wrapper">
+				<h3>团队管理</h3>
+				<ul class="module">
+					<li>
+						<a class="external" href="index/yj_td.html">
+							<div>
+								<p>团队业绩</p>
+								<p><span id="tdyj"></span>元</p>
+							</div>
+							<img src="images/index/icon11.png" alt="">
+						</a>
+					</li>
+					<li>
+						<a class="external" href="index/yj_gr.html">
+							<div>
+								<p>我的业绩</p>
+								<p><span id="gryj"></span>元</p>
+							</div>
+							<img src="images/index/icon12.png" alt="">
+						</a>
+					</li>
+					<li>
+						<a class="external" href="index/yg_td.html">
+							<div>
+								<p>团队结构</p>
+								<p style="font-size: 12px;">我的团队</p>
+								<p><span id="tdjg"></span>人</p>
+							</div>
+							<img src="images/index/icon13.png" alt="">
+						</a>
+					</li>
+					<li>
+						<a class="external" href="index/jl_wd.html">
+							<div>
+								<p>累计积分</p>
+								<p><span id="wdjl"></span>分</p>
+							</div>
+							<img src="images/index/icon14.png" alt="">
+						</a>
+					</li>
+				</ul>
+			</div>
+			<a class="technical_support" href="javascript:;">——初美生物——</a>
+		</div>
+		<link rel="stylesheet" href="css/footer.css">
+		<footer id="footer" class="row">
+			<a href="index.html" class="col-25 wrapper external team color-footer-nav-icon">
+				<p class="text color-footer-nav-text">主页</p>
+			</a>
+			<a href="i_yingxiao.html" class="col-25 wrapper external market color-footer-nav-icon">
+				<p class="text color-footer-nav-text">营销</p>
+			</a>
+			<a href="i_xiadan.html" class="col-25 wrapper external order color-footer-nav-icon">
+				<p class="text color-footer-nav-text">下单</p>
+			</a>
+			<a href="i_my.html" class="col-25 wrapper external personal color-footer-nav-icon">
+				<p class="text color-footer-nav-text">个人信息</p>
+			</a>
+		</footer>
+		<script type="text/javascript">
+			$(function() {
+				var active = window.location.href;
+				active = active.toLowerCase();
+				if (active.indexOf("i_yingxiao") != -1) {
+					$(".market").addClass("active").children("p").addClass("active");
+				} else if (active.indexOf("i_xiadan") != -1) {
+					$(".order").addClass("active").children("p").addClass("active");
+				} else if (active.indexOf("i_my") != -1) {
+					$(".personal").addClass("active").children("p").addClass("active");
+				} else {
+					$(".team").addClass("active").children("p").addClass("active");
+				}
+			});
+		</script>
+		<script src="js/index_v3_1.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			function saoMa() {
+				tusi("此功能稍后开放");
+			}
+			$(function() {
+				var myToken = getLocal("token");
+				if (myToken) {
+					var getparam_ajax = {
+						Token: myToken
+					};
+					var getorder_option = {
+						url: '/index/IndexTop',
+						params: getparam_ajax,
+						callback: function(res) {
+							if (res.code == 200) {
+								$(".avatar").attr("src", headerUrl + res.data.head);
+								$(".manager_name").html(res.data.username);
+								$(".manager_levname").html(res.data.items.agent_name);
+							} else {
+								window.location.href = 'login.html';
+							}
+						}
+					}
+					var getparam_ajax1 = {
+						Token: myToken
+					};
+					var getorder_option1 = {
+						url: '/Trade/IndexTrade', 
+						params: getparam_ajax1,
+						callback: function(res){
+							$("#tdyj").text(res.data.tdzyj[0].tdzje ? parseInt(res.data.tdzyj[0].tdzje) : 0);
+							$("#gryj").text(res.data.grzyj[0].grzyj ? parseInt(res.data.grzyj[0].grzyj) : 0);
+							$("#wdjl").text(res.data.MyJl[0].grzyj ? Math.floor(res.data.MyJl[0].grzyj) : 0);
+							$("#tdjg").text(res.data.IndexTd ? parseInt(res.data.IndexTd) : 0);
+						}
+					}
+					callajax(getorder_option);
+					callajax(getorder_option1);
+				} else {
+					window.location.href = './login.html';
+				}
+			})
+		</script>
+	</body>
+</html>

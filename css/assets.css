@@ -1,0 +1,34 @@
+.assets-wrapper { color: #333333; }
+.assets-wrapper .total-assets { padding: 0 20px; border-bottom: solid 1px #E0E0E0; background-color: #fff; overflow: hidden; }
+.assets-wrapper .total-assets .titles { float: left; display: inline-block; font-size: 18px; line-height: 56px; }
+.assets-wrapper .total-assets .titles i { display: inline-block; width: 20px; height: 20px; vertical-align: middle; background: url(../images/pie.png) no-repeat; background-size: contain; }
+.assets-wrapper .total-assets .money { float: right; display: inline-block; }
+.assets-wrapper .total-assets .money span { display: inline-block; font-size: 28px; line-height: 56px; }
+.assets-wrapper .chart-wrapper { display: flex; background-color: #fff; border-bottom: solid 1px #E0E0E0; }
+.assets-wrapper .chart-wrapper .money-radio { flex: 1; }
+.assets-wrapper .chart-wrapper .money-detail { flex: 1; display: flex; flex-direction: column; text-align: left; }
+.assets-wrapper .chart-wrapper .money-detail i { display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 20px; border: none; }
+.assets-wrapper .chart-wrapper .money-detail span { font-size: 16px; color: #606060; }
+.assets-wrapper .chart-wrapper .money-detail p { text-align: left; font-size: 20px; margin: 0; padding-left: 20px; }
+.assets-wrapper .chart-wrapper .money-detail .enable { flex: 1; padding: 24px 0 0 5px; }
+.assets-wrapper .chart-wrapper .money-detail .enable i { background: linear-gradient(to bottom, #71ebd1, #0da9ef); }
+.assets-wrapper .chart-wrapper .money-detail .disable { flex: 1; padding: 24px 0 24px 5px; }
+.assets-wrapper .chart-wrapper .money-detail .disable i { background: linear-gradient(to bottom, #ff806a, #ff4371); }
+
+.assets-wrapper .chart-wrapper .money-detail .balance { flex: 1; padding: 0 0 24px 5px; }
+.assets-wrapper .chart-wrapper .money-detail .balance i { background: linear-gradient(to bottom, #FCF56F, #FCEF04); }
+
+.assets-wrapper .assets-func { display: flex; text-align: center; background-color: #fff; line-height: 75px; margin-bottom: 10px; }
+.assets-wrapper .assets-func i { display: inline-block; width: 50px; height: 35px; background-repeat: no-repeat; background-size: contain; vertical-align: middle; }
+.assets-wrapper .assets-func span { color: #333333; text-decoration: none; }
+.assets-wrapper .assets-func .rechange { flex: 1; border-right: solid 1px #E0E0E0; box-sizing: border-box; }
+.assets-wrapper .assets-func .rechange i { background-image: url(../images/apply.png); }
+.assets-wrapper .assets-func .withdraw { flex: 1; }
+.assets-wrapper .assets-func .withdraw i { background-image: url(../images/rechange.png); }
+.assets-wrapper .money-log { display: flex; background-color: #fff; text-align: center; margin-top: .625rem;}
+.assets-wrapper .money-log .desc { font-size: 16px; color: #606060; }
+.assets-wrapper .money-log .money { font-size: 20px; color: #333333; }
+.assets-wrapper .money-log .rechange, .assets-wrapper .money-log .charging { flex: 1; }
+.assets-wrapper .money-log .rechange { border-right: solid 1px #E0E0E0; }
+
+/*# sourceMappingURL=assets.css.map */

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>账单</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="../css/bill.css">
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+	</head>
+	<body>
+		<div class="page" id="main">
+			<div class="buttons-tab">
+				<a v-for="(item,index) in navList" @click="makeNav(index,item.type,item.Status)" :class="index==select?'active':''"
+				 class="tab-link button btns color-examine-nav">
+					{{item.name}}
+				</a>
+			</div>
+			<div>
+				<div class="tabs">
+					<div class="tab active">
+						<div class="content-block">
+							<ul>
+								<li class="item-content" v-for="(item,index) in jiluList">
+									<div @click="makeToggle(index)">
+										<div class="item-text">
+											<span>单号：{{item.ordernumber}}</span>
+											<span>余额：{{item.dqmoney}}</span>
+											<span>日期：{{getTime(item.Create_time)}}</span>
+											<span>代理积分扣除：{{item.MoneyDiscount}}</span>
+										</div>
+										<i class="icon icon-down"></i>
+									</div>
+									<ul :class="index==toggle?'active':''">
+										<li v-for="itemss in item.product">
+											<span>类型：{{itemss.detailedname}}</span>
+											<span>钱数：{{itemss.money}}</span>
+										</li>
+									</ul>
+									
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+		<script>
+			var app = new Vue({
+				el: '#main',
+				data() {
+					return {
+						select: 0,
+						toggle: -1,
+						type: 0,
+						status: 4,
+						jiluList: [],
+						navList: [{
+								name: "所有",
+								type: 0,
+								Status: 4
+							}, {
+								name: "货款",
+								type: 1,
+								Status: 1
+							}, {
+								name: "运费",
+								type: 1,
+								Status: 2
+							}
+						]
+					}
+				},
+				mounted() {
+					this.init();
+				},
+				methods: {
+					//切换导航
+					makeNav(index, type, status) {
+						this.select = index;
+						this.type = type;
+						this.status = status;
+						this.init();
+					},
+					//点击下拉
+					makeToggle(index) {
+						this.toggle = this.toggle == index ? -1 : index;
+					},
+					//时间转换
+					getTime(timestamp) {
+						var date = new Date(timestamp * 1000);
+						var Y = date.getFullYear() + '-';
+						var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+						var D = date.getDate() + ' ';
+						var h = date.getHours() + ':';
+						var m = date.getMinutes() + ':';
+						var s = date.getSeconds();
+						return Y + M + D + h + m + s;
+					},
+					//初始化
+					init() {
+						var that = this;
+						var myToken = getLocal("token");
+						var getparam_ajax = {
+							Token: myToken,
+							Status: this.status,
+							Type: this.type
+						};
+						var getorder_option = {
+							url: '/Bill/Detailed',
+							params: getparam_ajax,
+							callback: function(res) {
+								if (res.code = 200) {
+									that.jiluList = res.data;
+								} else {
+									tusi(res.message);
+								}
+							}
+						}
+						callajax(getorder_option);
+					}
+				}
+			})
+		</script>
+		<style>
+			.buttons-tab .button {
+				height: 2.5rem;
+				line-height: 2.5rem;
+			}
+			.content-block {
+				padding: 0 0;
+			}
+			.item-content {
+				box-sizing: border-box;
+				padding: 10px;
+				background: #FFFFFF;
+				border-bottom: 1px solid #CCCCCC;
+			}
+			.item-content>ul {
+				display: none;
+				opacity: 0;
+				transition: all .2s;
+			}
+			.item-content>ul.active {
+				opacity: 1;
+				display: block;
+			}
+			.item-content>ul li {
+				border-top: 1px dashed #CCCCCC;
+			}
+			.item-content>div {
+				display: flex;
+				align-items: center;
+			}
+			.item-content>div .item-text {
+				flex: 1;
+			}
+			.item-content>div i {
+				width: 10px;
+			}
+			.item-content span {
+				display: block;
+				height: 1.5rem;
+				line-height: 1.5rem;
+			}
+		</style>
+	</body>
+
+</html>

@@ -1,0 +1,211 @@
+<html xmlns="http://www.w3.org/1999/xhtml" class="ui-mobile">
+	<head>
+		<title>初美生物</title>
+		<meta charset="UTF-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="HandheldFriendly" content="true">
+		<meta name="MobileOptimized" content="640">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-orientation" content="portrait">
+		<meta name="full-screen" content="yes">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="browsermode" content="application">
+		<meta name="x5-page-mode" content="app">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="width=640,target-densitydpi=device-dpi,maximum-scale=1.0, user-scalable=no">
+		<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.6.4/jquery.js"></script>
+		<script>
+			function setWidth(a) {
+				if(/Andriod/i.test(navigator.userAgent)) {
+					var c, b = window.innerWidth;
+					(b != a) && (c = b / a), document.addEventListener("DOMContentLoaded", function() {
+						var d = document.getElementsByTagName("body")[0];
+						d.style.webkitTransformOrigin = "left top";
+						d.style.webkitTransform = "scale(" + c + ")"
+					}, !1)
+				}
+			}
+			setWidth(640);
+		</script>
+		<script src="../js/jquery-2.1.1.min.js"></script>
+		<script src="../js/my/common.js"></script>
+		<link href="../css/index/jquery.mobile-1.4.2.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/reset.css">
+		<!--<link href="../css/my/show.css" rel="stylesheet">-->
+		<style>
+			* {
+				overflow: hidden;
+				padding: 0;
+				margin: 0;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			
+			.header {
+				width: 100%;
+				height: 80px;
+				background: #4abcf2;
+				line-height: 80px;
+				text-align: center;
+				font-size: 26px;
+				color: #fff;
+				position: relative;
+			}
+			
+			.header .a {
+				position: absolute;
+				left: 0;
+				margin-left: 35px;
+			}
+			
+			.header .a1 {
+				font-size: 21px;
+				color: #fff;
+				position: absolute;
+				right: 0;
+				margin-right: 26px;
+			}
+			
+			#bg {
+				-webkit-transform: rotate(45deg);
+				-moz-transform: rotate(45deg);
+				filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+				overflow: hidden;
+				z-index: 9999;
+				opacity: 0.1;
+				font-size: 30px;
+			}
+			img {
+				width: 100%;
+				/*height: 100%;*/
+			}
+		</style>
+		<script>
+			//var texta;
+			function change() {
+				for(var i = 150; i <= 956; i = i + 155) {
+					for(var j = 10; j <= 640; j = j + 172) {
+						var mask_div = document.createElement('div');
+						mask_div.id = 'bg';
+						mask_div.appendChild(document.createTextNode('侯立凯'));
+						mask_div.style.position = "absolute";
+						mask_div.style.left = j + 'px';
+						mask_div.style.top = i + 'px';
+						document.body.appendChild(mask_div);
+					};
+				};
+			}
+		</script>
+
+	</head>
+	<div class="page">
+		<div id='wx_pic' style='margin:0 auto;display:none;'>
+			<img src='../images/wx_logo.jpg' />
+		</div>
+
+		<body onload="change()">
+			<div>
+				<div style="text-align:center;width: 100%;">
+					<!DOCTYPE html>
+					<html>
+
+					<head>
+						<meta charset="UTF-8">
+						<title></title>
+						<script type="text/javascript">
+							var TP_PUBLIC = '..';
+							var agentseeurl = '/admin/manage/get_not_audit';
+							var agentpassurl = '/admin/manage/audit';
+							var getCavConfig = '/home/manager/get_certificate_config';
+						</script>
+						<script type="text/javascript" src='../js/jquery.js'></script>
+						<style>
+							.certificate p {
+								display: none;
+							}
+							
+							.certificate {
+								position: fixed;
+								top: 0;
+								left: 0;
+								right: 0;
+								bottom: 0;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+							}
+						</style>
+					</head>
+
+					<body>
+						<div class="card" style="background-color: transparent; overflow: auto;">
+							<div class="certificate">
+								<canvas id="thecanvas" width="652" height="920" style="width:327px;height:460px;"></canvas>
+							</div>
+						</div>
+
+						<script type="text/javascript">
+							$(function() {
+								//	loadImg();
+								var infor = {  "name": ["{\"open\":\"1\",\"example\":\"\\u4ee3\\u7406\\u59d3\\u540d\",\"str\":\"\\u6d4b\\u8bd5\\u59d3\\u540d\",\"x\":219,\"y\":363,\"fillStyle\":\"#000000\",\"font\":\"bold 16px Arial\",\"order\":\"1\",\"hide\":\"0\"}"], "wechatnum": ["{\"open\":\"1\",\"example\":\"\\u5fae\\u4fe1\\u53f7\",\"str\":\"\\u6d4b\\u8bd5***\\u53f7\",\"x\":407,\"y\":365,\"fillStyle\":\"#000000\",\"font\":\"bold 18px Arial\",\"order\":\"2\",\"hide\":1}"], "idennum": ["{\"open\":\"1\",\"example\":\"\\u4ee3\\u7406\\u8eab\\u4efd\\u8bc1\\u53f7\",\"str\":\"440***234\",\"x\":261,\"y\":418,\"fillStyle\":\"#000000\",\"font\":\"bold 18px Arial\",\"order\":\"3\",\"hide\":1}"], "levname": ["{\"open\":1,\"example\":\"\\u4ee3\\u7406\\u7b49\\u7ea7\",\"str\":\"\\u4e00\\u7ea7\\u7ecf\\u9500\\u5546\",\"x\":260,\"y\":535,\"fillStyle\":\"#000000\",\"font\":\"bold 24px Arial\",\"order\":\"4\",\"hide\":\"0\"}"], "authnum": ["{\"open\":\"1\",\"example\":\"\\u6388\\u6743\\u7f16\\u53f7\",\"str\":\"1234(\\u6d4b\\u8bd5\\u6388\\u6743\\u53f7)\",\"x\":311,\"y\":748,\"fillStyle\":\"#000000\",\"font\":\"bold 16px Arial\",\"order\":\"5\",\"hide\":\"0\"}"], "phone": ["{\"open\":0,\"example\":\"\\u4ee3\\u7406\\u7535\\u8bdd\\u53f7\\u7801\",\"str\":\"13504521352\",\"x\":414,\"y\":565,\"fillStyle\":\"#000000\",\"font\":\"bold 18px Arial\",\"order\":\"6\",\"hide\":\"0\"}"], "bossname": ["{\"open\":0,\"example\":\"\\u4e0a\\u7ea7\\u540d\\u79f0\",\"str\":\"\\u603b\\u90e8\",\"x\":121,\"y\":241,\"fillStyle\":\"#000000\",\"font\":\"bold 20px Arial\",\"order\":\"7\",\"hide\":\"0\"}"], "start_time_format1": ["{\"open\":1,\"example\":\"\\u5f00\\u59cb\\u65e5\\u671f\\u683c\\u5f0f\\u4e00\",\"str\":\"2017.01.01\",\"x\":308,\"y\":792,\"fillStyle\":\"#000000\",\"font\":\"bold 20px Arial\",\"order\":\"8\",\"hide\":\"0\"}"], "start_time_format2": ["{\"open\":0,\"example\":\"\\u5f00\\u59cb\\u65e5\\u671f\\u683c\\u5f0f\\u4e8c\",\"str\":\"2017-01-01\",\"x\":\"50\",\"y\":\"50\",\"fillStyle\":\"#000000\",\"font\":\"bold 20px Arial\",\"order\":\"9\",\"hide\":\"0\"}"], "start_time_format3": ["{\"open\":0,\"example\":\"\\u5f00\\u59cb\\u65e5\\u671f\\u683c\\u5f0f\\u4e09\",\"str\":\"2017\\u5e741\\u67081\\u65e5\",\"x\":\"50\",\"y\":\"50\",\"fillStyle\":\"#000000\",\"font\":\"bold 20px Arial\",\"order\":\"10\",\"hide\":\"0\"}"], "end_time_format1": ["{\"open\":1,\"example\":\"\\u7ed3\\u675f\\u65e5\\u671f\\u683c\\u5f0f\\u4e00\",\"str\":\"2018.01.01\",\"x\":459,\"y\":792,\"fillStyle\":\"#000000\",\"font\":\"bold 19px Arial\",\"order\":\"11\",\"hide\":\"0\"}"], "end_time_format2": ["{\"open\":0,\"example\":\"\\u7ed3\\u675f\\u65e5\\u671f\\u683c\\u5f0f\\u4e8c\",\"str\":\"2018-01-01\",\"x\":\"50\",\"y\":\"50\",\"fillStyle\":\"#000000\",\"font\":\"bold 20px Arial\",\"order\":\"12\",\"hide\":\"0\"}"], "end_time_format3": ["{\"open\":0,\"example\":\"\\u7ed3\\u675f\\u65e5\\u671f\\u683c\\u5f0f\\u4e09\",\"str\":\"2018\\u5e741\\u67081\\u65e5\",\"x\":\"50\",\"y\":\"50\",\"fillStyle\":\"#000000\",\"font\":\"bold 20px Arial\",\"order\":\"13\",\"hide\":\"0\"}"], "company": ["{\"open\":\"1\",\"example\":\"\\u516c\\u53f8\\u5730\\u5740\",\"str\":\"\\u2014\\u2014\",\"x\":413,\"y\":789,\"fillStyle\":\"#000000\",\"font\":\"bold 20px Arial\",\"order\":\"14\",\"hide\":\"0\"}"] };
+								var imgUrl = "../images/certificate.jpg";
+								$.each(infor, function(key, value) {
+									 infor[key] = JSON.parse(value); 
+								});
+                                var imgs = new Image();
+                                imgs.src = imgUrl;
+                                $(imgs).hide();
+                                 $('.certificate').append(imgs);
+                                imgs.onload = function() {
+                                    draw(imgs, infor);
+                                } 
+								console.log(infor);
+							})
+
+							//绘画证书的canvas
+							function draw(img, cavConfig){
+								
+								var canvas = document.getElementById("thecanvas");
+								var ctx = canvas.getContext("2d");
+								ctx.drawImage(img, 0, 0, 652, 920);
+								$.each(cavConfig, function(key, value) {
+									if(key == "bgImg" || value.open != "1" || value.str == "" || value.str == null || value.str == undefined) return;
+									ctx.fillStyle = value.fillStyle;
+									ctx.font = value.font;
+									ctx.fillText(value.str, value.x, value.y);
+									ctx.restore();
+								});
+								canvas.style.display = "none";
+								var type = 'png'; 
+								var d = document.getElementById("thecanvas");
+								
+								var imgdata = d.toDataURL(type);
+								var png = new Image();
+								png.src = imgdata;
+								
+								console.log(imgdata);
+								$('.warrant img').attr('src', imgdata);
+								$(png).attr("id", "imgtrue");
+
+								if(!$(".certificate").children("#imgtrue").length > 0) {
+									$(".certificate").append(png);
+								}
+							}
+						</script>
+					</body>
+
+					</html>
+				</div>
+			</div>
+	</div>
+	</body>
+
+</html>

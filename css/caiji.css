@@ -1,0 +1,55 @@
+.page{
+
+}
+header{
+   background: #0894EC;
+   height: 48px;
+   line-height: 48px;
+   text-align: center;
+   color: #FFFFFF;
+}
+.modal{
+	top: 60%;
+}
+.content-block{
+	margin: 0;
+	padding-top: .1rem;
+	background:#F0EFEF;
+}
+.tab1-content {
+	margin-top: 1rem;
+}
+.tab1-content textarea{
+	border: none;
+    outline: none;
+    resize: none;
+	width: 100%;
+	padding: 5px;
+}
+.tab1-content .tab1-title {
+	font-size: 1rem;
+	font-weight: bold;
+	margin: .1rem 0 .5rem 0;
+}
+.tab1-content .tab1-title span{
+    color: red;
+	display: inline-block;
+	margin-left: 5px;
+}
+.item-inner{
+	margin-top: 10px;
+}
+
+.item-inner>input {
+	display: block;
+	width: 100%;
+	height: 2.5rem;
+	border: none;
+	outline: none;
+	box-sizing: border-box;
+	padding-left: .5rem;
+	background: #FFFFFF;
+}
+.login-btn{
+	margin-top: 20px;
+}

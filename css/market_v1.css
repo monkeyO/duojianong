@@ -1,0 +1,102 @@
+.card-wrapper {
+    padding: 15px 5% 50px;
+    width: 100%;
+    height: 100%;
+    background-color: #f5f4f9;
+    overflow: auto;
+}
+
+.card-wrapper li {
+    margin-bottom: .9375rem;
+    height: 10rem;
+    background-size: cover;
+    text-align: center;
+    position: relative;
+    left: -106%;
+    transition: all 1s ease;
+}
+
+.card-wrapper li.animation {
+    left: 0;
+}
+
+.card-wrapper li:nth-of-type(1) {
+    background-image: url('../images/marketing/new1.png');
+}
+.card-wrapper li:nth-of-type(2) {
+    background-image: url('../images/marketing/new2.png');
+}
+.card-wrapper li:nth-of-type(3) {
+    background-image: url('../images/marketing/new3.png');
+}
+.card-wrapper li:nth-of-type(4) {
+    background-image: url('../images/marketing/new4.png');
+}
+.card-wrapper li:nth-of-type(5) {
+    background-image: url('../images/marketing/new5.png');
+}
+.card-wrapper li:nth-of-type(6) {
+    background-image: url('../images/marketing/new6.png');
+}
+.card-wrapper li h3,
+.card-wrapper li a {
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.card-wrapper li h3 {
+    position: relative;
+    text-align: center;
+    font-size: 1.5rem;
+    padding-top: 1.5625rem;
+}
+.card-wrapper li h3::after {
+    position: absolute;
+    content: '';
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1.5625rem;
+    height: 3px;
+    background-color: #fff;
+}
+.card-wrapper li a {
+    display: inline-block;
+    margin-top: 2.1875rem;
+    padding: .1875rem .625rem;
+    border-radius: 5px;
+    border: 2px solid #fff;
+}
+
+
+
+.waves{
+    position:relative;
+    cursor:pointer;
+    display:inline-block;
+    overflow:hidden;
+    text-align: center;
+    -webkit-tap-highlight-color:transparent;
+    z-index:1;
+}
+.waves .waves-animation{
+    position:absolute;
+    border-radius:50%;
+    width:25px;
+    height:25px;
+    opacity:0;
+    background:rgba(255,255,0,0.3);
+    transition:all 0.7s ease-out;
+    transition-property:transform, opacity, -webkit-transform;
+    -webkit-transform:scale(0);
+    transform:scale(0);
+    pointer-events:none
+}
+.ts-btn{
+    /* width: 200px; */
+    /* height: 56px; */
+    /* line-height: 56px; */
+    background: transparent;
+    color: #fff;
+    border-radius: 5px;
+}

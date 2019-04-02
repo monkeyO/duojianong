@@ -1,0 +1,247 @@
+.content {
+  background-color: #f5f4f9;
+}
+.part1 {
+  margin-bottom: .625rem;
+  background-color: #fff;
+}
+.part2 {
+  background-color: #fff;
+}
+.part3 {
+  background-color: #fff;
+}
+.part4 {
+  background-color: #fff;
+  margin-bottom: .625rem;
+  padding: .625rem 0;
+}
+.part5 {
+  background-color: #fff;
+  margin-bottom: .625rem;
+  padding: .625rem 0;
+}
+.part6 {
+  background-color: #fff;
+  padding: .625rem 0;
+  margin-bottom: .625rem;
+}
+.part7 {
+    padding: .9375rem 0;
+}
+.order-title {
+  display: flex;
+  width: 100%;
+  height: 3.125rem;
+  line-height: 3.125rem;
+  padding-left: 5%;
+  border-bottom: 0.0625rem solid #c9c9c9;
+}
+.order-title .order-num {
+  flex: 0 0 65%;
+}
+.order-title .is-pay {
+  flex: 0 0 35%;
+  text-align: right;
+  padding-right: 5%;
+  color: #fc4736;
+}
+.receiving-wrapper {
+  display: flex;
+  width: 100%;
+  height: 6.25rem;
+  padding: 0 5%;
+  color: #787878;
+  margin-bottom: 0.625rem;
+}
+.receiving-wrapper .icon-wrapper {
+  flex: 0 0 2rem;
+  margin-top: 1.9375rem;
+}
+.receiving-wrapper .receiving-detail {
+  line-height: 1.5625rem;
+  padding-top: 0.625rem;
+}
+.receiving-wrapper .receiving-detail .consignee {
+  float: left;
+}
+.receiving-wrapper .receiving-detail .tel {
+  float: right;
+}
+.account {
+  display: flex;
+  width: 100%;
+  height: 3.125rem;
+  line-height: 2.1875rem;
+  padding: 0 5%;
+  line-height: 3.125rem;
+}
+.account p{
+	margin: 0;
+}
+.account .avatar {
+  flex: 0 0 3.125rem;
+  margin-top: .4375rem
+}
+.account .username {
+  flex: 0 0 4.6875rem;
+}
+.account .WeChat {
+  flex: 1;
+  text-align: right;
+  font-size: 0.875rem;
+}
+.goods {
+  display: flex;
+  height: 7.18rem;
+  margin-bottom: 5px;
+  width: 100%;
+  padding: .625rem 5%;
+  background-color: #FAFAFA;
+}
+.goods:last-child{
+	margin-bottom: 0;
+}
+.goods .goods-img {
+  flex: 0 0 5.875rem;
+}
+.goods .goods-detail {
+  flex: 1;
+  padding-left: 1.0625rem;
+}
+.goods .goods-detail .goods-top {
+  display: flex;
+}
+.goods .goods-detail .goods-top .goods-name {
+  flex: 1;
+}
+.goods .goods-detail .goods-top .goods-price {
+  flex: 0 0 5rem;
+  text-align: right;
+}
+.goods .goods-detail .goods-bottom {
+  display: flex;
+  margin-top: 0.625rem;
+  color: #a0a0a0;
+}
+.goods .goods-detail .goods-bottom .goods-specification {
+  flex: 1;
+  font-size: 0.75rem;
+}
+.goods .goods-detail .goods-bottom .goods-count {
+  flex: 0 0 5rem;
+  text-align: right;
+  font-size: .875rem;
+}
+.all-price {
+  width: 100%;
+  padding: 0 5%;
+}
+.all-price .all-count {
+  float: right;
+  font-size: 0.875rem;
+}
+.all-price .price {
+  margin-left: .625rem;
+  float: right;
+  font-size: 0.875rem;
+}
+.all-price .price strong {
+  font-size: 0.875rem;
+  color: #fc4734;
+}
+.date {
+  width: 100%;
+  padding: 0 5%;
+  font-size: 0.75rem;
+  margin-top: -5px;
+  color: #afafaf;
+  text-align: right;
+}
+.logistics {
+  width: 100%;
+  padding: 0 5%;
+  line-height: 1.875rem;
+}
+.logistics .company {
+  color: #787878;
+}
+.logistics .detail {
+  display: flex;
+}
+.logistics .detail .order {
+  flex: 0 0 5rem;
+  color: #787878;
+}
+.logistics .detail .order-list {
+  flex: 1;
+}
+.logistics .detail .order-list li {
+  display: flex;
+}
+.logistics .detail .order-list li:last-child {
+  /*margin-bottom: 0.75rem;*/
+}
+.logistics .detail .order-list li .number {
+  flex: 1;
+  color: #787878;
+  line-height: 1.875rem;
+}
+.logistics .detail .order-list li .btn-check {
+	flex: 0 0 90px;
+	padding: 0;
+	/*margin-top: .1875rem;*/
+	height: 1.4375rem;
+	border: 1px solid #6c6c6c;
+	color: #303030;
+	background-color: transparent;
+	border-radius: 30px;
+	font-size: .75rem;
+	box-sizing: border-box;
+}
+.logistics .detail .order-list li .btn-check a{
+	line-height: 20px;
+	color: #303030; 
+}
+.remark {
+  width: 100%;
+  padding: 0 5%;
+}
+.remark span{
+	color: #787878;
+	word-break: break-all;
+}
+.order-count {
+  width: 100%;
+  padding: 0 5%;
+  display: flex;
+}
+.order-count .all {
+  flex: 1;
+}
+.order-count .all span {
+  color: #fc4736;
+}
+.order-count .processed {
+  flex: 1;
+}
+.order-count .processed span {
+  color: #fc4736;
+}
+.btn-wrapper {
+  width: 100%;
+  padding: 0 5%;
+  text-align: right;
+  margin-top: 1.25rem;
+  margin-bottom: .625rem;
+}
+.btn-wrapper .shipping-btn {
+  border: 1px solid #fc4734;
+  color: #fc4734;
+  margin-left: 0.75rem;
+  width: 5.625rem;
+  height: 2.125rem;
+  background: transparent;
+  border-radius: 0.3125rem;
+  font-size: .875rem;
+}

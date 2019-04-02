@@ -1,0 +1,210 @@
+/* 涓婚〉闈� */
+.color-index-bg {
+    background-image: url(../images/color-scheme/default/banner.png);
+}
+
+/* 閭€璇蜂唬鐞� */
+
+.color-creat-bg {
+    background: url(../images/color-scheme/default/banner.png) no-repeat;
+}
+
+
+/* 鍏呭€肩敵璇� */
+
+.color-recharge-apply-btn {
+    background-color: #0E3E6E;
+}
+
+
+/* 鍏呭€煎鏍� */
+
+.color-recharge-check-passbtn {
+    border: none !important;
+    background-color: #0E3E6E;
+    color: #fff !important;
+}
+
+.color-recharge-check-refusebtn {
+    color: #0E3E6E !important;
+    background-color: #fff;
+    border: 1px solid #0E3E6E !important;
+}
+
+/*璁㈠崟鏄庣粏*/
+
+.color-all-nav.active {
+    color: #0E3E6E !important;
+}
+
+.color-all-nav.active::after {
+    border: 2px solid #0E3E6E;
+}
+
+.color-all-status {
+    color: #0E3E6E;
+}
+
+.color-all-btn {
+    color: #0E3E6E;
+    border-color: #0E3E6E;
+}
+
+
+/*浠ｇ悊涓汉淇℃伅*/
+
+.color-agency-detail-bg {
+    background-image: url(../images/color-scheme/default/banner.png);
+}
+
+.colr-agency-detail-btn {
+    background-color: #0E3E6E;
+}
+
+
+/*澶勭悊涓嬬骇璁㈠崟*/
+
+.color-examine-nav.active {
+    color: #0E3E6E !important;
+}
+
+.color-examine-nav.active::after {
+    border: 2px solid #0E3E6E;
+}
+
+.color-examine-status {
+    color: #0E3E6E;
+}
+
+
+/*涓汉璧勬枡*/
+
+.color-info-exitbtn {
+    background-color: #0E3E6E;
+}
+
+
+/*涓汉淇℃伅*/
+
+.color-user-bg {
+    background: url(../images/color-scheme/default/banner.png) no-repeat;
+}
+
+
+/* 鍟嗗闄� */
+
+.color-business-index-nav.active {
+    border-bottom: 0.1875rem solid #0E3E6E;
+    color: #0E3E6E !important;
+}
+
+
+/* 瀹℃牳浠ｇ悊 */
+
+.color-manage-index-bg {
+    background: #0E3E6E;
+}
+.color-manage-index-text {
+    color: #0E3E6E;
+}
+.color-manage-index-btn-right {
+    background: #0E3E6E;
+    color:#fff;
+	border:none;
+}
+.color-manage-index-btn-left {
+    background: #fff;
+    color:#0E3E6E;
+	border:1px solid #0E3E6E;
+}
+
+
+/*绱犳潗璇︽儏*/
+
+.color-material-detail-text {
+    background-color: #0E3E6E;
+}
+
+
+/*鎻愮幇鐢宠*/
+
+.color-refund-apply-btn {
+    background-color: #0E3E6E;
+}
+
+
+/*鎻愮幇瀹℃牳*/
+
+.color-refund-check-passbtn {
+    border: none !important;
+    background-color: #0E3E6E;
+    color: #fff !important;
+}
+
+.color-refund-check-refusebtn {
+    color: #0E3E6E !important;
+    background-color: #fff;
+    border: 1px solid #0E3E6E !important;
+}
+
+/*涓嬪崟涓婚〉*/
+.color-order-index-bg {
+    background-image: url(../images/color-scheme/default/banner.png) !important;
+}
+
+
+/*淇敼瀵嗙爜*/
+.color-edit-password-btn {
+    background-color: #0E3E6E;
+}
+
+
+/*瀹℃牳鐢宠*/
+.color-check-apply-nav.active {
+    color: #0E3E6E;
+}
+
+.color-check-apply-nav.active::after {
+    border: 1px solid #0E3E6E;
+}
+
+/*鎴戠殑鍥㈤槦*/
+
+/* .color-team-index-nav.active {
+    color: #0E3E6E !important;
+}
+.color-team-index-nav.active::after {
+    border: solid 1px #0E3E6E !important;
+} */
+
+/*鎵爜鍙戣揣*/
+.color-s-bg {
+    background-color: #0E3E6E !important;
+}
+
+/*鍗囩骇鐢宠*/
+.cololr-upgrade-apply-btn {
+    background-color: #0E3E6E !important;
+}
+
+/* footer */
+
+.color-footer-nav-icon.active:nth-of-type(1) {
+    background-image: url(../images/color-scheme/default/footer1.png) !important;
+}
+
+.color-footer-nav-icon.active:nth-of-type(2) {
+    background-image: url(../images/color-scheme/default/footer2.png) !important;
+}
+
+.color-footer-nav-icon.active:nth-of-type(3) {
+    background-image: url(../images/color-scheme/default/footer3.png) !important;
+}
+
+.color-footer-nav-icon.active:nth-of-type(4) {
+    background-image: url(../images/color-scheme/default/footer4.png) !important;
+}
+
+.color-footer-nav-text.active {
+    color: #05A3E7 !important;
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>奖励管理</title>
+		<link rel="stylesheet" href="../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/light7.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/header_v1.css" />
+		<link rel="stylesheet" type="text/css" href="../css/award_manager.css" />
+		<link rel="stylesheet" type="text/css" href="../css/czzx.css" />
+		<style type="text/css">
+			.infinite-scroll-preloader {
+				margin-top: -20px;
+			}
+			.award-menu ul li a {
+				font-size: 14px;
+			}
+			.content-block {
+				padding: 0 1rem;
+			}
+			.tab1-content .tab1-title {
+				margin: .5rem 0 .5rem 0;
+			}
+			.list li {
+				position: relative;
+				background: #FFFFFF;
+				padding: 10px;
+				border-bottom: 1px solid #CCCCCC;
+			}
+           .list li>img{
+				display: block;
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				right: 10px;
+				top: 50%;
+				margin-top: -15px;
+			}
+			.list li span,
+			.list li span,
+			.list li span {
+				display: block;
+				font-size: 1rem;
+				height: 2.5rem;
+				line-height: 2.5rem;
+				padding-right: 30px;
+			}
+			.tab1-content {
+				margin-top: 1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page page-current" id="page1">
+			<div class="content infinite-scroll">
+				<nav class="award-menu">
+					<ul>
+						<!-- <li>
+							<a href="4">感恩推荐奖</a>
+						</li> -->
+						<li>
+							<a href="1" class="active">操盘手同级积分</a>
+						</li>
+						<li>
+							<a href="2">执行董事积分</a>
+						</li>
+						<!--权限添加-->
+						<li>
+							<a href="3">月度达量</a>
+						</li>
+						<li>
+							<a href="5">操盘手差价</a>
+						</li>
+					</ul>
+				</nav>
+				<section class="award-manager1" data-page="1">
+					<ul id="get_data1" class="list">
+					</ul>
+				</section>
+				<section class="award-manager2"  data-page="2">
+					<ul id="get_data2" class="list">
+					</ul>
+				</section>
+				<section class="award-manager3"  data-page="3">
+					<ul id="get_data3" class="list">
+					</ul>
+				</section>
+				<section class="award-manager5" data-page="5">
+					<ul id="get_data5" class="list">
+					</ul>
+				</section>
+			</div>
+		</div>
+		<link rel="stylesheet" href="../css/daterangepicker.css" />
+		<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="../js/moment.min.js"></script>
+		<script src="../js/jquery.daterangepicker.js"></script> -->
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+		<script type="application/javascript">
+			// 日期格式化函数
+			Date.prototype.format = function(format) {
+				let o = {
+					"M+": this.getMonth() + 1, //月份
+					"d+": this.getDate(), //日
+					"H+": this.getHours(), //小时
+					"m+": this.getMinutes(), //分
+					"s+": this.getSeconds(), //秒
+					"q+": Math.floor((this.getMonth() + 3) / 3), //季度
+					"f+": this.getMilliseconds() //毫秒
+				};
+				if (/(y+)/.test(format))
+					format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+				for (let k in o)
+					if (new RegExp("(" + k + ")").test(format))
+						format = format.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+				return format;
+			};
+			// HH:mm:ss
+			var sStartTime = new Date(new Date(new Date().toLocaleDateString()).getTime()).format('yyyy-MM-dd');
+			var sEndTime = new Date(new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000 - 1).format(
+				'yyyy-MM-dd');
+			$(function(){
+				getData(1);
+				$(".award-manager1").fadeIn();
+			});
+			//钱数
+			function getMoney(e) {
+				var result;
+				if (e === null) {
+					result = 0;
+				} else {
+					result = e;
+				}
+				return result;
+			}
+			//日期
+			function getTime(timestamp) {
+				var date = new Date(timestamp * 1000);
+				var Y = date.getFullYear() + '-';
+				var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+				var D = date.getDate() + ' ';
+				var h = date.getHours() + ':';
+				var m = date.getMinutes() + ':';
+				var s = date.getSeconds();
+				return Y + M + D + h + m + s;
+			}
+			//类型
+			function getType(e) {
+				var result;
+				if (e == 0) {
+					result = "未结算";
+				} else if (e == 1) {
+					result = "已结算";
+				}
+				return result;
+			}
+			//Tab切换监听
+			$(".award-menu a").on("click", function() {
+				var str = $(this).attr("href");
+				$('a[href=' + str + ']').addClass("active").parent().siblings().children("a").removeClass("active");
+				$(".content section").hide();
+				var content = '.award-manager' + str;
+				$(content).fadeIn();
+				getData(str);
+				return false;
+			});
+			//打开详情页
+			$(".list").on("click","li",function(){
+				window.location.href = "jl_detail.html?id="+$(this).data("id");
+			})
+			//获取数据
+			//Start_time: Start,
+			//End_time: End
+			function getData(type) {
+				$.showIndicator();
+				var Start = Date.parse(new Date(sStartTime)) / 1000;
+				var End = Date.parse(new Date(sEndTime)) / 1000;
+				var myToken = getLocal("token");
+				var getparam_ajax = {
+					Token: myToken,
+					Type: type
+				};
+				var getorder_option = {
+					url: '/Trade/MyReward',
+					params: getparam_ajax,
+					callback: function(res) {
+						if (res.code = 200) {
+							var Datas = res.data;
+							var ele = '#get_data' + type;
+							$(ele).html("");
+							for (var i = 0; i < Datas.length; i++) {
+								var content = "<li data-id="+Datas[i].id+"><span>明细：" + Datas[i].remarks + "</span><span>积分：" + getMoney(Datas[i].flmoney) +
+									"</span><img src='../images/i-list-chevron-right.png'/></li>";
+								$(ele).append(content);
+							}
+						} else {
+							tusi(res.message);
+						}
+						$.hideIndicator();
+					}
+				}
+				callajax(getorder_option);
+			}
+		</script>
+	</body>
+</html>

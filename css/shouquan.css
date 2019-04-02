@@ -1,0 +1,72 @@
+html,body{
+	background: #F0EEEF;
+	box-sizing: border-box;
+	position: relative;
+}
+[v-cloak] {
+     display: none;
+}
+.page{
+}
+#main{
+	padding-bottom: 50px;
+	position: relative;
+}
+#main #go-btn{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+.service li{
+	margin-top: 20px;
+	background: #FFFFFF;
+	padding: 10px 0;
+}
+.service li>div{
+	display: flex;
+	align-items: center;
+}
+.service li .service-main{
+	width: 80px;
+	text-align: center;
+}
+.service li .service-main img{
+	width:50%;
+}
+.service li .service-main span{
+	display: block;
+	font-size: 14px;
+	margin-top: 5px;
+}
+.service li>div p{
+	font-size: 14px;
+	line-height:20px;
+}
+.msg{
+	padding:10px;
+}
+.msg>h2{
+	font-size: 18px;
+	font-weight: 100;
+	line-height: 30px;
+}
+.msg>h2 img{
+	vertical-align: middle;
+	width: 26px;
+	margin-right: 5px;
+	float: left;
+	padding-bottom: 10px;
+}
+.msg>p{
+    font-size: 14px;
+	line-height: 20px;
+}
+.proto{
+	margin-top: 50px;
+	text-align: center;
+}
+.proto a{
+	text-decoration:underline;
+	color: red;
+}

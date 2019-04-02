@@ -1,0 +1,144 @@
+.content {
+    background-color: #f5f4f9;
+}
+
+.search-wrapper {
+    display: flex;
+    width: 100%;
+    height: 3.75rem;
+    padding-left: 5%;
+    /* border-bottom: 1px solid #c9c9c9; */
+}
+
+.search-wrapper .left {
+    flex: 0 0 70%;
+}
+
+.search-wrapper .left .search-input {
+    margin-top: 0.75rem;
+}
+
+.search-wrapper .left .search-input .icon-search {
+    left: 1.125rem;
+}
+
+.search-wrapper .left .search-input .search {
+    height: 2.1875rem;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    text-indent: 18px;
+}
+
+.search-wrapper .right {
+    flex: 0 0 30%;
+    color: #303030;
+}
+
+.search-wrapper .right .select {
+    line-height: 3.75rem;
+    text-align: center;
+}
+
+.search-wrapper .right .select em {
+    padding-right: .625rem;
+    display: inline-block;
+    margin-left: -5px;
+    font-size: 0.875rem;
+    font-style: normal;
+    z-index: 10;
+}
+
+.search-wrapper .right .select span {
+    margin-left: -10px;
+    font-size: 0.75rem;
+}
+
+.nav-wrapper {
+    border-bottom: 1px solid #c9c9c9;
+}
+
+.nav-wrapper ul {
+    display: flex;
+}
+
+.nav-wrapper ul li {
+    flex: 1;
+    text-align: center;
+    line-height: 1.875rem;
+}
+
+/* .nav-wrapper ul li.active {
+    color: #FC4736;
+} */
+
+.nav-wrapper ul li.active:after {
+    content: '';
+    /* border: 1px solid #FC4736; */
+    width: 30px;
+    display: block;
+    margin: -2px auto -12px auto;
+}
+
+
+.apply {
+    display: flex;
+    width: 90%;
+    margin: .9375rem 0 1.25rem 5%;
+    padding: .625rem 0 .625rem .625rem;
+    background-color: #fff;
+}
+
+.apply .apply-left {
+    flex: 0 0 64%;
+    line-height: 1.875rem;
+    color: #303030;
+}
+
+.apply .apply-left dt {
+    color: #0e3e6e;
+}
+
+.apply .apply-left dd span {
+    color: #fd4835;
+}
+
+.apply .apply-right {
+    flex: 0 0 36%;
+    text-align: center;
+}
+
+.apply .apply-right button {
+    margin-top: 2.1875rem;
+    width: 5.3125rem;
+    border: 1px solid #303030;
+    color: #303030;
+    background: transparent;
+    line-height: 1.875rem;
+    border-radius: 0.3125rem;
+    padding: 0;
+}
+
+.popover {
+    top: 3.125rem !important;
+    left: calc(100% - 130px) !important;
+}
+
+.popover .popover-angle.on-top {
+    left: 56px !important;
+}
+
+.popover .popover-inner {
+    text-align: center;
+    line-height: 2.5rem;
+}
+
+.popover .popover-inner li+li {
+    /*margin: 0 30px;*/
+    border-top: 0.0625rem solid #c9c9c9;
+}
+
+.pass button,
+.refuse button {
+    border: none !important;
+    color: #A0A0A0 !important;
+}

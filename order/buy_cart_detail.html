@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>提交订单</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		<script src="../js/jquery.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/order-list.css" />
+		<link rel="stylesheet" type="text/css" href="../css/buy_cart_detail.css" />
+		<script>
+			$.config = { router: false, autoInit: true };
+		</script>
+	</head>
+	<body>
+		<div class="page" id="main">
+			<!-- header end-->
+			<div class="content content-order">
+				<section class="order-address">
+					<a @click="makeGoAddress" class="address-link external" style="color: #0894ec;">
+						<ul>
+							<li>收货人:{{dizhi.yhm}}</li>
+							<i class="icon icon-right"></i>
+							<li>手机号:{{dizhi.phone}}</li>
+							<li>地&nbsp;&nbsp;址:{{dizhi.areaname}}</li>
+						</ul>
+					</a>
+				</section>
+				<section class="order-alist">
+					<ul>
+						<li>
+							<p class="seller-inf">
+								<img id="avatar" src="" alt="" />
+								<span id="name"></span>
+							</p>
+							<div class="goods-infs" v-for="(item,index) in product">
+								<img :src="imgUrl+item.image" />
+								<p class="goods-title">{{item.productname}}</p>
+								<p class="goods-format">描述：{{item.miaoshu}}</p>
+								<p class="goods-price">
+									￥<span class="priceval">{{item.jiage}}
+										<font class="goods-format" style="display: inline;">x{{item.number}}</font>
+									</span>
+								</p>
+							</div>
+						</li>
+					</ul>
+				</section>
+				<div class="list-block">
+					<div class="item-inner">
+						<div class="item-title label">选择物流：</div>
+						<div class="item-input">
+							<select v-model="selectWl">
+								<option v-for="(item,index) in wuLiu">{{item.LogisticsName}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="item-inner">
+						<div class="item-title label">
+							<span>
+								<input type="checkbox" name="rebate" :checked="rebate==1" @click="makeRebate">
+							</span>
+						</div>
+						<div class="item-input">
+							单笔使用返利金额<font>{{fanli}}元</font>
+						</div>
+						<a class="button button-fill" @click="makeRebateDetail">详情</a>
+					</div>
+					<div class="order-inner">
+						<div class="item-inner">
+							<div class="item-title label">运费是否到付：</div>
+							<div class="item-input">
+								<span>
+									<input type="radio" name="payment" value="1" v-model="payment" @click="makePayment(1)"><label>是</label>
+								</span>
+								<span>
+									<input type="radio" name="payment" value="2" v-model="payment" @click="makePayment(2)"><label>否</label>
+								</span>
+							</div>
+						</div>
+						<div class="item-inner">
+							<div class="item-title label">运费：</div>
+							<div class="item-input">
+								￥<font>{{yunfei}}元</font>
+							</div>
+						</div>
+					</div>
+					<div class="order-inner">
+						<div class="item-inner">
+							<div class="item-title label">订单总金额：</div>
+							<div class="item-input">
+								￥<font>{{totalPrice}}元</font>
+							</div>
+						</div>
+						<div class="item-inner">
+							<div class="item-title label">商品总金额：</div>
+							<div class="item-input">
+								￥<font>{{totalMoney}}元</font>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="remark">
+					备注信息：
+					<textarea id="note" name="note" rows="3" placeholder="请输入备注" maxlength="50"></textarea>
+				</div>
+				<div class="pay-way">
+				</div>
+			</div>
+			<footer class="submit-order">
+				<p>需支付：￥
+					<span id="countprice" style="font-size: 12px;">{{totalPrice}} (含运费:￥{{yunfei}})
+					</span>
+				</p>
+				<input type="button" @click="makeSubmit" name="submit-order" id="submit-order" value="提交订单" />
+			</footer>
+		</div>
+		<style>
+			.item-inner {
+				padding-left: 1.2rem;
+				background: #FFFFFF;
+			}
+		</style>
+		<script>
+			$('document').ready(function() {
+				$("input[name='payWay']").click(function() {
+					if ($(this).val() == 2) {
+						$('.upLoadImg-wrapper').fadeIn();
+					} else {
+						$('.upLoadImg-wrapper').fadeOut();
+					}
+				})
+			})
+		</script>
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#main',
+				data() {
+					return {
+						product: {},
+						dizhi: {},
+						totalPrice: "",
+						yunfei: "",
+						oldyunfei: "",
+						wuLiu: [],
+						selectWl: "",
+						payment: 2, //是否到付1:是 2:否
+						rebate: 2, //是否返利1:是 2:否
+						fanli: "",
+						totalMoney: "",
+						newfanli: 0,
+						hasClick: 1
+					}
+				},
+				mounted() {
+					var that = this;
+					that.init();
+					that.getUerInfor();
+					that.getLogistics();
+				},
+				methods: {
+					//查看详情
+					makeRebateDetail() {
+						$.alert('订单使用返利无上限，返利金额有30%!');
+					},
+					//选择是否到付
+					makePayment(id) { //1:是 2:否
+						this.payment = id;
+						if (id == 1) {
+							this.totalPrice = this.totalPrice - this.yunfei
+							this.yunfei = 0
+						} else {
+							this.yunfei = this.oldyunfei
+							this.totalPrice = this.totalPrice + this.yunfei
+						}
+					},
+					//是否使用返利
+					makeRebate() {
+						this.rebate = this.rebate == 1 ? 0 : 1;
+						if (this.rebate == 1) {
+							this.newfanli = this.fanli
+							this.totalPrice = this.totalPrice - this.fanli
+						} else {
+							this.newfanli = 0
+							this.totalPrice = this.totalPrice + this.fanli
+						}
+					},
+					//获取物流
+					getLogistics() {
+						var that = this;
+						var getorder_option = {
+							url: '/Single/logistics',
+							type: 'get',
+							callback: function(res) {
+								if (res.code == 200) {
+									that.wuLiu = res.data;
+									that.selectWl = that.wuLiu[0].LogisticsName
+								}
+							}
+						}
+						callajax(getorder_option);
+					},
+					//提交订单
+					makeSubmit() {
+						var that = this;
+						$.alert('确定要提交订单吗？', function() {
+							that.goSubmit();
+						});
+					},
+					//点击确定
+					goSubmit() {
+						if(this.hasClick==1){
+							this.hasClick=2;
+							this.activeSubmit();
+						}else{
+							tusi("已提交！");
+						}
+					},
+					//提交
+					activeSubmit(){
+						var myToken = getLocal("token");
+						var that = this;
+						if (myToken) {
+							var getparam_ajaxs = {
+								Token: myToken,
+								Zjia: that.totalMoney,
+								Yunfei: that.yunfei,
+								Acceptor: that.dizhi["yhm"],
+								PhoneNumber: that.dizhi["phone"],
+								Areacode: that.dizhi["areacode"],
+								AreaName: that.dizhi["areaname"],
+								Province: that.dizhi["province"],
+								City: that.dizhi["city"],
+								County: that.dizhi["county"],
+								Address: that.dizhi["address"],
+								SalesmanRemark: $("#note").val(), //备注
+								LogisticName: that.selectWl,
+								GwId: GetQueryString("id"),
+								RebateAmounts: this.newfanli
+							};
+							var getorder_options = {
+								url: '/Single/SingleXd',
+								params: getparam_ajaxs,
+								callback: function(res) {
+									if (res.code == 200) {
+										tusi(res.message);
+										setTimeout(function() {
+											window.history.go(-1);
+										}, 1500)
+									} else if (res.code == 201) {
+										tusi(res.message);
+										setTimeout(function() {
+											window.location.href = "../index/czzx.html"
+										}, 1500)
+									} else if(res.code == 202){
+										tusi(res.message);
+									} else {
+										tusi("服务器报错，联系管理员");
+									}
+								}
+							}
+							callajax(getorder_options);
+						}
+					},
+					//去地址页
+					makeGoAddress() {
+						window.location.href = "../my/dizhi.html?type=" + 1
+					},
+					//获取用户信息
+					getUerInfor() {
+						var that = this;
+						var getparam_ajaxs = {
+							Token: getLocal("token")
+						};
+						var getorder_options = {
+							url: '/index/IndexTop',
+							params: getparam_ajaxs,
+							callback: function(res) {
+								if (res.code == 200) {
+									$("#avatar").attr("src", headerUrl + res.data.head);
+									$("#name").html(res.data.username);
+								}
+							}
+						}
+						callajax(getorder_options);
+					},
+					//计算运费
+					getFreight(province) {
+						var that = this;
+						var getparam_ajax = {
+							id: GetQueryString("id"),
+							Province: province,
+							Token: getLocal("token")
+						};
+						var getorder_option = {
+							url: '/Single/SingleJsYm',
+							type: 'post',
+							params: getparam_ajax,
+							callback: function(res) {
+								if (res.code == 200) {
+									that.oldyunfei = res.data.yunfei;
+									that.yunfei = res.data.yunfei;
+									that.fanli = res.data.RebateAmounts;
+									that.totalMoney = res.data.TotalPrice;
+									that.totalPrice = res.data.TotalPrice + res.data.yunfei
+								}
+							}
+						}
+						callajax(getorder_option);
+					},
+					//初始加载
+					init() {
+						var that = this;
+						var getparam_ajax = {
+							id: GetQueryString("id"),
+							Token: getLocal("token")
+						};
+						var getorder_option = {
+							url: '/Order/GWMx',
+							type: 'post',
+							params: getparam_ajax,
+							callback: function(res) {
+								if (res.code == 200) {
+									if (res.data.dizhi == null) {
+										tusi("请添加地址");
+										setTimeout(function() {
+											window.location.href = "../my/dizhi.html"
+										}, 2000)
+									} else {
+										that.product = res.data.product;
+										that.dizhi = res.data.dizhi;
+										that.getFreight(that.dizhi["province"]);
+									}
+								}
+							}
+						}
+						callajax(getorder_option);
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>充值中心</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/czzx.css" />
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<style>
+			.buttons-tab .button {
+				height: 3rem;
+				line-height: 3rem;
+				font-size: 1rem;
+			}
+			.button-big{
+				width: 100%;
+			}
+			.reset{
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page" style="background:#F0EFEF;">
+			<div class="buttons-tab">
+				<a href="#tab1" class="tab-link active button btns color-examine-nav" data-stat='1'>充值</a>
+				<a href="#tab2" class="tab-link button btns color-examine-nav" data-stat='2'>待审核</a>
+				<a href="#tab3" class="tab-link button btns color-examine-nav" data-stat='3'>充值记录</a>
+			</div>
+			<div>
+				<div class="tabs">
+					<div id="tab1" class="tab active">
+						<div class="content-block">
+							<div class="tab1-content">
+								<div class="tab1-title">
+									充值金额
+								</div>
+								<div class="item-inner">
+									<input type="number" id="jine" placeholder="请输入已充值金额" />
+								</div>
+							</div>
+							<div class="tab1-content">
+								<div class="tab1-title">
+									上传截图
+								</div>
+								<div class="z_photo clearfix">
+									<div class="z_file">
+										<input type="file" id="file" value="" accept="image/*" onchange="imgChange('z_photo','z_file');" />
+									</div>
+								</div>
+							</div>
+							<div class="tab1-content tab3">
+								<div class="tab1-title">
+									充值类别
+								</div>
+								<p>
+									<input type="radio" name="type" value="1">货款
+								</p>
+								<!-- <p>
+									<input type="radio" name="type" value="2">运费
+								</p> -->
+							</div>
+							<button @click="makeSubmit" :disabled="isDisabled" class="button button-big button-fill" :class="isDisabled ? 'button-light' : ''" >提交</button>
+						   <button @click="makeReset" class="reset button button-big button-fill button-success">重置</button>
+						</div>
+					</div>
+					<div id="tab2" class="tab">
+						<div class="content-block">
+							<ul>
+								<li class="item-content" v-for="item in dataList">
+									<div class="item-media">
+										<span>充值金额：{{item.money}}</span>
+										<span>申请类别：{{getType(item.type)}}</span>
+										<span class="time">申请时间：{{getTime(item.create_time)}}</span>
+										<span class="red">状态：待公司审核</span>
+									</div>
+									<div class="item-after">
+										<a class="button button-fill" @click="makeCheck(item.pricrimage)">
+											点击查看凭证
+										</a>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id="tab3" class="tab">
+						<div class="content-block">
+							<ul>
+								<li class="item-content" v-for="item in jiluList">
+									<div class="item-media">
+										<span>
+											{{getType(item.type)}}
+										</span>
+										<span class="time">
+											{{getTime(item.create_time)}}
+										</span>
+										<span class="red" v-if="item.status===-1">
+											已被拒绝
+										</span>
+										<span class="red" v-else-if="item.status===1">
+											待公司审核
+										</span>
+										<span class="green" v-else-if="item.status===2">
+											已通过
+										</span>
+									</div>
+									<div class="item-after">
+										{{item.money}}元
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--弹框-->
+		<div class="mask">
+			<div class="qrcode-wrapper">
+				<img src="" alt="" id="qrcode" />
+			</div>
+		</div>
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+		<script type="application/javascript">
+			//充值记录
+			var app = new Vue({
+				el: '#tab3',
+				data() {
+					return {
+						jiluList: []
+					}
+				},
+				mounted() {
+					var that = this;
+					that.init();
+				},
+				methods: {
+					//时间转换
+					getTime(timestamp) {
+						var date = new Date(timestamp * 1000);
+						var Y = date.getFullYear() + '-';
+						var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+						var D = date.getDate() + ' ';
+						var h = date.getHours() + ':';
+						var m = date.getMinutes() + ':';
+						var s = date.getSeconds();
+						return Y + M + D + h + m + s;
+					},
+					//获取类别
+					getType(e) { //1货款  2运费
+						var result;
+						if (e == 1) {
+							result = "货款";
+						} else if (e == 2) {
+							result = "运费";
+						}
+						return result;
+					},
+					//初始化
+					init() {
+						var that = this;
+						var myToken = getLocal("token");
+						var getparam_ajax = {
+							Token: myToken
+						};
+						var getorder_option = {
+							url: '/Wallet/RechargeMx',
+							params: getparam_ajax,
+							callback: function(res) {
+								if (res.code = 200) {
+									that.jiluList = res.data;
+								} else {
+									tusi(res.message);
+								}
+							}
+						}
+						callajax(getorder_option);
+					}
+				}
+			})
+			//待审核
+			var app = new Vue({
+				el: '#tab2',
+				data() {
+					return {
+						dataList: [],
+						zhi: false,
+						selectValue: ""
+					}
+				},
+				mounted() {
+					var that = this;
+					that.init();
+				},
+				methods: {
+					//查看图片
+					makeCheck(img) {
+						this.showCode(img);
+					},
+					//展示图片
+					showCode(img) {
+						$('.mask').slideDown().find('.qrcode-wrapper').fadeIn();
+						$('#qrcode').attr('src', reUrl + img);
+					},
+					//审核类型
+					getCategory(status) {
+						var result;
+						if (status === 0) {
+							result = "待上级审核";
+						} else if (status === 1) {
+							result = "待公司审核";
+						}
+						return result;
+					},
+					//获取类别
+					getType(e) { //1货款  2运费
+						var result;
+						if (e == 1) {
+							result = "货款";
+						} else if (e == 2) {
+							result = "运费";
+						}
+						return result;
+					},
+					//时间转换
+					getTime(timestamp) {
+						var date = new Date(timestamp * 1000);
+						var Y = date.getFullYear() + '-';
+						var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+						var D = date.getDate() + ' ';
+						var h = date.getHours() + ':';
+						var m = date.getMinutes() + ':';
+						var s = date.getSeconds();
+						return Y + M + D + h + m + s;
+					},
+					init() {
+						var that = this;
+						var myToken = getLocal("token");
+						var getparam_ajax = {
+							Token: myToken,
+							Status: 1
+						};
+						var getorder_option = {
+							url: '/Rebate/Rebateexamine',
+							params: getparam_ajax,
+							callback: function(res) {
+								if (res.code = 200) {
+									that.dataList = res.data;
+								} else {
+									tusi(res.message);
+								}
+							}
+						}
+						callajax(getorder_option);
+					}
+				}
+			})
+			//表单上传
+			var app = new Vue({
+				el: '#tab1',
+				data() {
+					return {
+						isDisabled:false
+					}
+				},
+				methods: {
+					//表单重置
+					makeReset(){
+						window.history.go(0);
+					},
+					//表单提交
+					makeSubmit() {
+						var that  =this;
+						var myToken = getLocal("token");
+						var formData = new FormData();
+						var fileObj = $('#file')[0].files[0];
+						if ($('#jine').val() == "" || Number($('#jine').val()) > 1000000) {
+							tusi("请输入金金额切不能超过1000000");
+						} else if ($('input:radio[name="type"]:checked').val() == null) {
+							tusi("请选择充值类别");
+						} else if (fileObj == undefined) {
+							tusi("请上传凭证");
+						}else{	
+							$.showPreloader();
+							formData.append('money', $('#jine').val());
+							formData.append('Token', myToken);
+							formData.append('type', $('input:radio:checked').val());
+							if (fileObj.size / 1024 > 1025 && fileObj) { //图片大于1M
+								photoCompress(fileObj, {
+									quality: 0.2
+								}, function(base64Codes) {
+									var bl = convertBase64UrlToBlob(base64Codes);
+									formData.append("CzImg", bl, "file_" + Date.parse(new Date()) + ".jpg"); // 文件对象
+									that.makeUpload(formData);
+								});
+							} else {
+								formData.append('CzImg', fileObj);
+								this.makeUpload(formData);
+							}
+						}
+					},
+					//图片上传
+					makeUpload(formData){
+						var that = this;
+						$.ajax({
+							url: apiUrl + '/Rebate/CpRebate',
+							type: 'POST',
+							data: formData,
+							cache: false,
+							processData: false,
+							contentType: false,
+							success: function(res) {
+								if (res.code == 200) {
+									tusi(res.message);
+									that.isDisabled = true;
+									setTimeout(function() {
+										$.hidePreloader();
+										window.location.href = "../order/shopping_cart.html";
+									}, 1000)
+								} else {
+									tusi(res.message);
+									$.hidePreloader();
+								}
+							},
+							error: function() {
+								$.hidePreloader();
+							}
+						})
+					}
+				}
+			})
+			//关闭
+			$('.mask').hide(1).css('backgroundColor', 'rgba(0, 0, 0, .7)');
+			//关闭凭证
+			$('.mask').bind('click', function() {
+				if ($('.guide-wrapper').is(":visible")) {
+					return false;
+				} else {
+					$(this).slideToggle();
+				}
+			})
+			//选择图片
+			function imgChange(obj1, obj2) {
+				//获取点击的文本框
+				var file = document.getElementById("file");
+				//存放图片的父级元素
+				var imgContainer = document.getElementsByClassName(obj1)[0];
+				//获取的图片文件
+				var fileList = file.files;
+				//文本框的父级元素
+				var input = document.getElementsByClassName(obj2)[0];
+				var imgArr = [];
+				//遍历获取到得图片文件
+				for (var i = 0; i < fileList.length; i++) {
+					var imgUrl = window.URL.createObjectURL(file.files[i]);
+					imgArr.push(imgUrl);
+					var img = document.createElement("img");
+					img.setAttribute("src", imgArr[i]);
+					var imgAdd = document.createElement("div");
+					imgAdd.setAttribute("class", "z_addImg");
+					imgAdd.appendChild(img);
+					imgContainer.appendChild(imgAdd);
+				};
+				$(".z_file").hide();
+			};
+			//点击图片删除
+			$(document).on('click', '.z_addImg img', function() {
+				$.alert('确定删除此张图片吗？', function() {
+					var file = document.getElementById("file");
+					file.value = "";
+					$(".z_addImg").remove();
+					$(".z_file").show();
+				});
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>订单明细</title>
+	<link rel="stylesheet" href="../css/reset.css">
+	<link rel="stylesheet" href="../css/light7.min.css">
+	<link rel="stylesheet" href="../css/header_v1.css">
+	<link rel="stylesheet" href="../css/color_scheme-default.css">
+	<script src="../js/jquery.js"></script>
+	<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../js/common.js"></script>
+	<script>
+		$.config = { router: false, autoInit: true }
+	</script>
+	<link rel="stylesheet" href="../css/order-detail.css" type="text/css" />
+	</head>
+	<body>
+		<div id="main" v-cloak>
+			<div class="page">
+				<div class="buttons-tab">
+					<a v-for="item in navList" :class="item.status==selectId?'active':''" @click="makeNav(item.status)" class="tab-link button btns color-all-nav">{{item.name}}</a>
+				</div>
+				<div class="order-detail">
+					<div class="tabs">
+						<dl class="all-detail" v-for="item in orderList" @click="makeDetail(item.oid)">
+							<dt>
+							订单号：<span>{{item.ordernumber}}</span><p class="color-all-status">{{getType(item.Status)}}</p></dt>
+							<dd>
+								<div class="all-list">
+									<img :src="imgUrl+item.image" alt="">
+									<div class="goods-detail">
+										<div class="details-top">
+											<p>{{item.productname}}</p>
+											<p style="color: red;">￥{{item.price}}</p>
+										</div>
+										<div class="details-bottom">
+											<!--	<p>规格：黄 </p>-->
+											<p>x{{item.num}}</p>
+										</div>
+									</div>
+								</div>
+								<p class="goods-sum"><span>共{{item.num}}件商品</span><span>合计:￥{{item.price*item.num}}(含运费:￥{{item.Wlyf}})</span></p>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<!-- 展示订单详情 -->
+			<div class="popup popup-detail">
+				<div class="content-block" v-for="item in selectList">
+					<a href="#" class="close-popup"></a>
+					<h2 style="text-align: center;">订单详情</h2>
+					<!--收件人信息-->
+					<div class="card shoujian">
+						<div class="s-header">
+							<span>收货人：{{item.Acceptor}}</span>
+							<span>{{item.PhoneNumber}}</span>
+						</div>
+						<div class="s-body">
+							详细地址：{{item.Province}}{{item.City}}{{item.County}}{{item.Address}}
+						</div>
+					</div>
+					<!--产品信息-->
+					<div class="card">
+						<h3>产品信息：</h3>
+						<div class="product">
+							<img :src="item.img" />
+							<div class="goods-detail">
+								<div class="details-top"><span>{{item.productname}}</span> <span>￥{{item.price}}</span></div>
+								<div class="details-bottom"><span>x{{item.num}}</span></div>
+							</div>
+						</div>
+						<div class="totalMoney">
+							<span>实付款（含运费）</span>
+							<span class="red">￥{{item.Moneytotal}}</span>
+						</div>
+					</div>
+					<!--物流信息-->
+					<div class="card wuliu">
+						<h3>物流信息：</h3>
+						<span>承运快递：{{item.Logisticname}}</span>
+						<span v-if="item.Couriernumber">物流单号：{{item.Couriernumber}}</span>
+						<span>订单编号：{{item.ordernumber}}</span>
+						<span>创建时间：{{timestampToTime(item.Create_time)}}</span>
+						<span v-if="item.Couriernumber">发货时间：{{timestampToTime(item.Update_time)}}</span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<script type="application/javascript" src="../js/vue.min.js"></script>
+		<style>
+			.popup .close-popup {
+				position: absolute;
+				right: 20px;
+				top: 20px;
+				width: 30px;
+				height: 30px;
+				background: url(../images/error.png) center center no-repeat;
+				background-size: 100%;
+			}
+		</style>
+	</body>
+	<script>
+		var app = new Vue({
+			el: '#main',
+			data() {
+				return {
+					orderList: [],
+					selectList: [],
+					selectId: "",
+					navList: [{
+							status: "0",
+							name: "全部订单"
+						},
+						{
+							status: "1",
+							name: "待审核"
+						},
+						{
+							status: "2",
+							name: "已发货"
+						},
+						{
+							status: "3",
+							name: "已完成"
+						},
+						{
+							status: "-1",
+							name: "作废"
+						}
+					]
+				}
+			},
+			mounted() {
+				var that = this;
+				that.init(GetQueryString("id"));
+			},
+			methods: {
+				//订单详情
+				makeDetail(e) {
+					var Datas = this.orderList,
+						itemList = new Array();
+					Datas.forEach(function(v, i, a) {
+						if(v.oid == e) {
+							itemList.push(v);
+						}
+					})
+					this.selectList = itemList;
+					$.popup('.popup-detail');
+				},
+				//获取状态
+				getType(e) {
+					var result;
+					if(e === 1) {
+						result = "已发货";
+					} else if(e === 2) {
+						result = "待评价";
+					} else if(e === -1) {
+						result = "作废";
+					} else {
+						result = "待审核";
+					}
+					return result;
+				},
+				//初始加载
+				init(e) {
+					var that = this,newArry=[];
+					that.selectId = e;
+					var myToken = getLocal("token");
+					var getparam_ajax = {
+						Token: myToken,
+						Status: e
+					};
+					var getorder_option = {
+						url: '/Single/Order',
+						type: 'post',
+						params: getparam_ajax,
+						callback: function(res) {
+							if(res.code == 200) {
+								var Datas =  res.data;
+								for(var i =0;i<Datas.length;i++){
+									var url = that.getImg(Datas[i].pid);
+									Datas[i]["image"] = url;
+									newArry.push(Datas[i])
+								}
+								that.orderList = newArry;
+							} else {
+								tusi(res.message);
+							}
+						}
+					}
+					callajax(getorder_option);
+				},
+				//返回图片
+				getImg(id){
+					var imgUrl;
+					var getparam_ajax = {
+						pid: id
+					};
+					var getorder_option = {
+						url: '/Single/ProductXq',
+						type: 'post',
+						params: getparam_ajax,
+						callback: function(res) {
+							imgUrl = res.data.image;
+						}
+					}
+					callajax(getorder_option);
+					return imgUrl;
+				},
+				makeNav(e) {
+					this.init(e);
+				}
+			}
+		})
+	</script>
+
+</html>

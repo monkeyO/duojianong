@@ -1,0 +1,171 @@
+.content {
+  background-color: #f5f4f9;
+}
+.pay-way {
+  display: flex;
+  padding: 0 5%;
+  background-color: #fff;
+  height: 3.125rem;
+  color: #303030;
+  border-bottom: 1px solid #c9c9c9;
+}
+.popover.modal-in{
+  display: block!important;
+}
+.pay-way span {
+  line-height: 3.125rem;
+}
+.pay-way span:nth-of-type(1) {
+  flex: 0 0 5rem;
+}
+.pay-way span:nth-of-type(2) {
+  flex: 1;
+}
+.pay-way span:nth-of-type(3) {
+  flex: 0 0 0.75rem;
+  padding: 0 0.625rem;
+  font-size: 0.75rem;
+  color: #949494;
+}
+.username {
+  display: flex;
+  padding: 0 5%;
+  height: 3.125rem;
+  background-color: #fff;
+  color: #303030;
+}
+.username span {
+  flex: 0 0 3rem;
+  line-height: 3.125rem;
+  border-bottom: 1px solid #c9c9c9;
+}
+.username input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #c9c9c9;
+}
+.bank {
+  display: flex;
+  padding: 0 5%;
+  height: 3.125rem;
+  background-color: #fff;
+  color: #303030;
+}
+.bank span {
+  flex: 0 0 3rem;
+  line-height: 3.125rem;
+  border-bottom: 1px solid #c9c9c9;
+}
+.bank input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #c9c9c9;
+}
+.bank.hidden {
+  display: none;
+}
+.card-number {
+  display: flex;
+  padding: 0 5%;
+  height: 3.125rem;
+  background-color: #fff;
+  color: #303030;
+}
+.card-number span {
+  line-height: 3.125rem;
+  border-bottom: 1px solid #c9c9c9;
+  flex: 0 0 3rem;
+}
+.card-number input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #c9c9c9;
+}
+.card-number.hidden {
+  display: none;
+}
+.checkbox {
+  display: flex;
+  padding: 0 5%;
+  height: 3.125rem;
+  background-color: #fff;
+  color: #303030;
+  text-indent: 1.375rem;
+  line-height: 3.125rem;
+}
+.checkbox .deposit-card {
+  flex: 0 0 7.8125rem;
+  background-image: url("../images/funds/1.png");
+  background-repeat: no-repeat;
+  background-size: 1.125rem auto;
+  background-position: 0 16px;
+}
+.checkbox .deposit-card.active {
+  background-image: url("../images/funds/2.png");
+}
+.checkbox .credit-card {
+  flex: 1;
+  background-image: url("../images/funds/1.png");
+  background-repeat: no-repeat;
+  background-size: 1.125rem auto;
+  background-position: 0 16px;
+}
+.checkbox .credit-card.active {
+  background-image: url("../images/funds/2.png");
+}
+.checkbox.hidden {
+  display: none;
+}
+.account-number {
+  display: flex;
+  padding: 0 5%;
+  height: 3.125rem;
+  background-color: #fff;
+  color: #303030;
+}
+.account-number span {
+  line-height: 3.125rem;
+  flex: 0 0 3rem;
+}
+.account-number input {
+  flex: 1;
+  border: none;
+}
+.account-number.hidden {
+  display: none;
+}
+.btn {
+  margin: 1.875rem 5% 0 5%;
+}
+.btn button {
+  width: 100%;
+  height: 3.125rem;
+  background-color: #0e3e6e;
+  border: none;
+  border-radius: 0.3125rem;
+  color: #fff;
+}
+.popover {
+  top: 50px !important;
+  min-width: 80px !important;
+}
+.popover-angle.on-top {
+  left: 65px !important;
+}
+.popover .popover-inner {
+  text-align: center;
+  line-height: 2.5rem;
+}
+.select-list li a {
+  display: block;
+  color: #303030;
+}
+.popover .popover-inner li {
+  margin: 0 20px;
+}
+.popover .popover-inner li+li {
+  border-top: 0.0625rem solid #c9c9c9;
+}
+.select-list li {
+  padding: 0.4rem 0;
+}

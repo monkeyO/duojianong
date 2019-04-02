@@ -1,0 +1,296 @@
+.state_bar {
+	display: flex;
+	background-color: white;
+	border-bottom: solid 1px #c9c9c9;
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+}
+
+.state_bar li {
+	flex: 1;
+	text-align: center;
+	color: #303030;
+	padding-top: .5rem;
+}
+
+.state_bar li span {
+	line-height: 2.5rem;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.state_bar li .active {
+	color: #fc4735;
+}
+
+.state_bar li .active::after {
+	content: "";
+	display: block;
+	width: 1.875rem;
+	border: 2px solid #fc4735;
+	margin: 0 auto;
+}
+
+.buttons-tab {
+	padding: 0 .5rem;
+}
+
+.order-detail .content {
+	margin-top: 3rem;
+}
+
+.order-detail .wrappers {
+	margin: 0;
+	padding: 0;
+}
+
+.buttons-tab .btns {
+	height: 3rem;
+	line-height: 3rem;
+	font-size: .8rem;
+}
+
+.buttons-tab .btns.active {
+	border-color: transparent;
+}
+
+.buttons-tab .btns.active::after {
+	content: "";
+	display: block;
+	width: 1.875rem;
+	margin: -.3rem auto 0;
+}
+
+.order-detail .all-detail {
+	background-color: white;
+	padding: 0.625rem 0;
+	margin-bottom: .5rem;
+}
+
+.order-detail .all-detail dt {
+	padding: 0 1.25rem;
+	line-height: 2.1875rem;
+}
+
+.order-detail .all-detail dt img {
+	width: 2.1875rem;
+	vertical-align: middle;
+	margin-right: .875rem;
+}
+
+.order-detail .all-detail dt p {
+	float: right;
+	margin: 0;
+	line-height: 2.1875rem;
+}
+
+.order-detail .all-detail dd {
+	margin: .5rem 0 0 0;
+}
+
+.order-detail .all-detail dd .all-list {
+	display: flex;
+	padding: 10px 1.25rem 10px;
+	background-color: #fafafa;
+	margin-bottom: 5px;
+}
+
+.order-detail .all-detail dd .all-list img {
+	flex: 1;
+	min-height: 5.9375rem;
+	min-width: 5.9375rem;
+	max-width: 5.9375rem;
+	max-height: 5.9375rem;
+	margin-right: 1rem;
+}
+
+.order-detail .all-detail dd .all-list .goods-detail {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+}
+
+.order-detail .all-detail dd .all-list .goods-detail p {
+	margin: 0;
+}
+
+.order-detail .all-detail dd .all-list .goods-detail .details-top {
+	flex: 2;
+	display: flex;
+}
+
+.order-detail .all-detail dd .all-list .goods-detail .details-top p:first-child {
+	flex: 4;
+}
+
+.order-detail .all-detail dd .all-list .goods-detail .details-top p:last-child {
+	flex: 2;
+	text-align: right;
+}
+
+.order-detail .all-detail dd .all-list .goods-detail .details-top p span {
+	display: block;
+}
+
+.order-detail .all-detail dd .all-list .goods-detail .details-bottom {
+	flex: 1;
+	display: flex;
+}
+
+.order-detail .all-detail dd .all-list .goods-detail .details-bottom p {
+	font-size: 0.75rem;
+	color: #a0a0a0;
+	font-size: 0.9rem;
+}
+
+.order-detail .all-detail dd .all-list .goods-detail .details-bottom p:first-child {
+	flex: 1;
+}
+
+.order-detail .all-detail dd .all-list .goods-detail .details-bottom p:last-child {
+	text-align: right;
+	flex: 1;
+}
+
+.order-detail .all-detail dd .goods-sum {
+	margin: 0;
+	padding: 0 1rem;
+	height: 49px;
+	margin-bottom: 0;
+	text-align: right;
+	line-height: 20px;
+}
+
+.order-detail .all-detail dd .goods-sum span {
+	font-size: .9rem;
+	margin-left: 1rem;
+}
+
+.order-detail .all-detail .order-btn {
+	padding: .5rem 1.25rem 0 0;
+	text-align: right;
+	border-top: solid 1px #c9c9c9;
+}
+
+.order-detail .all-detail .order-btn input {
+	display: inline-block;
+	width: auto;
+	margin: 0 0 0 .5rem;
+	line-height: 1.75rem;
+	height: auto;
+	font-size: .9rem;
+}
+
+.infinite-scroll-preloader {
+	margin-top: -20px;
+}
+
+[v-cloak] {
+	display: none;
+}
+
+
+/**订单详情**/
+
+.card {
+	color: #a0a0a0;
+	padding: 10px 1rem;
+}
+
+.card span {
+	font-size: 0.9rem;
+}
+
+.card h3 {
+	color: #000000;
+}
+
+
+/**收件人信息**/
+
+.shoujian {
+	padding: 10px 1rem 10px;
+}
+
+.s-header {
+	display: flex;
+	font-size: 12px;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/**产品**/
+.product,.totalMoney{
+	display: flex;
+}
+.totalMoney{
+	margin-top: 10px;
+	align-items: center;
+	font-size: 14px;
+}
+.totalMoney span{
+	flex: 1;
+	justify-content: space-between;
+}
+
+.totalMoney span.red{
+  color: red;	
+}
+
+.totalMoney span:first-child{
+	text-align: left;
+}
+.totalMoney span:last-child{
+	text-align: right;
+}
+
+.product>img {
+	flex: 1;
+	min-height: 5.9375rem;
+	min-width: 5.9375rem;
+	max-width: 5.9375rem;
+	max-height: 5.9375rem;
+	margin-right: 1rem;
+}
+
+.product .goods-detail {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+}
+
+.product .goods-detail .details-top {
+	flex: 2;
+	display: flex;
+}
+
+.product .goods-detail .details-top span:first-child {
+	flex: 4;
+}
+
+.product .goods-detail .details-top span:last-child {
+	flex: 2;
+	text-align: right;
+}
+
+.product .goods-detail .details-bottom {
+	flex: 1;
+	display: flex;
+}
+
+.product .goods-detail .details-bottom span:last-child {
+	flex: 1;
+	text-align: right;
+}
+
+/**物流信息**/
+.wuliu h3 {
+	margin-bottom: 10px;
+}
+
+.wuliu>span {
+	display: block;
+	font-size: 12px;
+	line-height: 20px;
+}

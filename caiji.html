@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>信息采集</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/light7.min.css" />
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/caiji.css" />
+		<link rel="stylesheet" href="css/city-picker.css" />
+	</head>
+	<body>
+		<div class="page">
+			<header>
+				录入真实信息
+			</header>
+			<div class="content-block">
+				<div class="tab1-content">
+					<div class="tab1-title">
+						身份证号<span>*</span>
+					</div>
+					<div class="item-inner">
+						<input type="text" id="Identity" placeholder="请输入身份证号" />
+					</div>
+				</div>
+				<div class="tab1-content">
+					<div class="tab1-title">
+						年龄<span>*</span>
+					</div>
+					<div class="item-inner">
+						<input type="text" id="Age" placeholder="请输入年龄" />
+					</div>
+				</div>
+				<div class="tab1-content">
+					<div class="tab1-title">
+						所在地址<span>*</span>
+					</div>
+					<div class="city_picker">
+						<div class="select-wrapper">
+							<div class="three-select">
+								<select name="province" class="province" placeholder="请选择地址">
+									<option value="">请选择</option>
+								</select>
+								<select name="city" class="city">
+									<option value="">请选择</option>
+								</select>
+								<select name="county" class="county">
+									<option value="">请选择</option>
+								</select>
+							</div>
+							<input type="hidden" name="probably_address" class="probably_address" value="" />
+						</div>
+					</div>
+				</div>
+				<div class="tab1-content">
+					<div class="tab1-title">
+						详细地址<span>*</span>
+					</div>
+					<div class="item-inner">
+						<textarea name="address-detail" id="Detailed" rows="4" cols="50" placeholder="请填写详细地址"></textarea>
+					</div>
+				</div>
+				<div class="tab1-content">
+					<div class="tab1-title">
+						是否法人公司
+						<!-- <span>*</span> -->
+					</div>
+					<div class="item-inner">
+						<label><input type="radio" name="Status" value="1" />是</label>
+						<label><input type="radio" name="Status" value="0" />否</label>
+					</div>
+				</div>
+
+				<div class="tab1-content">
+					<div class="tab1-title">
+						公司全名
+						<!-- <span>*</span> -->
+					</div>
+					<div class="item-inner">
+						<input type="text" id="CompanyName" placeholder="请输入公司全名" />
+					</div>
+				</div>
+
+				<div class="tab1-content">
+					<div class="tab1-title">
+						税号
+						<!-- <span>*</span> -->
+					</div>
+					<div class="item-inner">
+						<input type="text" id="TaxNum" placeholder="请输入税号" />
+					</div>
+				</div>
+				<a id="makeSubmit" class="button button-big button-fill login-btn">提交</a>
+				<a id="makeGoIndex" class="button button-big button-fill button-success login-btn">跳过去首页</a>
+			</div>
+		</div>
+		<script src="js/jquery.js"></script>
+		<script src="js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/area.js"></script>
+		<script type="text/javascript">
+			var re_province = "";
+								var re_city = "";
+								var re_county = "";
+								var china = Object;
+								var province = new Array(),
+									province1, city = new Array(),
+									city1, area = new Array(),
+									province = new Array();
+									china = newCity;
+										$.each(china, function(key, value) {
+											if(value.name == re_province) {
+												province.push('<option value="' + value.name + '" selected>' + value.name + '</option>');
+											} else {
+												province.push('<option value="' + value.name + '">' + value.name + '</option>');
+											}
+										})
+									$('.province').append(province);
+								$(document).on('change', '.province', function() {
+									var str = $(this).children('option:selected').val()
+									getCity(str);
+									$('.probably_address').val(getselectStr());
+								});
+
+								$(document).on('change', '.city', function() {
+									var str = $(this).children('option:selected').val()
+									getCounty(str);
+									$('.probably_address').val(getselectStr());
+								});
+
+								$(document).on('change', '.county', function() {
+									$('.probably_address').val(getselectStr());
+								})
+								$('.city-picker').hide();
+								$('.picker-icon').hide();
+								$(document).on('click', '.change_picker', function() {
+									$('.city-picker').toggle();
+									$('.picker-icon').toggle();
+									$('.three-select').toggleClass('hide');
+								});
+								$(document).on("click", ".sure", function() {
+									$('.probably_address').val($(".city-picker").val());
+								})
+								$(document).on("change", ".city-picker", function() {
+									$('.probably_address').val($(".city-picker").val());
+								})
+								if(re_province != "") {
+									getCity(re_province);
+									if(re_city != "") {
+										$('.city option[value="' + re_city.substring(0, re_city.length - 1) + '"]').attr("selected", true);
+										$('.city option[value="' + re_city + '"]').attr("selected", true);
+										getCounty(re_city);
+										getCounty(re_city.substring(0, re_city.length - 1));
+										if(re_county != "") {
+											$('.county option[value="' + re_county.substring(0, re_county.length - 1) + '"]').attr("selected", true);
+											$('.county option[value="' + re_county + '"]').attr("selected", true);
+										}
+									}
+								}
+								function getselectStr() {
+									var str = '';
+									$.each($('.three-select select'), function(key, value) {
+										if($(value).val() != "请选择" && $(value).val() != null) {
+											str += $(value).val() + " ";
+										}
+									});
+									return str;
+								}
+								function getCity(str) {
+									province1 = str;
+									city = new Array();
+									$.each(china, function(key, value) {
+										if(province1 === value.name) {
+											$.each(value.sub, function(k, v) {
+												if(v.name == re_city) {
+													city.push('<option value="' + v.name + '" selected>' + v.name + '</option>');
+												} else {
+													city.push('<option value="' + v.name + '">' + v.name + '</option>');
+												}
+											});
+										}
+									});
+									$('.city').empty().append(city);
+									$('.county').empty();
+								}
+								function getCounty(str) {
+									area = [];
+									city1 = str;
+									county = new Array();
+									$.each(china, function(key, value) {
+										if(province1 == value.name) {
+											$.each(value.sub, function(k, v) {
+												if(city1 == v.name || (city1 == v.name.substring(0, v.name.length - 1))) {
+													if(!(v.sub == undefined || v.sub == "" || v.sub == null)) {
+														$.each(v.sub, function(i, j) {
+															if(j.name == re_county) {
+																area.push('<option value="' + j.name + '" selected>' + j.name + '</option>');
+															} else {
+																area.push('<option value="' + j.name + '">' + j.name + '</option>');
+															}
+														});
+													}
+												}
+											});
+										}
+									});
+									$('.county').empty().append(area);
+								}
+			//点击登录
+			$("#makeSubmit").click(function() {
+				var myToken = getLocal("token");
+				var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+				if (!reg.test($("#Identity").val())) {
+					tusi("请确定身份证格式！");
+					$("#Identity").focus();
+				} else if ($("#Age").val() == "") {
+					tusi("请输入年龄！");
+					$("#Age").focus();
+				} else if ($(".province").val() == "请选择" || !$(".county").val()) {
+					tusi("请检查地址信息！");
+				} else if ($("#Detailed").val() == '') {
+					tusi("详细地址必填！");
+					$("#Detailed").focus();
+				}
+// 				 else if ($('input:radio[name="Status"]:checked').val() === "") {
+// 					tusi("请选择是否公司法人！");
+// 				} else if ($("#CompanyName").val() == "") {
+// 					tusi("请填写公司全名！");
+// 					$("#CompanyName").focus();
+// 				} else if ($("#TaxNum").val() == "") {
+// 					tusi("请填写税号！");
+// 					$("#TaxNum").focus();
+// 				} 
+				else {
+					var getparam_ajax = {
+						Token:myToken,
+						Identity: $("#Identity").val(),
+						Age: $("#Age").val(),
+						Province: $(".province").val(),
+						City: $(".city").val(),
+						County: $(".county").val(),
+						Detailed: $("#Detailed").val(),
+						Status: $('input:radio[name="Status"]:checked').val(),
+						CompanyName: $("#CompanyName").val(),
+						TaxNum: $("#TaxNum").val()
+					}
+					var getorder_option = {
+						url: '/Member/Xinx',
+						params: getparam_ajax,
+						callback: function(res) {
+							if(res.code==200){
+								window.location.href = "index.html";
+							}else{
+								tusi(res.message);
+							}
+						}
+					}
+					callajax(getorder_option);
+				}
+			})
+			//点击去首页
+			$("#makeGoIndex").click(function(){
+				window.location.href = "index.html";
+			})
+		</script>
+	</body>
+</html>

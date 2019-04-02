@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>邀请代理</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<link rel="stylesheet" type="text/css" href="../css/create_v1.css" />
+	</head>
+	<body>
+		<div class="page">
+			<div class="content">
+				<div class="top-wrapper color-creat-bg">
+					<img class="avatar" alt="" />
+					<p class="name"></p>
+					<p class="level"></p>
+					<p class="phone agent-id"></p>
+					<div class="titles">邀请成为代理</div>
+				</div>
+				<div class="bottom-wrapper">
+					<ul class="agent-list">
+						<li>
+							<img src="../images/team-manager/team-agent/2.png" alt="" />
+							<p></p>
+						</li>
+						<li>
+							<img src="../images/team-manager/team-agent/3.png" alt="" />
+							<p></p>
+						</li>
+						<li>
+							<img src="../images/team-manager/team-agent/4.png" alt="" />
+							<p></p>
+						</li>
+
+						<li>
+							<img src="../images/team-manager/team-agent/5.png" alt="" />
+							<p></p>
+						</li>
+<!--
+						<li>
+							<img src="../images/team-manager/team-agent/6.png" alt="" />
+							<p></p>
+						</li>
+					-->	
+					</ul>
+				</div>
+			</div>
+			<div class="mask">
+				<div class="guide-wrapper">
+					<div class="guide-aim"></div>
+					<div class="guide-aim guide-aim2"></div>
+					<div class="guide-img"></div>
+					<span class="desc">点击邀请代理</span>
+					<button class="btn-close">知道了</button>
+				</div>
+				<div class="qrcode-wrapper">
+					<img src="" alt="" id="qrcode" />
+				</div>
+			</div>
+			<div class="overlay_hole"></div>
+			<!--footer start-->
+			<link rel="stylesheet" href="../css/footer.css" />
+			<footer id="footer" class="row">
+				<a href="../index.html" class="col-25 wrapper external team color-footer-nav-icon">
+					<p class="text color-footer-nav-text">主页</p>
+				</a>
+				<a href="../i_yingxiao.html" class="col-25 wrapper external market color-footer-nav-icon">
+					<p class="text color-footer-nav-text">营销</p>
+				</a>
+				<a href="../i_xiadan.html" class="col-25 wrapper external order color-footer-nav-icon">
+					<p class="text color-footer-nav-text">下单</p>
+				</a>
+				<a href="../i_my.html" class="col-25 wrapper external personal color-footer-nav-icon">
+					<p class="text color-footer-nav-text">个人信息</p>
+				</a>
+			</footer>
+			<script type="text/javascript">
+				$(function() {
+					var active = window.location.href;
+					active = active.toLowerCase();
+					if(active.indexOf("i_yingxiao") != -1) {
+						$(".market").addClass("active").children("p").addClass("active");
+					} else if(active.indexOf("i_xiadan") != -1) {
+						$(".order").addClass("active").children("p").addClass("active");
+					} else if(active.indexOf("i_my") != -1) {
+						$(".personal").addClass("active").children("p").addClass("active");
+					} else {
+						$(".team").addClass("active").children("p").addClass("active");
+					}
+				});
+			</script>
+		</div>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/qrcode.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var myToken = getLocal("token");
+			var sid, aid;
+			//获取用户信息
+			if(myToken) {
+				var getparam_ajaxs = {
+					Token: myToken
+				};
+				var getorder_options = {
+					url: '/index/IndexTop',
+					params: getparam_ajaxs,
+					callback: function(res) {
+						if(res.code == 200) {
+							sid = res.data.sid;
+							$(".name").html(res.data.username);
+							$(".level").html(res.data.items.agent_name);
+							$(".avatar").attr("src", headerUrl+res.data.head);
+							$(".phone").html(res.data.phone);
+						}
+					}
+				}
+				callajax(getorder_options);
+			} else {
+				tusi("无法确定用户");
+			}
+			//列表信息
+			var getorder_option = {
+				url: '/index/IndexYQ',
+				type: "get",
+				callback: function(res) {
+					var Datas = res.data;
+					for(var i in Datas) {
+						$(".agent-list").find("li").eq(i).find("p").html(Datas[i].agent_name);
+						$(".agent-list").find("li").eq(i).data("link", Datas[i].sjcost);
+						$(".agent-list").find("li").eq(i).data("aid", Datas[i].aid);
+					}
+				}
+			}
+			callajax(getorder_option);
+			var guide = getLocal("yqClose") || true;
+			$('.agent-list').on('click', 'li', function() {
+				var getparam_ajax = {
+					aid: $(this).data("aid"),
+					Token: myToken
+				};
+				var getorder_option = {
+					url: '/Invitation/InvitationUrl', // 地址
+					params: getparam_ajax,
+					callback: function(res) {
+						if(res.code == 200) {
+							showCode(res.message);
+						} else {
+							tusi(res.message);
+						}
+					}
+				}
+				callajax(getorder_option);
+			})
+			//点击闪按钮
+			$(".guide-aim").click(function() {
+				$(document).off('touchmove');
+				$('.mask').fadeOut().css('backgroundColor', 'rgba(0, 0, 0, .7)');
+				$('.overlay_hole').fadeOut();
+				$('.guide-wrapper').fadeOut();
+				var getUrls = $('.agent-list').find("li").eq(2).data('link');
+				var images = QRCode.generatePNG(urls, {
+					ecclevel: "H",
+					format: "html",
+					fillcolor: "#FFFFFF",
+					textcolor: "#373737",
+					margin: 4,
+					modulesize: 8
+				})
+				$('#qrcode').attr('src', images);
+			})
+			//展示验证码
+			function showCode(urls) {
+				$('.mask').slideDown().find('.qrcode-wrapper').fadeIn();
+				var images = QRCode.generatePNG(urls, {
+					ecclevel: "H",
+					format: "html",
+					fillcolor: "#FFFFFF",
+					textcolor: "#373737",
+					margin: 4,
+					modulesize: 8
+				})
+				$('#qrcode').attr('src', images);
+			}
+		</script>
+		<script src="../js/create.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

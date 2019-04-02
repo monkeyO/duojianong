@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>订单管理</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/light7.min.css" />
+		<link rel="stylesheet" href="css/color_scheme-default.css" />
+		<link rel="stylesheet" type="text/css" href="css/manager-order_v3.1.css" />
+		<style type="text/css">
+			* {
+				-webkit-overflow-scrolling: touch;
+				overflow-scrolling: touch;
+			}
+			body,
+			html {
+				height: 100%;
+				position: static;
+			}
+			.page {
+				position: static !important;
+			}
+			.manager-order {
+				position: absolute !important;
+				width: 100%;
+				top: 0;
+				z-index: 1000;
+			}
+			.container {
+				height: 100%;
+				padding: 70px 0 0;
+				overflow-y: scroll;
+				-webkit-overflow-scrolling: touch;
+				overflow-scrolling: touch;
+			}
+			.scroll_wrapper {
+				height: calc(100% + 1px);
+				min-height: calc(100% + 1px);
+			}
+			.popup-content input{
+				width: 70px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="order-contents" id="main" v-cloak>
+			<div class="manager-order">
+				<div class="manager-kind color-order-index-bg">
+					<ul class="col-100 slidedown" id="kind-head">
+						<li>
+							<a href="order/index.html?id=0" class="external ">
+								<img src="images/manager-order/manager-kind1.png" />
+								<p>全部</p>
+							</a>
+						</li>
+						<li>
+							<a href="order/index.html?id=1" class="external">
+								<img src="images/manager-order/manager-kind2.png" />
+								<p>待审核</p>
+								<span v-if="orderNum.Dsh!==0" class="tip-num cart_count" style="display: inline;">
+									{{orderNum.Dsh}}
+								</span>
+							</a>
+						</li>
+						<li>
+							<a href="order/index.html?id=2" class="external">
+								<img src="images/manager-order/manager-kind3.png" />
+								<p>已发货</p>
+								<span v-if="orderNum.Yfh!=0" class="tip-num cart_count" style="display: inline;">
+									{{orderNum.Yfh}}
+								</span>
+							</a>
+						</li>
+						<li>
+							<a href="order/shopping_cart.html" class="external">
+								<img src="images/manager-order/manager-kind4.png" />
+								<p>购物车</p>
+								<span v-if="orderNum.Gwc!=0" class="tip-num cart_count" style="display: inline;">
+									{{orderNum.Gwc}}
+								</span>
+							</a>
+						</li>
+					</ul>
+					<div class="search col-100">
+						<label class="icon icon-search" for="search"></label>
+						<input type="search" id='search' placeholder='搜索商品名称' />
+					</div>
+				</div>
+			</div>
+			<div class="container infinite-scroll">
+				<div class="scroll_wrapper">
+					<div class="hidden-scorll line" style="display: none;">
+						<nav class="shop-nav">
+							<ul class="shop-nav-list">
+								<li id="first-li">
+									<a href="javascript:void(0);" class="external">
+										<p>产品分类</p>
+									</a>
+								</li>
+								<li class="sales">
+									<a href="javascript:void(0);" class="external">
+										<p>销量</p>
+									</a>
+								</li>
+								<li class="price">
+									<a href="javascript:void(0);" class="external">
+										<p>价格</p>
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<section class="shop-items">
+						<ul id="products" style="overflow: hidden;">
+							<li v-for="(item,index) in productList">
+								<a class="external">
+									<div class="img-wrapper" @click="makeDetail(item.pid,item.jiage)">
+										<img :src="imgUrl+item.image" alt="">
+									</div>
+									<p class="goods-name">{{item.productname}}</p>
+									<p>￥{{item.jiage}}</p>
+									<p>
+										{{item.jifen}}%好评</p>
+									<i class="icon icon-car cart" @click="makeShowCart(item.pid,item.productname,item.jiage)"></i>
+								</a>
+							</li>
+						</ul>
+					</section>
+					<div class="infinite-scroll-preloader">
+						<div class="preloader"></div>
+					</div>
+				</div>
+			</div>
+			<!--购物车弹框-->
+			<div class="popup popup-about">
+				<div class="content-block">
+					<div class="popup-content">
+						<span>
+							商品名称：{{shoppingCart.name}}
+						</span>
+						<span>
+							商品价格：{{shoppingCart.price}}
+						</span>
+						<span>
+						    购买箱数：<input type="number" v-model="boxNum" @keyup="makeKeyUp" />
+						</span> 
+					</div>
+				</div>
+				<div class="num_operate">
+					<font>盒</font>
+					<span @click="makeLess">-</span>
+					<input type="text" readonly="readonly" v-model="buyNum" />
+					<span @click="makeAdd">+</span>
+				</div>
+				<a href="#" @click="makeAddCart" class="button button-big button-fill">加入购物车</a>
+			</div>
+		</div>
+
+		<!--footer start-->
+		<link rel="stylesheet" href="css/footer.css">
+		<footer id="footer" class="row">
+			<a href="index.html" class="col-25 wrapper external team color-footer-nav-icon">
+				<p class="text color-footer-nav-text">主页</p>
+			</a>
+			<a href="i_yingxiao.html" class="col-25 wrapper external market  color-footer-nav-icon">
+				<p class="text color-footer-nav-text">营销</p>
+			</a>
+			<a href="i_xiadan.html" class="col-25 wrapper external order color-footer-nav-icon">
+				<p class="text color-footer-nav-text">下单</p>
+			</a>
+			<a href="i_my.html" class="col-25 wrapper external personal color-footer-nav-icon">
+				<p class="text color-footer-nav-text">个人信息</p>
+			</a>
+		</footer>
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script src="js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="application/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var active = window.location.href;
+				active = active.toLowerCase();
+				if (active.indexOf("i_yingxiao") != -1) {
+					$(".market").addClass("active").children("p").addClass("active");
+				} else if (active.indexOf("i_xiadan") != -1) {
+					$(".order").addClass("active").children("p").addClass("active");
+				} else if (active.indexOf("i_my") != -1) {
+					$(".personal").addClass("active").children("p").addClass("active");
+				} else {
+					$(".team").addClass("active").children("p").addClass("active");
+				}
+			});
+		</script>
+		<script type="application/javascript">
+			var app = new Vue({
+				el: '#main',
+				data() {
+					return {
+						productList: "",
+						shoppingCart: {},
+						buyNum: "",
+						minNum: "",
+						orderNum: "",
+						boxNum:""
+					}
+				},
+				created() {
+					var that = this;
+					that.init();
+				},
+				methods: {
+					makeKeyUp(){
+						if(!/^[1-9]\d*$|^0$/.test(this.boxNum)&&this.boxNum!==""){
+							this.boxNum="";
+							tusi("必须为数字");
+							$.popup('.popup-about');
+						}else{
+							if(this.boxNum!=0){
+								this.buyNum =!this.boxNum?this.minNum:this.boxNum*this.minNum;
+							}
+						}
+					},
+					//查看详情
+					makeDetail(e, jiage) {
+						window.location.href = "index/product_detail.html?id=" + e + "&jiage=" + jiage;
+					},
+					//减少数量
+					makeLess() {
+						if (this.buyNum <= this.minNum) {
+							return false;
+						} else {
+							this.buyNum -= this.minNum;
+						}
+					},
+					//添加数量
+					makeAdd() {
+						//this.buyNum = JSON.parse(this.buyNum)+JSON.parse(this.minNum);
+						this.buyNum += this.minNum;
+					},
+					//加入购物车
+					makeAddCart() {
+						var that = this;
+						var myToken = getLocal("token");
+						if (myToken) {
+							var getparam_ajax = {
+								Token: myToken,
+								number: this.buyNum,
+								pid: this.shoppingCart.id
+							};
+							var getorder_option = {
+								url: '/Single/JrGouWC', // 地址
+								params: getparam_ajax,
+								callback: function(res) {
+									if (res.code == 200) {
+										tusi(res.message);
+										that.getCartNum();
+									} else {
+										tusi(res.message);
+									}
+								}
+							}
+							callajax(getorder_option);
+						} else {
+
+						}
+					},
+					//展示购物车
+					makeShowCart(id, name, price) {
+						var myObject = {};
+						myObject["id"] = id;
+						myObject["name"] = name;
+						myObject["price"] = price;
+						this.shoppingCart = myObject;
+						this.getMinNum(id);
+					},
+					//获取商品最小数量
+					getMinNum(id) {
+						var that = this;
+						var myToken = getLocal("token");
+						var getparam_ajax = {
+							Token: myToken,
+							pid: id
+						};
+						var getorder_option = {
+							url: '/Single/GwNumber',
+							params: getparam_ajax,
+							callback: function(res) {
+								if (res.code = 200) {
+									$.popup('.popup-about');
+									that.buyNum = that.minNum = res.data;
+								}
+							}
+						}
+						callajax(getorder_option);
+					},
+					//获取积分
+					getjiFen(n, m) {
+						var c = m - n + 1;
+						return Math.floor(Math.random() * c + n);
+					},
+					//初始加载
+					init() {
+						var that = this;
+						var myToken = getLocal("token");
+						var getparam_ajax = {
+							Token: myToken
+						};
+						var getorder_option = {
+							url: '/Single/Product',
+							params: getparam_ajax,
+							callback: function(res) {
+								if (res.code = 200) {
+									var Data = res.data;
+									var newData = new Array;
+									for (var i in Data) {
+										Data[i]["jifen"] = that.getjiFen(96, 98);
+										newData.push(Data[i]);
+									}
+									that.productList = newData;
+								} else {
+									tusi(res.message);
+								}
+								$('.infinite-scroll-preloader').remove();
+							}
+						}
+						callajax(getorder_option);
+						that.getCartNum();
+					},
+					//获取购物车数量
+					getCartNum() {
+						var that = this;
+						var myToken = getLocal("token");
+						var getparam_ajax1 = {
+							Token: myToken
+						};
+						var getorder_option1 = {
+							url: '/Order/OrderSl',
+							params: getparam_ajax1,
+							callback: function(res) {
+								if (res.code == 200) {
+									that.orderNum = res.data;
+								} else {
+
+								}
+							}
+						}
+						callajax(getorder_option1);
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

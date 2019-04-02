@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>银行卡</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		<script type="text/javascript">
+			var TP_PUBLIC = '/Public';
+		</script>
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+
+		<link rel="stylesheet" type="text/css" href="../css/bankcard.css" />
+	</head>
+
+	<body>
+		<div class="page page-current">
+			<section class="user-payinf">
+				<div class="content infinite-scroll empty_img">
+					<div id="card-list">
+
+					</div>
+					<!--preloader-->
+
+					<div class="infinite-scroll-preloader">
+						<div class="preloader"></div>
+					</div>
+				</div>
+
+			</section>
+			<footer id="footer">
+				<a href="/admin/user/pay_way" class="external">
+					<p class="bankcard"><span>+</span>添加新的支付方式<i class="icon icon-right pull-right"></i></p>
+				</a>
+			</footer>
+			<!--script start-->
+			<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+			<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+
+			<script src="../js/bankcard.js" type="text/javascript" charset="utf-8"></script>
+
+			<script type="text/javascript">
+				var loading = false;
+				var bankcardurl = '/admin/user/get_bankcard';
+				var icbcImg = '../images/information/icbc.png'
+				var wechatImg = '../images/information/wechat.png'
+				var appilyImg = '../images/information/aplipay.png'
+				var usedImg = '../images/information/20.png'
+				var changeCard = '/admin/user/set_pay_way_status';
+				var delCard = '/admin/user/del_bankcard';
+				var page = 1;
+				var bankcard = {
+					imgurl: '',
+					cardName: '',
+					cardKind: '',
+					cardNum: '',
+					Oclass: ''
+				}
+				$.attachInfiniteScroll(".infinite-scroll");
+				getBankcard();
+
+				function getBankcard() {
+					$.post(bankcardurl, {
+							page_num: page
+						},
+						function(data) {
+							console.log(data);
+							var control_html = '<div class="control_wrapper"><div class="control_list"><a class="control_item edit"><span>编辑</span></a>' +
+								'<a class="control_item del"><span>删除</span></a><a class="control_item cancel"><span>取消</span></a></div></div>';
+							if(data.info.list == null || data.info.list.length == 0) {
+								var str;
+								if(page == 1) {
+									str = '<div style="position:relative;width: 70%;top: 50%;left: 50%;transform: translate3d(-45%,-70%,0);">' +
+										'<img src="../images/information/nopay@2x.png" width="100%" /></div>'
+									$('.empty_img').append(str)
+								} else {
+									str = '<p style="color:white;text-align:center">暂无更多数据！</p>'
+									$("#card-list").append(str);
+								}
+								$(".infinite-scroll-preloader").remove();
+								$.detachInfiniteScroll($('.infinite-scroll'));
+								return false;
+							}
+							if(data.info.list.length < 5) {
+								$.detachInfiniteScroll($('.infinite-scroll'));
+								$('.infinite-scroll-preloader').remove();
+							}
+							var cards = [];
+							$.each(data.info.list, function(key, value) {
+								//							if(data.info)
+								var str = '';
+								var strused = '';
+								if(value.status == 1) {
+									strused = '<img class="default show" src="../images/information/20.png" alt="">';
+								} else {
+									strused = '<img class="default hide" src="../images/information/20.png" alt="">';
+								}
+								console.log(typeof value.card_account)
+								if(value.type == "银行卡") {
+									str = '<div class="card icbc bcard" data-id="' + value.id + '"><img src="' + icbcImg + '" />' + strused + '<p class="card-name">' + value.bank + '</p>' +
+										'<div class="control_wrapper"><div class="hide_c"><div class="control_list"><a class="control_item edit external" href="/admin/user/pay_way_edit?id=' + value.id + '"><span>编辑</span></a>' +
+										'<a class="control_item del external" data-id="' + value.id + '" ><span>删除</span></a><a class="control_item cancel"><span>取消</span></a></div></div></div>' +
+										'<p class="card-kind">' + value.card_type + '</p><p class="card-num"><span>***</span><span>****</span><span>****</span>' +
+										'<span>' + value.card_number.substring(value.card_number.length - 4, value.card_number.length) + '</span></p>';
+								} else if(value.type == "微信支付") {
+									str = '<div class="card wechat bcard" data-id="' + value.id + '"><img src="' + wechatImg + '" />' + strused + '<p class="card-name">' + value.type + '</p>' +
+										'<div class="control_wrapper"><div class="hide_c"><div class="control_list"><a class="control_item edit external" href="/admin/user/pay_way_edit?id=' + value.id + '"><span>编辑</span></a>' +
+										'<a class="control_item del external" data-id="' + value.id + '" ><span>删除</span></a><a class="control_item cancel"><span>取消</span></a></div></div></div>' +
+										'<p class="card-kind">' + value.card_name + '</p><p class="card-num"><span>***</span><span>****</span><span>****</span>' +
+										'<span>' + value.card_account.substring(value.card_account.length - 4, value.card_account.length) + '</span></p>';
+								} else if(value.type == "支付宝") {
+									str = '<div class="card aplipay bcard" data-id="' + value.id + '"><img src="' + appilyImg + '" />' + strused + '<p class="card-name">' + value.type + '</p>' +
+										'<div class="control_wrapper"><div class="hide_c"><div class="control_list"><a class="control_item edit external" href="/admin/user/pay_way_edit?id=' + value.id + '"><span>编辑</span></a>' +
+										'<a class="control_item del external" data-id="' + value.id + '" ><span>删除</span></a><a class="control_item cancel"><span>取消</span></a></div></div></div>' +
+										'<p class="card-kind">' + value.card_name + '</p><p class="card-num"><span>' + value.card_account.substring(0, 3) + "***" + value.card_account.substring(value.card_account.length - 5, value.card_account.length) +
+										'</span></p>';
+								}
+								cards.push(str);
+							});
+							page = page + 1;
+							$("#card-list").append(cards);
+							loading = false;
+						});
+				}
+
+				$(document).on('infinite', '.infinite-scroll', function() {
+
+					// 如果正在加载，则退出
+					if(loading) return;
+
+					// 设置flag
+					loading = true;
+					getBankcard();
+				});
+			</script>
+
+			<!--script end-->
+		</div>
+	</body>
+
+</html>

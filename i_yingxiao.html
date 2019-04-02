@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="css/market_v1.css">
+		<link rel="stylesheet" href="css/footer.css">
+		<title>营销管理</title>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/light7.min.css">
+		<link rel="stylesheet" href="css/header_v1.css">
+		<link rel="stylesheet" href="css/color_scheme-default.css">
+		<script type="text/javascript">
+			var TP_PUBLIC = '/Public';
+		</script>
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script src="js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="page">
+			<section class="card-wrapper">
+				<ul>
+					<li>
+						<h3>商学院</h3>
+						<a class="waves ts-btn external" href="index/sxy.html">立即进入</a>
+					</li>
+					<li>
+						<h3>视频中心</h3>
+						<a class="waves ts-btn external" onclick="makeDetail()" href="javascript:;">立即进入</a>
+					</li>
+					<li>
+						<h3>素材库</h3>
+						<a class="waves ts-btn external" onclick="makeDetail()" href="javascript:;">立即进入</a>
+					</li>
+					<li>
+						<h3>品牌商城</h3>
+						<a class="waves ts-btn external" onclick="makeDetail()" href="javascript:;">立即进入</a>
+					</li>
+				</ul>
+			</section>
+			<link rel="stylesheet" href="css/footer.css">
+			<footer id="footer" class="row">
+				<a href="index.html" class="col-25 wrapper external team color-footer-nav-icon">
+					<p class="text color-footer-nav-text">主页</p>
+				</a>
+				<a href="i_yingxiao.html" class="col-25 wrapper external market color-footer-nav-icon">
+					<p class="text color-footer-nav-text active">营销</p>
+				</a>
+				<a href="i_xiadan.html" class="col-25 wrapper external order color-footer-nav-icon">
+					<p class="text color-footer-nav-text">下单</p>
+				</a>
+				<a href="i_my.html" class="col-25 wrapper external personal color-footer-nav-icon">
+					<p class="text color-footer-nav-text">个人信息</p>
+				</a>
+			</footer>
+			<script type="text/javascript">
+				$(function() {
+				var active = window.location.href;
+				active = active.toLowerCase();
+				if(active.indexOf("i_yingxiao") != -1) {
+					$(".market").addClass("active").children("p").addClass("active");
+				} else if(active.indexOf("i_xiadan") != -1) {
+					$(".order").addClass("active").children("p").addClass("active");
+				} else if(active.indexOf("i_my") != -1) {
+					$(".personal").addClass("active").children("p").addClass("active");
+				} else {
+					$(".team").addClass("active").children("p").addClass("active");
+				}
+			});
+			</script>
+		</div>
+
+		<script>
+            function makeDetail(){
+                tusi("此功能稍后开放");
+            }
+			$(document).ready(function() {
+				$('.card-wrapper li').each(function(index, value) {
+					if($(value).offset().top < $('.card-wrapper').height() + 15) {
+						setTimeout(function() {
+							$(value).addClass('animation');
+						}, index * 100)
+					}
+				})
+
+				$('.card-wrapper').on('scroll', function() {
+					var nAllTop = $('.card-wrapper').scrollTop() + $('.card-wrapper').height() + 15;
+					$('.card-wrapper li').each(function(index, value) {
+						if($(value).offset().top < nAllTop) {
+							$(value).addClass('animation');
+						}
+					})
+				})
+			})
+
+			// 点击按钮波浪纹
+			document.addEventListener('DOMContentLoaded', function() {
+
+				var duration = 750;
+
+				// 样式string拼凑
+				var forStyle = function(position) {
+					var cssStr = '';
+					for(var key in position) {
+						if(position.hasOwnProperty(key)) {
+							cssStr += key + ':' + position[key] + ';';
+						}
+					};
+					return cssStr;
+				}
+
+				// 获取鼠标点击位置
+				var forRect = function(target) {
+					var position = {
+							top: 0,
+							left: 0
+						},
+						ele = document.documentElement;
+					'undefined' != typeof target.getBoundingClientRect && (position = target.getBoundingClientRect());
+					return {
+						top: position.top + window.pageYOffset - ele.clientTop,
+						left: position.left + window.pageXOffset - ele.clientLeft
+					}
+				}
+
+				var show = function(event) {
+					var pDiv = event.target,
+						cDiv = document.createElement('div');
+					pDiv.appendChild(cDiv);
+					var rectObj = forRect(pDiv),
+						_height = event.pageY - rectObj.top,
+						_left = event.pageX - rectObj.left,
+						_scale = 'scale(' + pDiv.clientWidth / 100 * 10 + ')';
+					var position = {
+						top: _height + 'px',
+						left: _left + 'px'
+					};
+					cDiv.className = cDiv.className + " waves-animation",
+						cDiv.setAttribute("style", forStyle(position)),
+						position["-webkit-transform"] = _scale,
+						position["-moz-transform"] = _scale,
+						position["-ms-transform"] = _scale,
+						position["-o-transform"] = _scale,
+						position.transform = _scale,
+						position.opacity = "1",
+						position["-webkit-transition-duration"] = duration + "ms",
+						position["-moz-transition-duration"] = duration + "ms",
+						position["-o-transition-duration"] = duration + "ms",
+						position["transition-duration"] = duration + "ms",
+						position["-webkit-transition-timing-function"] =
+						"cubic-bezier(0.250, 0.460, 0.450, 0.940)",
+						position["-moz-transition-timing-function"] =
+						"cubic-bezier(0.250, 0.460, 0.450, 0.940)",
+						position["-o-transition-timing-function"] =
+						"cubic-bezier(0.250, 0.460, 0.450, 0.940)",
+						position["transition-timing-function"] =
+						"cubic-bezier(0.250, 0.460, 0.450, 0.940)",
+						cDiv.setAttribute("style", forStyle(position));
+					var finishStyle = {
+						opacity: 0,
+						"-webkit-transition-duration": duration + "ms",
+						"-moz-transition-duration": duration + "ms",
+						"-o-transition-duration": duration + "ms",
+						"transition-duration": duration + "ms",
+						"-webkit-transform": _scale,
+						"-moz-transform": _scale,
+						"-ms-transform": _scale,
+						"-o-transform": _scale,
+						top: _height + "px",
+						left: _left + "px",
+					};
+					setTimeout(function() {
+						cDiv.setAttribute("style", forStyle(finishStyle));
+						setTimeout(function() {
+							pDiv.removeChild(cDiv);
+						}, duration);
+					}, 100)
+				}
+				var aWaves = document.querySelectorAll('.waves');
+				for(var value of aWaves) {
+					value.addEventListener('click', function(e) {
+						show(e);
+					}, !1);
+				}
+			}, !1);
+		</script>
+	</body>
+
+</html>

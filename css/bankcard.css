@@ -1,0 +1,30 @@
+.user-payinf .content { background-color: #2d3132; margin-bottom: 3.125rem; padding: 0 1rem; }
+.user-payinf .content .card { background-color: #2d3132; box-shadow: none; }
+.user-payinf .content .card img { width: 100%; }
+.user-payinf .content .card p { position: absolute; font-weight: bold; margin: 0; }
+.user-payinf .content .card .card-name { top: 13%; left: 20%; }
+.user-payinf .content .card .card-kind { top: 28%; left: 20%; font-size: 0.875rem;font-weight: normal;}
+.user-payinf .content .card .card-num { top: 49%; left: 17%; }
+.user-payinf .content .card .card-num span { vertical-align: middle; margin-left: .5rem; }
+.user-payinf .content .card .control_wrapper {opacity: 0; transition:all .5s linear;position: absolute;top: 0;right: 0;left: 0;bottom: 5px;border-radius: 5px;background-color: rgba(0,0,0,.3);text-align: center;z-index: 99999;}
+.user-payinf .content .card .control_wrapper .hide_c{display: none;width: 100%;height: 100%;}
+.user-payinf .content .card .control_wrapper .control_list { width: 80%;height: 100%;align-items: center;margin: 0 auto;display: flex;}
+.user-payinf .content .card .control_wrapper .control_list .control_item {flex: 1;height: 62%;min-height: 50px;min-width: 50px;max-height: 90px;max-width: 90px;border-radius: 50%;margin: 0 2%;display: flex;align-items: center;justify-content:center;}
+.user-payinf .content .card .control_wrapper .control_list .del{color: white;background-color: #fc8e4c;}
+.user-payinf .content .card .control_wrapper .control_list .edit{color: white;background-color: #ef312e;}
+.user-payinf .content .card .control_wrapper .control_list .cancel{color: #303030;background-color:#e5e5e5;}
+.user-payinf .content .icbc p span { font-size: 1.5375rem; }
+.user-payinf .content .aplipay { position: relative; }
+.user-payinf .content .card .default { position: absolute; bottom: 5px; right: 0; height: 36px; width: 41px;  }
+.user-payinf .content .card .hide { display: none; }
+.user-payinf .content .card .show { display: block; }
+.user-payinf .content .aplipay p span { font-size: 1.4rem; }
+.user-payinf .content p { color: rgba(255,255,255,.7); }
+.user-payinf .content .wechat p span { font-size: 1.5375rem; }
+
+#footer { border-top: none; }
+#footer .bankcard { background-color: #3f4344; color: #c9c9c9; margin: 0; text-align: left; padding: 0 1rem; line-height: 3.125rem; }
+#footer .bankcard span { margin-right: .5rem; font-size: 2rem; font-weight: bold; vertical-align: bottom; }
+#footer .bankcard i { line-height: 3.125rem; font-size: .8rem; }
+.infinite-scroll-preloader {margin-top:-20px;}
+/*# sourceMappingURL=funds.css.map */

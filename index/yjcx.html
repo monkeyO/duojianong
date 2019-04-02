@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>申请经销商</title>
+		<link rel="stylesheet" href="../css/light7.min.css"/>
+		<script src="../js/jquery.js"></script>
+		<script src="../js/common.js" type="text/javascript" ></script>
+		<script src="../js/light7.min.js" type="text/javascript"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<link rel="stylesheet" href="../css/apply_agent.css" />
+		<script src="js/toast.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="css/apply.css" />
+	</head>
+	<body>
+		<div class="page page-current">
+			<div class="content">
+				<div class="inviter-wrapper">
+					<div class="inviter-title">邀请人信息：</div>
+					<div class="inviter-detail">
+						<div class="inviter-avatar">
+							<img alt="" id="avatar">
+							<div class="text">
+								<div class="inviter-name"></div>
+								<div class="inviter-grade"></div>
+							</div>
+						</div>
+					</div>
+					<div class="apply-grade">
+						<p>您申请的经销商级别为：</p>
+						<input id="jibie" type="text" value="" disabled="disabled">
+					</div>
+				</div>
+				<div class="informatin">
+					<p class="informatin-title">填写资料（有*为必填项）</p>
+					<div class="username">
+						<div>*
+							<span class="font2">姓</span>名：</div>
+						<input type="text" id="name" name="name">
+					</div>
+					<div class="Wechat">
+						<div>*
+							<span class="font3">微信</span>号：</div>
+						<input type="text" id="wechatnum" name="wechatnum">
+					</div>
+					<div class="tel">
+						<div>*
+							<span class="font2">电</span>话：</div>
+						<input type="text" id="phone" name="phone">
+					</div>
+					
+					<div class="identity-card">
+						<div>*
+							<span class="font3">身份</span>证：</div>
+						   <input type="text" id="idennum2" name="idennum">
+					</div>
+					
+					<div class="identity-card">
+						<div>*
+							<span class="font3">钱</span>数：</div>
+						   <input type="text" id="money" name="idennum">
+					</div>
+					
+					<div class="uploading-img">
+						<div>
+							* 转账凭证
+							<span>（限一张）</span>
+						</div>
+						<span id="list1" style="float:left"></span>
+
+						<div class="z_photo clearfix">
+							<div class="z_file">
+								<input type="file" id="file" value="" accept="image/*" onchange="imgChange('z_photo','z_file');" />
+							</div>
+						</div>
+
+					</div>
+					<input type="hidden" value="" name="ct" />
+					<div class="agreement" checked="checked" id="checked">
+						<span>本人已阅读并同意</span>
+						<a href="#">《系统条款条例》</a>
+					</div>
+					<div class="btn-wrapper">
+						<button>提交</button>
+					</div>
+					<div class="tip">
+						（注意：一个手机微信号只能申请一次，禁止替他人申请，避免系统造成不必要的麻烦！）
+					</div>
+				</div>
+				<!-- 图片遮罩层 -->
+				<div class="mask-img" style="display: none;">
+					<div class="qrcode-wrapper">
+						<img src="" alt="" id="qrcode" />
+					</div>
+					<div class="img-wrapper">
+					</div>
+				</div>
+				<div class="mask-text">
+					<div class="text">
+						<p>
+							1。江西张氏中医科技条款</p>
+						<p><br/></p>
+					</div>
+					<img src="../images/close.png" alt="">
+				</div>
+			</div>
+		</div>
+		<script>
+			function imgChange(obj1, obj2) {
+				//获取点击的文本框
+				var file = document.getElementById("file");
+				//存放图片的父级元素
+				var imgContainer = document.getElementsByClassName(obj1)[0];
+				//获取的图片文件
+				var fileList = file.files;
+				//文本框的父级元素
+				var input = document.getElementsByClassName(obj2)[0];
+				var imgArr = [];
+				//遍历获取到得图片文件
+				for(var i = 0; i < fileList.length; i++) {
+					var imgUrl = window.URL.createObjectURL(file.files[i]);
+					imgArr.push(imgUrl);
+					var img = document.createElement("img");
+					img.setAttribute("src", imgArr[i]);
+					var imgAdd = document.createElement("div");
+					imgAdd.setAttribute("class", "z_addImg");
+					imgAdd.appendChild(img);
+					imgContainer.appendChild(imgAdd);
+				};
+				$(".z_file").hide();
+				//				imgRemove();
+			};
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				var myAid = GetQueryString("aid"); //测试1
+				var mySid = GetQueryString("sid"); //测试2
+				var getparam_ajax = {
+					aid: myAid,
+					uid: mySid
+				};
+				var getorder_option = {
+					url: '/Invitation/sjzl',
+					params: getparam_ajax,
+					callback: function(res) {
+						if(res.code == 200) {
+							$(".inviter-name").html(res.data.member.nick);
+							$(".inviter-grade").html(res.data.agent.jibie);
+							$("#avatar").attr("src", res.data.member.head);
+							$("#jibie").val(res.data.member.agent_name);
+						} else {
+
+						}
+					}
+				}
+				callajax(getorder_option);
+				$('.btn-wrapper').click(function() { //提交信息
+					if($("#name").val() == "") {
+						tusi("用户名不能为空！");
+					} else if($("#wechatnum").val() == "") {
+						tusi("微信不能为空！");
+					} else if($("#phone").val() == "") {
+						tusi("手机号不能为空！");
+					} else if($("#idennum2").val()==""){
+						tusi("身份证号不能为空！");
+					}else if($("#money").val()==""){
+						tusi("钱数不能为空！");
+					}
+					else if($('#file')[0].files[0] == undefined) {
+						tusi("请上传凭证！");
+					}else {
+						var formData = new FormData();
+						formData.append('UserName', $("#name").val());
+						formData.append('Wxid', $("#wechatnum").val());
+						formData.append('Phone', $("#phone").val());
+						formData.append('Identity', $("#idennum2").val());
+						formData.append('Money', $("#money").val());
+						formData.append('Sid', GetQueryString("sid"));
+						formData.append('Aid', GetQueryString("aid"));
+						formData.append('Czpz',$('#file')[0].files[0]);
+						$.ajax({
+							url: apiUrl+'/User/UserSj',
+							type: 'POST',
+							data: formData,
+							cache: false,
+							processData: false,
+							contentType: false,
+							success: function(res) {
+								if(res.code == 200) {
+									tusi(res.message);
+								    setTimeout(function(){
+								    	window.location.href = openUrl;
+								    },1500)
+								}else{
+									tusi(res.message);
+								}
+							},
+							error: function() {
+
+							}
+						})
+					}
+				})
+			})
+		</script>
+		<script>
+			$(document).ready(function() {
+				$('.agreement a').click(function() {
+					$('.mask-text').show();
+				})
+				$('.mask-text img').click(function() {
+					$('.mask-text').hide();
+				})
+			})
+		</script>
+	</body>
+</html>

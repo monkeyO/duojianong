@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>朵嘉浓代理管理系统</title>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/light7.min.css">
+		<link rel="stylesheet" href="css/header_v1.css">
+		<link rel="stylesheet" href="css/color_scheme-default.css">
+		<script src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script src="js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<link rel="stylesheet" type="text/css" href="css/login.css" />
+	</head>
+	<body>
+		<div class="page">
+			<div class="content">
+				<!--背景-->
+				<div class="bg">
+					<!--<img src="images/login/cm_bg.jpg" alt="">-->
+				</div>
+				<!--logo-->
+				<div class="logo">
+					<img src="images/login/cm_logo.png" />
+				</div>
+				<!--表单-->
+				<form action="" class="form">
+					<div class="form-item phone-item">
+						<input type="text" class="phone" placeholder="请输入手机号" name="phone">
+					</div>
+					<div class="form-item password-item">
+						<div>
+							<input type="text" class="code" placeholder="请输入验证码" name="code">
+						</div>
+						<div>
+							<a href="#" onclick="getCode()" class="getCode button button-big">获取验证码</a>
+						</div>
+					</div>
+					<input type="button" value="登录" class="login" name="button">
+				</form>
+				<!--<p class="tip">版权所有</p>-->
+			</div>
+		</div>
+		<script src="js/login.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			function getCode() {
+				if($("input[name=phone]").val() == "") {
+					tusi("手机号不能为空");
+				} else {
+					var getparam_ajax = {
+						phone: $("input[name=phone]").val()
+					};
+					var getorder_option = {
+						url: '/Identify/Index', // 地址
+						params: getparam_ajax,
+						state:1,
+						callback: function(res) {
+							if(res.code==200){
+							    countDown();
+							}else{
+								tusi(res.message);
+							}
+						}
+					}
+					callajax(getorder_option);
+				}
+			}
+			var countNum = 60;
+			//倒计时
+			function countDown() {
+				if(countNum <= -1) {
+					$(".getCode").removeClass("disabled");
+				} else {
+					$(".getCode").addClass("disabled");
+					$(".getCode").html("" + countNum + "后重新发送");
+					countNum--;
+					setTimeout(function() {
+						countDown();
+					}, 1000)
+				}
+			}
+			$(".login").click(function() {
+				var phone = $("input[name=phone]").val();
+				var code = $("input[name=code]").val();
+				if(phone == "") {
+					tusi("请输入手机号");
+					return false;
+				}
+				if(code == "") {
+					tusi("请输入验证码");
+					return false;
+				}
+				var getparam_ajax = {
+					phone: phone,
+					code: code
+				};
+				var getorder_option = {
+					url: '/Login/Index', // 地址
+					params: getparam_ajax,
+					callback: function(res) {
+						if(res.code == 200) {
+							setLocal("token", res.data.token);
+							setLocal("status", res.data.status);
+							window.location.href = "shouquan.html";
+						}else{
+							tusi(res.message);
+						}
+					}
+				}
+				callajax(getorder_option);
+			});
+		</script>
+	</body>
+</html>

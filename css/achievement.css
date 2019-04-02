@@ -1,0 +1,28 @@
+#p_achievement .content {  }
+#p_achievement .card { margin: 0 0 1rem 0; box-shadow: none; }
+#p_achievement .achiev-menu ul { display: flex; background-color: white; padding: 0 10%; border-bottom: #c9c9c9 solid 1px; }
+#p_achievement .achiev-menu ul li { flex: 1; text-align: center; line-height: 2.96875rem; }
+#p_achievement .achiev-menu ul li a{ font-size: 1rem; color: #000;display: block;}
+#p_achievement .achiev-menu ul li .active { color: #00a7f1; }
+#p_achievement .achiev-menu ul li .active::after { content: ""; display: block; width: 2.5rem; margin: 0 auto; border: solid 1px #00a7f1; }
+#p_achievement .income{ text-align: center;}
+.bar+.picker-items {display: flex;height: 10.8rem;}
+.picker-items-col {margin: 0 .5rem!important;margin: 0 .5rem!important;flex: 1;text-align: center;}
+#p_achievement .income input{border: none; outline: none; color: #00a7f1; text-align: center;margin-top: 1rem; position: relative;background:transparent;z-index: 50;}
+#p_achievement .income i{ left: -3rem;font-size: .5rem;top:-5px;vertical-align: text-bottom;color: #00a7f1; margin-right: .5rem; z-index: 1;}
+#p_achievement .income p { text-align: center; color: #00a7f1; }
+#p_achievement .income .income-title { color: #303030; font-size: 1.5rem; margin-bottom: 0; margin-top: .5rem;}
+#p_achievement .income .income-num { font-size: 2.25rem; margin-top: 1rem; padding-bottom: 1rem; border-bottom: #c9c9c9 solid 1px; }
+#p_achievement .income .income-list ul { display: flex; padding: 1rem 0; }
+#p_achievement .income .income-list ul li { flex: 1; text-align: center; color: #00a7f1; font-size: 1.225rem; }
+#p_achievement .income .income-list ul li span { display: block; text-align: center; margin-top: .5rem; color: #00a7f1; font-size: 1.625rem; }
+#p_achievement .income .income-list ul li:first-child { border-right: #c9c9c9 solid 1px; }
+#p_achievement .income .income-list ul li p { color: #303030; margin: 0; }
+#p_achievement .income-items ul { padding-left: 1rem;  }
+#p_achievement .income-items ul li { font-size: 1.125rem; padding-right: 1rem; padding-top: .5rem; padding-bottom: .5rem; border-bottom: #c9c9c9 solid 1px; }
+#p_achievement .income-items ul li img { line-height: 5.125rem; border-radius: 50%; width: 3.625rem; vertical-align: middle; margin-right: 1rem; }
+#p_achievement .income-items ul li p { float: right; color: #00a7f1; }
+#p_achievement .income-items ul li p i { font-size: 0.625rem; color: #c9c9c9; vertical-align: text-bottom; }
+
+.charts{margin-bottom: 30px;}
+/*# sourceMappingURL=achievement.css.map */

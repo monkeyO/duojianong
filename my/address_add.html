@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>添加收货地址</title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<link rel="stylesheet" href="../css/order_address.css" type="text/css" />
+		<link rel="stylesheet" href="../css/city-picker.css" />
+		<!--script end-->
+		<script>
+			var return_url = "";
+		</script>
+	</head>
+	<body>
+		<div class="page">
+			<section class="order-address">
+				<div class="content">
+					<ul class="add-address">
+						<li><span>收货人:</span><input type="text" id="receiver" value="" required="required" /></li>
+						<li><span>联系电话:</span><input type="tel" id="phone" value="" required="required" pattern="^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$" /></li>
+						<li><span style="flex: 0 0 5.625rem;">所在地址:</span>
+							<div class="city_picker">
+								<span class="icon icon-right picker-icon" name="addr"></span>
+								<div class="select-wrapper">
+									<input type="text" class='city-picker' placeholder="请选择地址" value="  ">
+									<div class="three-select">
+										<select name="province" class="province" placeholder="请选择地址">
+											<option value="">请选择</option>
+										</select>
+										<select name="city" class="city">
+											<option value="">请选择</option>
+										</select>
+										<select name="county" class="county">
+											<option value="">请选择</option>
+										</select>
+									</div>
+									<input type="hidden" name="probably_address" class="probably_address" value="" />
+									<!--<p class="change_picker">更换方式</p>-->
+								</div>
+							</div>
+							<script type="text/javascript" src="../js/area.js"></script>
+							<script type="text/javascript">
+								var re_province = "";
+								var re_city = "";
+								var re_county = "";
+								var china = Object;
+								var province = new Array(),
+									province1, city = new Array(),
+									city1, area = new Array(),
+									province = new Array();
+									china = newCity;
+										$.each(china, function(key, value) {
+											if(value.name == re_province) {
+												province.push('<option value="' + value.name + '" selected>' + value.name + '</option>');
+											} else {
+												province.push('<option value="' + value.name + '">' + value.name + '</option>');
+											}
+										})
+									$('.province').append(province);
+								
+
+								$(document).on('change', '.province', function() {
+									var str = $(this).children('option:selected').val()
+									getCity(str);
+									$('.probably_address').val(getselectStr());
+								});
+
+								$(document).on('change', '.city', function() {
+									var str = $(this).children('option:selected').val()
+									getCounty(str);
+									$('.probably_address').val(getselectStr());
+								});
+
+								$(document).on('change', '.county', function() {
+									$('.probably_address').val(getselectStr());
+								})
+
+								$('.city-picker').hide();
+								$('.picker-icon').hide();
+
+								$(document).on('click', '.change_picker', function() {
+									$('.city-picker').toggle();
+									$('.picker-icon').toggle();
+									$('.three-select').toggleClass('hide');
+								});
+								$(document).on("click", ".sure", function() {
+									$('.probably_address').val($(".city-picker").val());
+								})
+								$(document).on("change", ".city-picker", function() {
+									$('.probably_address').val($(".city-picker").val());
+								})
+								if(re_province != "") {
+									getCity(re_province);
+									if(re_city != "") {
+										$('.city option[value="' + re_city.substring(0, re_city.length - 1) + '"]').attr("selected", true);
+										$('.city option[value="' + re_city + '"]').attr("selected", true);
+										getCounty(re_city);
+										getCounty(re_city.substring(0, re_city.length - 1));
+										if(re_county != "") {
+											$('.county option[value="' + re_county.substring(0, re_county.length - 1) + '"]').attr("selected", true);
+											$('.county option[value="' + re_county + '"]').attr("selected", true);
+										}
+									}
+								}
+
+								function getselectStr() {
+									var str = '';
+									$.each($('.three-select select'), function(key, value) {
+										if($(value).val() != "请选择" && $(value).val() != null) {
+											str += $(value).val() + " ";
+										}
+									});
+									return str;
+								}
+								function getCity(str) {
+									province1 = str;
+									city = new Array();
+									$.each(china, function(key, value) {
+										if(province1 === value.name) {
+											$.each(value.sub, function(k, v) {
+												if(v.name == re_city) {
+													city.push('<option value="' + v.name + '" selected>' + v.name + '</option>');
+												} else {
+													city.push('<option value="' + v.name + '">' + v.name + '</option>');
+												}
+											});
+										}
+									});
+									$('.city').empty().append(city);
+									$('.county').empty();
+								}
+								function getCounty(str) {
+									area = [];
+									city1 = str;
+									county = new Array();
+									$.each(china, function(key, value) {
+										if(province1 == value.name) {
+											$.each(value.sub, function(k, v) {
+												if(city1 == v.name || (city1 == v.name.substring(0, v.name.length - 1))) {
+													if(!(v.sub == undefined || v.sub == "" || v.sub == null)) {
+														$.each(v.sub, function(i, j) {
+															if(j.name == re_county) {
+																area.push('<option value="' + j.name + '" selected>' + j.name + '</option>');
+															} else {
+																area.push('<option value="' + j.name + '">' + j.name + '</option>');
+															}
+														});
+													}
+												}
+											});
+										}
+									});
+									$('.county').empty().append(area);
+								}
+							</script>
+						</li>
+						<li><textarea name="address-detail" id="address" rows="2" cols="50" placeholder="请填写详细地址"></textarea></li>
+						<input type="hidden" id="default">
+						<input type="button" class="save" onclick="add(this)" value="保存" id="save" />
+					</ul>
+				</div>
+			</section>
+		</div>
+	</body>
+	<script>
+		function add(aim) {
+			var myToken = getLocal("token");
+			var getparam_ajax = {
+				Token: myToken,
+				AreaCode: 000000,
+				yhm: $("#receiver").val(),
+				phone: $("#phone").val(),
+				Province: $(".province").val(),
+				City: $(".city").val(),
+				County: $(".county").val(),
+				AreaName: $(".province").val() + $(".city").val() + $(".county").val(),
+				Address: $("#address").val(),
+				Status: 0
+			};
+			if($("#receiver").val() == "") {
+				tusi("请填写收货人！");
+			} else if($("#phone").val() == "") {
+				tusi("请填写手机号！");
+			} else if(!checkPhone($("#phone").val())){
+				tusi("手机号格式有误！");
+			}else if(getparam_ajax.County== '请选择'|| !getparam_ajax.County) {
+				tusi("请检查地址信息！");
+			} else if($("#address").val() == '') {
+				tusi("详细地址必填！");
+				$("#address").focus();
+			} else {
+				if(myToken) {
+					$(aim).val('保存中...').css({
+						backgroundColor: '#a0a0a0'
+					});
+					var getorder_option = {
+						url: '/User/AddressAdd',
+						params: getparam_ajax,
+						callback: function(res) {
+							$(aim).val('保存').css({
+								backgroundColor: '#009CDA'
+							});
+							if(res.code==200){
+								tusi(res.message);
+								setTimeout(function() {
+											window.history.go(-1);
+								}, 2000)
+							}else{
+								tusi(res.message);
+							}
+						}
+					}
+					callajax(getorder_option);
+				} else {
+					tusi("请重新登录！");
+				}
+			}
+
+		}
+	</script>
+
+</html>

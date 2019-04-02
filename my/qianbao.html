@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" href="../css/light7.min.css">
+		<link rel="stylesheet" href="../css/header_v1.css">
+		<link rel="stylesheet" href="../css/color_scheme-default.css">
+		<script src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/light7.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$.config = { router: false, autoInit: true }
+		</script>
+		<link rel="stylesheet" href="../css/assets.css">
+		<title>钱包</title>
+	</head>
+	<body>
+		<div class="page">
+			<header class="bar bar-nav">
+				<a class="icon icon-left pull-left"></a>
+				<!-- <a class="icon icon-refresh pull-right"></a> -->
+				<h1 class="title">钱包</h1>
+			</header>
+			<div class="content">
+				<div class="assets-wrapper">
+					<div class="chart-wrapper">
+						<div class="money-radio" id="moneyChart">
+						</div>
+						
+						<div class="money-detail">
+							<div class="enable">
+								<i></i>
+								<span>货款（元）</span>
+								<p id="huokuan"></p>
+							</div>
+							<div class="disable">
+								<i></i>
+								<span>运费（元）</span>
+								<p id="yunfei"></p>
+							</div>
+							<div class="balance">
+								<i></i>
+								<span>我的积分</span>
+								<p id="fanli"></p>
+							</div>
+						</div>
+					</div>
+					<section class="assets-func">
+						<a href="../index/czzx.html" class="withdraw external">
+							<i></i>
+							<span>充值</span>
+						</a>
+					</section>
+				</div>
+			</div>
+		</div>
+		<script src="../js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/assets.js" type="text/javascript" charset="utf-8"></script>
+		<script type="application/javascript">
+			var myToken = getLocal("token");
+			var getparam_ajax = {
+				Token: myToken
+			};
+			var getorder_option = {
+				url: '/Wallet/query',
+				params: getparam_ajax,
+				callback: function(res) {
+					if(res.code = 200) {
+                        $("#total").html(res.data.CzZje);
+                        $("#huokuan").html(res.data.huokuan);
+                        $("#yunfei").html(res.data.yunfei);
+						$("#fanli").html(Math.floor(res.data.fl));
+					} else {
+						tusi(res.message);
+					}
+				}
+			}
+			callajax(getorder_option);
+		</script>
+	</body>
+
+</html>

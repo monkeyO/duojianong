@@ -1,0 +1,268 @@
+.content-order {
+    padding-bottom: 3.125rem;
+}
+
+.order-address {
+  padding: 1rem 1.25rem;
+  background-color: white;
+}
+
+.address-link {
+  text-decoration: none;
+}
+.address-link i:first-of-type {
+  padding: 0 0.3125rem;
+  font-size: 1.5625rem;
+  line-height: 1.5625rem;
+  vertical-align: middle;
+  margin-right: 1rem;
+}
+.address-link i:last-of-type {
+  float: right;
+}
+/*******璁㈠崟鍒楄〃********/
+.order-alist ul li {
+  margin-top: 1rem;
+  background-color: white;
+}
+.seller-inf {
+  padding: .5rem 1.25rem;
+  margin: 0;
+  /*border-bottom: solid 1px #c9c9c9;*/
+}
+
+.seller-inf img {
+  width: 2.1875rem;
+  vertical-align: middle;
+  margin-right: 1rem;
+}
+
+.goods-infs {
+  border-bottom: solid 1px #c9c9c9;
+  border-top: solid 1px #c9c9c9;
+  padding: .625rem 0;
+  overflow: hidden;
+}
+
+.goods-infs img {
+  width: 5.84375rem;
+  height: 5.84375rem;
+  float: left;
+  margin: .5rem 1.2rem;
+}
+
+.goods-infs .goods-title {
+  font-weight: bold;
+  margin-bottom: 0rem;
+  margin-top: .5rem;
+  margin-right: 1rem;
+}
+
+.goods-infs .goods-format {
+  margin: 0;
+  color: #a0a0a0;
+  transform: scale(.8);
+  margin-left: 10px;
+}
+
+.goods-infs .goods-price,
+.goods-infs .goods-integral {
+  display: block;
+  color: #fc4735;
+  font-weight: bold;
+  margin-top: .2rem;
+  margin-bottom: 0;
+}
+
+.count-num {
+  padding: .75rem 1.25rem;
+}
+
+.count-num span {
+  font-weight: bold;
+}
+
+.shownum {
+  width: 3.4375rem;
+  background-color: #eee;
+  border: none;
+  outline: none;
+  text-align: center;
+  margin: .1rem;
+}
+
+.numadd {
+  width: 1.25rem;
+  border: none;
+  background-color: #eee;
+}
+
+.reducenum {
+  width: 1.25rem;
+  border: none;
+  background-color: #eee;
+}
+
+.count-num input {
+  float: right;
+  margin: .1rem;
+}
+
+/*********搴曢儴鎻愪氦璁㈠崟***********/
+.submit-order {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  height: 3.125rem;
+  z-index: 99;
+	line-height: 3.125rem;
+}
+.submit-order p {
+  flex: 2;
+  text-align: right;
+  color: #dd0000;
+  font-weight: bold;
+  border-top: solid 1px #c9c9c9;
+  /*line-height: 3.125rem;*/
+  margin: 0;
+  padding: 0 1rem 0 0;
+}
+.submit-order input {
+  flex: 1;
+  background-color: #dd0000;
+  color: white;
+  font-weight: bold;
+  border: none;
+  outline: none;
+}
+
+.remark {
+  widows: 100%;
+  padding: 10px 1.25rem;
+  margin-top: 1rem;
+  background-color: white;
+}
+
+.remark textarea {
+  display: block;
+  width: 100%;
+  resize: none;
+  color: #787878;
+  border: none;
+}
+
+.pay-way {
+    /* height: 10.875rem; */
+    margin-top: .9375rem;
+    /* padding: .625rem 5%; */
+    background-color: #fff;
+    line-height: 1.5rem;
+}
+.pay-way label {
+    display: inline-block;
+}
+.pay-way label input {
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+
+/*杩愯垂鏂瑰紡閫夋嫨*/
+
+.picker-shipping {
+  display: flex;
+  padding: 10px 1.25rem;
+  background-color: #fff;
+}
+
+.picker-shipping .desc {
+  flex: 0 0 90px;
+}
+
+.picker-shipping #picker-way {
+  flex: 2;
+  border: none;
+  outline: none;
+}
+
+.picker-shipping .icon {
+  flex: 0 0 15px;
+  margin-left: 10px;
+}
+
+.skus{
+  color: #A0A0A0;
+  font-size: 14px;
+  margin: 0;
+}
+
+.address_wrapper .list-block{
+    margin: 0 0 1rem;
+    color: #0894ec;
+}
+
+.address_wrapper .list-block p{
+    width: 90%;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.6);
+    z-index: 99999999;
+    display: none;
+}
+#mask .address_info{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%,-50%,0);
+    width: 80%;
+    background-color: white;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+#mask .address_info .titles{
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+    color: white;
+    background-color: #dd0000;
+    text-align: center;
+}
+#mask .address_info .info_item{
+    display: flex;
+    padding: 0 5%;
+    margin: 5% 0;
+}
+#mask .address_info .info_item .text{
+    flex: 1;
+    line-height: 28px;
+}
+#mask .address_info .info_item input{
+    flex: 2;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    border-bottom: 1px solid #dad8d8;
+}
+#mask .address_info .info_item textarea{
+    resize: none;
+    padding: 5px;
+}
+#mask .address_info #btn_sure{
+    margin: 0 auto;
+    width: 80px;
+    height: 28px;
+    margin-bottom: 10px;
+}

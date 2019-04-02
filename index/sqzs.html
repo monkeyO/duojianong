@@ -1,0 +1,236 @@
+<html xmlns="http://www.w3.org/1999/xhtml" class="ui-mobile">
+	<head>
+		<title>授权证书</title>
+		<meta charset="UTF-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no, email=no" />
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="HandheldFriendly" content="true">
+		<meta name="MobileOptimized" content="640">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="x5-orientation" content="portrait">
+		<meta name="full-screen" content="yes">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="browsermode" content="application">
+		<meta name="x5-page-mode" content="app">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style>
+			* {
+				overflow: hidden;
+				padding: 0;
+				margin: 0;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			.header {
+				width: 100%;
+				height: 80px;
+				background: #4abcf2;
+				line-height: 80px;
+				text-align: center;
+				font-size: 26px;
+				color: #fff;
+				position: relative;
+			}
+			
+			.header .a {
+				position: absolute;
+				left: 0;
+				margin-left: 35px;
+			}
+			
+			.header .a1 {
+				font-size: 21px;
+				color: #fff;
+				position: absolute;
+				right: 0;
+				margin-right: 26px;
+			}
+			
+			#bg {
+				-webkit-transform: rotate(45deg);
+				-moz-transform: rotate(45deg);
+				filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+				overflow: hidden;
+				z-index: 9999;
+				opacity: 0.1;
+				font-size: 30px;
+			}
+			
+			img {
+				width: 100%;
+				/*height: 100%;*/
+			}
+			
+			.certificate p {
+				display: none;
+			}
+			
+			.certificate {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		</style>
+		<script>
+			function setWidth(a) {
+				if(/Andriod/i.test(navigator.userAgent)) {
+					var c, b = window.innerWidth;
+					(b != a) && (c = b / a), document.addEventListener("DOMContentLoaded", function() {
+						var d = document.getElementsByTagName("body")[0];
+						d.style.webkitTransformOrigin = "left top";
+						d.style.webkitTransform = "scale(" + c + ")"
+					}, !1)
+				}
+			}
+			setWidth(640);
+		</script>
+		<script src="../js/jquery-2.1.1.min.js"></script>
+		<script src="../js/common.js"></script>
+		<link href="../css/index/jquery.mobile-1.4.2.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/reset.css">
+		<script>
+			//var texta;
+			function change() {
+				for(var i = 150; i <= 956; i = i + 155) {
+					for(var j = 10; j <= 640; j = j + 172) {
+						var mask_div = document.createElement('div');
+						mask_div.id = 'bg';
+						mask_div.appendChild(document.createTextNode('朵嘉浓'));
+						mask_div.style.position = "absolute";
+						mask_div.style.left = j + 'px';
+						mask_div.style.top = i + 'px';
+						document.body.appendChild(mask_div);
+					};
+				};
+			}
+		</script>
+	</head>
+	<body onload="change()" style="background: rgba(219,218,216,0.8);">
+		<div class="page">
+			<div class="card" style="background-color: transparent; overflow: auto;">
+				<div class="certificate">
+					<canvas id="thecanvas" width="652" height="920" style="width:327px;height:460px;"></canvas>
+				</div>
+			</div>
+			<script type="text/javascript">
+				$(function() {
+					var cavConfig = {
+// 						code: {
+// 							fillStyle: "#0394CE",
+// 							font: "bold 20px Arial",
+// 							str: "",
+// 							x: 158,
+// 							y: 106,
+// 						},
+                        name: {
+							fillStyle: "#000000",
+							font: "20px Arial",
+							str: "",
+							x: 180,
+							y: 412
+						},
+						zw: {
+							fillStyle: "#000000",
+							font: "20px Arial",
+							str: "",
+							x: 200,
+							y: 620
+						},
+						identity:{
+							fillStyle: "#000000",
+							font: "20px Arial",
+							str: "",
+							x: 200,
+							y: 660
+						},
+						wx:{
+							fillStyle: "#000000",
+							font: "20px Arial",
+							str: "",
+							x: 200,
+							y: 700
+						},
+						time:{
+							fillStyle: "#000000",
+							font: "20px Arial",
+							str: "",
+							x: 200,
+							y: 740
+						}
+					};
+					var myToken = getLocal("token");
+					//获取用户信息
+					if(myToken) {
+						var getparam_ajaxs = {
+							Token: myToken
+						};
+						var getorder_options = {
+							url: '/User/UserSq',
+							params: getparam_ajaxs,
+							callback: function(res) {
+								if(res.code == 200) {
+                                    var Datas = res.data;
+                                    //cavConfig["code"].str = Datas.code;
+									cavConfig["name"].str  = Datas.username;
+                                    cavConfig["zw"].str = Datas.dj;
+                                    cavConfig["identity"].str = Datas.sf_x_x.identity;
+									cavConfig["wx"].str = Datas.wxid;
+									cavConfig["time"].str = Datas.create_time+"—";
+								}
+							}
+						}
+						callajax(getorder_options);
+					} else {
+						tusi("无法确定用户");
+					}
+					var imgUrl = "../images/certificate.png";
+					var imgs = new Image();
+					imgs.src = imgUrl;
+					$(imgs).hide();
+					$('.certificate').append(imgs);
+					imgs.onload = function() {
+						draw(imgs, cavConfig);
+					}
+				})
+				//绘画证书的canvas
+				function draw(img, cavConfig) {
+					var canvas = document.getElementById("thecanvas");
+					var ctx = canvas.getContext("2d");
+					ctx.drawImage(img, 0, 0, 652, 920);
+					$.each(cavConfig, function(key, value) {
+						ctx.fillStyle = value.fillStyle;
+						ctx.font = value.font;
+						ctx.fillText(value.str, value.x, value.y);
+						ctx.restore();
+					});
+					canvas.style.display = "none";
+					var type = 'png';
+					var d = document.getElementById("thecanvas");
+					var imgdata = d.toDataURL(type);
+					var png = new Image();
+					png.src = imgdata;
+					$('.warrant img').attr('src', imgdata);
+					$(png).attr("id", "imgtrue");
+					if(!$(".certificate").children("#imgtrue").length > 0) {
+						$(".certificate").append(png);
+					}
+				}
+			</script>
+
+		</div>
+	</body>
+
+</html>
